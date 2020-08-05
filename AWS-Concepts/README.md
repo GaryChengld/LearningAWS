@@ -8,3 +8,5 @@
   - Falut tolerant
   - Scalibility
   - Elasticity
+
+#### Core AWS Services
