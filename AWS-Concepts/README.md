@@ -48,4 +48,5 @@ Computer service, storage service, database service, networking service, securit
  ### AWS Global Infrastructure
   * AWS region
   * Availability zone
+  * Edge locations
   * Data center
