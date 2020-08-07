@@ -13,8 +13,6 @@ IaaS, PaaS, SaaS
 * PaaS: Application
 * SaaS: Everything is provided by cloud (gmail)
 
-AWS provides Iaas, Paas, SaaS
-
 ##### Essential Characters
 * On-demand self-service
 * Broad network access
@@ -29,9 +27,11 @@ AWS provides Iaas, Paas, SaaS
  * Hybird cloud
 
  AWS: Public cloud
- 
+
 #### What is AWS
 AWS is a cloud service provider, also know as infrastructure as a service (IaaS.)
+AWS provides Iaas, Paas, SaaS
+Computer service, storage service, database service, networking service, security service, management tools, analatic service, mobile service, application service, messaging service, AI, Internet of things service, gaming service, SaaS
 
 #### The benifits of cloud
   - High availibility
