@@ -19,6 +19,7 @@ IaaS, PaaS, SaaS
 * Resource pooling
 * Rapid elasticity
 * Measured service
+* Lambda - Function as a service
 
 ##### Deployment models
  * Private cloud
