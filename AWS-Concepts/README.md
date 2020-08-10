@@ -19,7 +19,6 @@ IaaS, PaaS, SaaS
 * Resource pooling
 * Rapid elasticity
 * Measured service
-* Lambda - Function as a service
 
 ##### Deployment models
  * Private cloud
@@ -45,6 +44,7 @@ Computer service, storage service, database service, networking service, securit
  * EC2 - Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers. EC2 as a virtual computer that you can use for whatever you like. EC2 is good for any type of “processing” activity.
  * RDS - Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. 
  * S3 - Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance.
+ * Lambda - Function as a service
 
  ### AWS Global Infrastructure
   * AWS region
