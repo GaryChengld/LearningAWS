@@ -82,4 +82,43 @@ How it works
   * Objects from Zero bytes to 5 TB
   * Containers are called 'buckets'
   * Access via API / HTTP
-  
+
+  #### S3 web hosting
+
+  bucket-policy.txt
+  ```
+  {
+    "Version": "2020-08-01",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::[bucket-name]/*"
+        }
+    ]
+}
+```
+
+#### Lambda - Run functions of code in cloud
+
+The service
+  * Lambda
+  * Executes functions of code
+  * Functions as a Service (FaaS)
+
+Use cases
+  * Simple tasks
+  * Batch tasks
+  * Chained tasks
+  * Serverless architectures
+  * Almost anything
+
+How it works
+  * 'Single' function of code
+  * Triggered by:
+    * API / HTTP call
+    * An AWS event
+    * Timer
+  * Multiple language support
+
