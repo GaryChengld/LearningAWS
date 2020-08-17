@@ -51,3 +51,35 @@ Computer service, storage service, database service, networking service, securit
   * Availability zone
   * Edge locations
   * Data center
+
+### Tools need to setup computer
+  * Web browser
+  * Remote Desktop Protocol (RDP) tool\
+  * SSH tool
+
+### Setup CLI
+   * Download and install, [AWS Command Line Interface](https://aws.amazon.com/cli/)
+   * Create security credentials
+   * Configure the CLI tools
+
+###  Essential Services   
+#### Simple storage service - S3
+
+The service
+  * S3
+  * Simple storage service
+  * Cloud object storage
+
+Use cases
+  * backups
+  * media files
+  * log files
+  * large data sets
+  * web / media hosting
+
+How it works
+  * Unlimlited number of objects
+  * Objects from Zero bytes to 5 TB
+  * Containers are called 'buckets'
+  * Access via API / HTTP
+  
