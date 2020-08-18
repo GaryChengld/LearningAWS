@@ -122,3 +122,32 @@ How it works
     * Timer
   * Multiple language support
 
+#### Elastic Compute Cloud (EC2)
+
+The Service
+  * EC2
+  * Elastic Compute Cloud
+  * Virtual servers
+
+Use cases
+  * Web Server
+  * Backend Server
+  * (Database server)
+  * general purpose servers
+
+How it works
+  * Pick your 'type' and 'size'
+  * Pick your 'OS'
+  * Select your storage
+  * (plus much more)
+  * Launch a instance
+
+### All the services
+
+#### Compute
+  * EC2 (Elastic Compute Cloud)
+  * Lightsail -- Virtual priovate server
+  * ECS (Elastic Container Service) -- Container management service, manage Docker contaioners on a cluster
+  * Lambda -- Serverless compute service
+  * Batch
+  * Elastic Beanstalk -- Servoce for deploying and scaling web applications and services
