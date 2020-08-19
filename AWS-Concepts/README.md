@@ -170,3 +170,10 @@ How it works
   * Database Migration Service - Migrate database to AWS quickly and securely
   * SMS (Server Migration Service) - migrate your on-premises workloads to AWS
   * Snowball - Petabyte-scale data transport solution
+
+#### Networking and Content Delivery
+  * VPC (Virtual Private Cloud) - Private network in the cloud
+  * CloudFront - Content distribution network
+  * Route 53 - Cloud Domain Name System (DNS) web service
+  * API Gateway - Create, publish,maintain, monitor and secure APIs at any scale
+  * Direct Connect - Dedicated network connection from your premisses to AWS
