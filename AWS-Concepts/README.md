@@ -157,3 +157,9 @@ How it works
   * EFS (Elastic File System) - Cloud file storage
   * Glacier - Cloud archive service
   * Storage Gateway - Integrate existing onm-premises storage infrastructure and data with the AWS Cloud
+
+#### Database
+  * RDS (Amazon Relational Database Service)
+  * DynamnoDB - Cloud NoSQL database
+  * ElastiCache - In-memory data store and cache in the cloud
+  * Amazon Redshift - Cloud data warehousing
