@@ -177,3 +177,12 @@ How it works
   * Route 53 - Cloud Domain Name System (DNS) web service
   * API Gateway - Create, publish,maintain, monitor and secure APIs at any scale
   * Direct Connect - Dedicated network connection from your premisses to AWS
+
+#### Developer Tools
+  * CodeStar - Develop, build and deploy applications
+  * CodeCommit - Managed source control service
+  * CodeBuild - Fully managed build service
+  * CodeDeploy - Automates software deployments
+  * CodePipeline - Continues delivery service
+  * Cloud9 - Cloud-based integrated developenmt environment (IDE)
+  * X-Ray - Debug and analyze your microservices applications
