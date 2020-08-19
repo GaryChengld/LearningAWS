@@ -163,3 +163,10 @@ How it works
   * DynamnoDB - Cloud NoSQL database
   * ElastiCache - In-memory data store and cache in the cloud
   * Amazon Redshift - Cloud data warehousing
+
+#### Migration
+  * AWS Migration Hub - Simpfy and accelerate migrations to the AWS Cloud
+  * Application Discovery Service - Plan application cloud migration projects
+  * Database Migration Service - Migrate database to AWS quickly and securely
+  * SMS (Server Migration Service) - migrate your on-premises workloads to AWS
+  * Snowball - Petabyte-scale data transport solution
