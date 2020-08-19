@@ -151,3 +151,9 @@ How it works
   * Lambda -- Serverless compute service
   * Batch
   * Elastic Beanstalk -- Servoce for deploying and scaling web applications and services
+
+#### Storage
+  * S3 (Simple Storage Service) - Cloud object storage
+  * EFS (Elastic File System) - Cloud file storage
+  * Glacier - Cloud archive service
+  * Storage Gateway - Integrate existing onm-premises storage infrastructure and data with the AWS Cloud
