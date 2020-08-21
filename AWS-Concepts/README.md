@@ -207,4 +207,13 @@ How it works
       * MediaStore
       * MediaTrailor
 
-
+#### Machine Learning
+  * Amazon SageMaker - Build, train and deploy machine learning models at scale
+  * Amazon Comprehand - Discover insights and relationships in text
+  * AWS DeepLens - Deep learning enabled video camera
+  * Amazon Lex - Conversational interfaces for your applications
+  * Machine Learning - Managed service for building ML models and generating predictions
+  * Amazon Polly - Turn text into lifelike speech using deep learning
+  * Rekognition - Deep learning-based image and video analysis
+  * Amazon Transcribe - Automatic speech reconition
+  * Amazon Translate - Natual and fluent language transaction
