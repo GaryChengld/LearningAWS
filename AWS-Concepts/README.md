@@ -197,3 +197,14 @@ How it works
     * Systems manager - Gain Operational Insights and Take Action on AWS Resources
     * Trusted Advisor - Optimizing your AWS environment
     * Managed Services - Infrastructure Operations Manmagement for AWS
+
+  #### Media Service
+    * Elastic Transcoder - Media transcoding in the cloud
+    * Elemental
+      * MediaConvert
+      * MediaLive
+      * MediaPackage
+      * MediaStore
+      * MediaTrailor
+
+
