@@ -217,3 +217,14 @@ How it works
   * Rekognition - Deep learning-based image and video analysis
   * Amazon Transcribe - Automatic speech reconition
   * Amazon Translate - Natual and fluent language transaction
+
+#### Analytics
+  * Athena - Analyze data in Amazon S3 using standard SQL
+  * EMR - Run and Scale Apache Hadoop, Spark, HBase, Presto, Hive and other big data frameworks
+  * CloudSearch - Set up, manage and scale a search solution
+  * ElasticSearch service - Fully managed, reliable and scalable Elasticsearch service.
+  * Kinesis - Easily collect, process and analyze video and data streams in real time
+  * Kinesis Video Streams - Capture, process and store video streams for analytics and machine learning
+  * QuickSight - Business analytics service
+  * Data Pipeline - Easily automate the movement and transformation of data
+  * AWS Glue - Simple, flexible and cost effective ETL  
