@@ -186,3 +186,14 @@ How it works
   * CodePipeline - Continues delivery service
   * Cloud9 - Cloud-based integrated developenmt environment (IDE)
   * X-Ray - Debug and analyze your microservices applications
+
+  #### Management Tools
+    * CloudWatch - Monitoring service
+    * CloudFormation - Model and provision all your cloud infrastructure resources
+    * CloudTrail - Track user activity and API usage
+    * Config - Record and evaluate conmfigurations of your AWS resources
+    * OpsWorks - Automate Operations with Chef and Puppet
+    * Service Catalog - Create and manage calalogs of IT services
+    * Systems manager - Gain Operational Insights and Take Action on AWS Resources
+    * Trusted Advisor - Optimizing your AWS environment
+    * Managed Services - Infrastructure Operations Manmagement for AWS
