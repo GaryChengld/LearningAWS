@@ -258,3 +258,13 @@ How it works
   * Simple Notification service( SNS) - pub/sub messaging
   * Simple Queue Service(SQS) - Fully managed message queues
   * Amazon Simple workflow service (SWF) Build, run and scale background jobs that have parallel or sequential steps
+
+#### Customer Engagement
+  * Amazon Connect - conmtact center as a service(CCaS)
+  * Amazon Simple email Service (SES) - Email sending and receiving platform
+
+#### Business Productivity
+  * Alexa for Business - Empower your organization with Alexa
+  * Amazon Chime - Communications service for online meetings
+  * WorkDocs - Secure file collaboration and management
+  * WorkMail - Managed business email and calendar services
