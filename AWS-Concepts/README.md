@@ -251,3 +251,10 @@ How it works
 
 #### AR & VR
   * Amazon Sumerian - create VR, AR and 3D eperiences
+
+#### Application Integration
+  * Step Functions - Coordinage the components of distributed applications and microservices using visual workflows
+  * Amaon MQ - Managedmessage broker service for Apache ActiveMQ
+  * Simple Notification service( SNS) - pub/sub messaging
+  * Simple Queue Service(SQS) - Fully managed message queues
+  * Amazon Simple workflow service (SWF) Build, run and scale background jobs that have parallel or sequential steps
