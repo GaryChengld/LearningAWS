@@ -241,3 +241,13 @@ How it works
   * AWS Directory service - Managed microsoft Active Directory in the AWS Cloud
   * AWS WAF & Shield - Monitor web requests for Amazon CloudFront distributions and restrict access to your content
   * AWS Artifact - On-demand access to AWS's compliance reports
+
+#### Mobile services
+  * Mobile Hub - Tools that enable you tpo quickly configure AWS services and integrate them into your mobile app
+  * Amazon Pinpoint - Track the ways in which users interact with your applications
+  * AWS AppSync - Build Data Driven Apps with Realtime and offline capabilities
+  * AWS Device Farm  - Test against real mobile devices in AWS cloud
+  * Mobile Analytics - Measure app userage and app revenue
+
+#### AR & VR
+  * Amazon Sumerian - create VR, AR and 3D eperiences
