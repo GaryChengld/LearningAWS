@@ -228,3 +228,16 @@ How it works
   * QuickSight - Business analytics service
   * Data Pipeline - Easily automate the movement and transformation of data
   * AWS Glue - Simple, flexible and cost effective ETL  
+
+#### Security, Identity & Compliance
+  * IAM (AWS Identity and Access management) - Securely congtrolling access to AWS service
+  * Cognito - Simple and secure user sign up/Sign in
+  * GuardDuty - Intelligent threat detection and continous monitoring to protect your AWS accounts and workloads
+  * Inspector - Automated security accessment service to help improve the security and compliance of applications deployed on AWS
+  * Amazon Macie - A machine learning-powered security service to discover, classiofy and protect sensitive data.
+  * AWS single sign-on - Centrally manage single sign-on (SSO) access to multiple AWS accounts and business applications
+  * Certificate Manager - Provision, manage and deploy SSL/TLS certificates
+  * AWS CloudHSM - Managed hardware security module (HSM) on the AWS cloud
+  * AWS Directory service - Managed microsoft Active Directory in the AWS Cloud
+  * AWS WAF & Shield - Monitor web requests for Amazon CloudFront distributions and restrict access to your content
+  * AWS Artifact - On-demand access to AWS's compliance reports
