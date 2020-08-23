@@ -268,3 +268,16 @@ How it works
   * Amazon Chime - Communications service for online meetings
   * WorkDocs - Secure file collaboration and management
   * WorkMail - Managed business email and calendar services
+
+#### Desktop & App Streaming
+  * Amazon WorkSpaces - Fully managed secure virtual cloud desktops running onm AWS
+  * AppStream 2.0 - Stream desktop applications to any device running a web browser
+
+#### Internet of Things
+  * AWS IoT - A system ubiquitous devices connecting the physical world to the cloud
+  * IoT Device Management - Onboard, Orgamize, Monitor and remotely manage connected devices at scale
+  * Amazon FreeRTOS - IoT operating system for microcontrollers
+  * Amazon Greengrass - Local compute, messaging, datga caching, sync and ML inference capabilities for connected devices
+
+#### Game Development
+  * Amazon GameLift - Dedicated game server hosting
