@@ -43,7 +43,7 @@ X
 
 Amazon EBS allows you to create storage volumes and attach them to Amazon EC2 instances.
 
-#### EBS Volume Types
+EBS Volume Types
 * General Purpose SSD (GP2)
 * Provisioned IOPS SSD (I01)
 * Throughput Optimized HDD (ST1)
@@ -66,3 +66,39 @@ Amazon EBS allows you to create storage volumes and attach them to Amazon EC2 in
   chkconfig httpd on
 ```
   * create index.html under /var/www/html (nano command)
+
+##### Install node js on EC2
+1. Connect to your Linux instance as ec2-user using SSH.  
+2. Install node version manager (nvm) by typing the following at the command line.
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+```
+3 Activate nvm by typing the following at the command line.
+```
+. ~/.nvm/nvm.sh
+```
+4. Use nvm to install the latest version of Node.js by typing the following at the command line.
+```
+nvm install node
+```
+5. Test that Node.js is installed and running correctly by typing the following at the command line.
+```
+node -e "console.log('Running Node.js ' + process.version)"
+```
+
+### Elastic load balancers
+
+Type of Load balancers
+
+* Application Load Balancer
+* Network Load Balancer
+* Classic Load Balancer
+
+Application load balancers are bust suited for load balancing of HTTP/HTTPS traffic. They operate at layer 7 and are application-aware.\
+Network load balancers are best suited for load balancing of TCP traffic where extreme performance is required.Operating at the connection level (Layer 4).\
+Classic load balancers are the lagacy Elastic Load Balancers. You can load balance HTTP/HTTPS applications and use Layer 7-specific features, such as X-Forwarded and sticky sessions. Ypou can alspo user strict Layer 4 load balancing for applications that rely purely on the TCP protocol.\
+
+Load Balancer Errors\
+* 504 error means gateway has time out. This means that the application not responding within the idle timeout period. Trouble shoot the application. Is it the web server or datbase server issue?\
+
+If you need the IPv4 address of your end user, look for the X-Forwrded-For header.
