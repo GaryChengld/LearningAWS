@@ -1,5 +1,8 @@
 ## AWS Certified Developer - Associate 2020
 
+[AWS Certified Developer–Associate(DVA-C01) Examination Guide](https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_Certified_Developer_Associate-Exam_Guide_EN_1.4.pdf)
+[AWS Best Practices](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
+
 ### IAM - Identity and Access Management
 
 ##### Using Multi-Factor Authentication (MFA) in AWS
@@ -26,6 +29,8 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 #### EC2 instance types
 
 Amazon EC2 provides a wide selection of instance types optimized to fit different use cases. Instance types comprise varying combinations of CPU, memory, storage, and networking capacity and give you the flexibility to choose the appropriate mix of resources for your applications. Each instance type includes one or more instance sizes, allowing you to scale your resources to the requirements of your target workload.
+
+<img src="https://cloudacademy.com/wp-content/uploads/2016/12/ec2-types-vertical.jpg">
 
 F
 I
