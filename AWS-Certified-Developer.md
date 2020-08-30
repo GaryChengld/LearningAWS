@@ -102,3 +102,11 @@ Load Balancer Errors\
 * 504 error means gateway has time out. This means that the application not responding within the idle timeout period. Trouble shoot the application. Is it the web server or datbase server issue?\
 
 If you need the IPv4 address of your end user, look for the X-Forwrded-For header.
+
+### Route53
+
+* Route53 is Amazon's DNS service
+* Allows you to map your domain name to
+  * EC2 instances.
+  * Load Balancers.
+  * S3 Buckets.
