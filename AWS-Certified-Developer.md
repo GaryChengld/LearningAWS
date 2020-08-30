@@ -112,5 +112,31 @@ If you need the IPv4 address of your end user, look for the X-Forwrded-For heade
   * Load Balancers.
   * S3 Buckets.
 
+#### EC2 Cli
+1. Add user with programmatic access
+2. Open SSH
+3. AWS configure
+```
+aws configure
+```
+List S3 bucket
+```
+aws s3 ls
+```
+Create s3 bucket
+```
+aws s3 mb s://<bucket-name>
+```
+copy file to s3
+```
+aws s3 cp <filename> s3://<bucket-name>
+```
+list s3 bucket
+```
+aws s3 ls s3://<bucket-name>
+```
+
+[AWS cli commanmd reference](https://docs.aws.amazon.com/cli/latest/)
+
 ### EC2 Cheat Sheet
   ![EC2-CheatSheet](https://user-images.githubusercontent.com/3359299/91666421-9c03a780-eaca-11ea-8166-ff7512482bb4.PNG)
