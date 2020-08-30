@@ -30,19 +30,15 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure,
 
 Amazon EC2 provides a wide selection of instance types optimized to fit different use cases. Instance types comprise varying combinations of CPU, memory, storage, and networking capacity and give you the flexibility to choose the appropriate mix of resources for your applications. Each instance type includes one or more instance sizes, allowing you to scale your resources to the requirements of your target workload.
 
+* General Purpose: The most popular; used for web servers, development environments, etc.
+* Compute Optimized: Good for compute-intensive applications such as some scientific modeling or high-performance web servers.
+* Memory Optimized: Used for anything that needs memory-intensive applications, such as real-time big data analytics, or running Hadoop or Spark.
+* Accelerated Computing: Include additional hardware (GPUs, FPGAs) to provide massive amounts of parallel processing for tasks such as graphics processing.
+* Storage Optimized: Ideal for tasks that require huge amounts of storage, specifically with sequential read-writes, such as log processing.
+
 <img src="https://cloudacademy.com/wp-content/uploads/2016/12/ec2-types-vertical.jpg">
 
-F
-I
-G
-H
-T
-D
-R
-M
-C
-P
-X
+FIGHT-DR-MC-PX
 
 #### What is EBS
 
@@ -115,3 +111,6 @@ If you need the IPv4 address of your end user, look for the X-Forwrded-For heade
   * EC2 instances.
   * Load Balancers.
   * S3 Buckets.
+
+### EC2 Cheat Sheet
+  ![EC2-CheatSheet](https://user-images.githubusercontent.com/3359299/91666421-9c03a780-eaca-11ea-8166-ff7512482bb4.PNG)
