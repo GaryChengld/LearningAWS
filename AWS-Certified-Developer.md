@@ -11,12 +11,22 @@
 * Hardware MFA device. 
 * SMS text message-based MFA.
 
-### AWS IAM allows you to:
+#### AWS IAM allows you to:
 * Manage IAM users and their access – You can create users in IAM, assign them individual security credentials (in other words, access keys, passwords, and multi-factor authentication devices), or request temporary security credentials to provide users access to AWS services and resources. You can manage permissions in order to control which operations a user can perform.
 * Manage IAM roles and their permissions – You can create roles in IAM and manage permissions to control which operations can be performed by the entity, or AWS service, that assumes the role. You can also define which entity is allowed to assume the role. In addition, you can use service-linked roles to delegate permissions to AWS services that create and manage AWS resources on your behalf.
 * Manage federated users and their permissions – You can enable identity federation to allow existing identities (users, groups, and roles) in your enterprise to access the AWS Management Console, call AWS APIs, and access resources, without the need to create an IAM user for each identity. Use any identity management solution that supports SAML 2.0, or use one of our federation samples (AWS Console SSO or API federation).
 
-### EC2 101
+[Identities (Users, Groups, and Roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html?icmpid=docs_iam_console)
+
+#### IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:
+
+* IAM user in another account
+* Application code running on an EC2 instance that needs to perform actions on AWS resources
+* An AWS service that needs to act on resources in your account to provide its features
+* Users from a corporate directory who use identity federation with SAML
+* IAM roles issue keys that are valid for short durations, making them a more secure way to grant access.
+
+### EC2 - Amazon Elastic Compute Cloud
 
 Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers. Amazon EC2’s simple web service interface allows you to obtain and configure capacity with minimal friction. It provides you with complete control of your computing resources and lets you run on Amazon’s proven computing environment.
 
@@ -39,6 +49,10 @@ Amazon EC2 provides a wide selection of instance types optimized to fit differen
 <img src="https://cloudacademy.com/wp-content/uploads/2016/12/ec2-types-vertical.jpg">
 
 FIGHT-DR-MC-PX
+
+
+#### EC2 Cheat Sheet
+  ![EC2-CheatSheet](https://user-images.githubusercontent.com/3359299/91666421-9c03a780-eaca-11ea-8166-ff7512482bb4.PNG)
 
 #### What is EBS
 
@@ -87,7 +101,7 @@ nvm install node
 node -e "console.log('Running Node.js ' + process.version)"
 ```
 
-### Elastic load balancers
+#### Elastic load balancers
 
 Type of Load balancers
 
@@ -104,7 +118,7 @@ Load Balancer Errors\
 
 If you need the IPv4 address of your end user, look for the X-Forwrded-For header.
 
-### Route53
+#### Route53
 
 * Route53 is Amazon's DNS service
 * Allows you to map your domain name to
@@ -138,5 +152,25 @@ aws s3 ls s3://<bucket-name>
 
 [AWS cli commanmd reference](https://docs.aws.amazon.com/cli/latest/)
 
-### EC2 Cheat Sheet
-  ![EC2-CheatSheet](https://user-images.githubusercontent.com/3359299/91666421-9c03a780-eaca-11ea-8166-ff7512482bb4.PNG)
+
+CLI Tips
+* Least Privilege - Always give your users the minimun amount of access required.
+* Create Groups - Assign your users to groups. Your users will automatically inherit the permissions of the group. The groups permissions are assigned using policy document.
+* Secret Access Key - You will see this only once. If you do not save it, you can delete the key pair and regenerate it. You will need to run aws configure again.
+* Do not use just one access key - Do nmpt create just one access key and share that with all your developers. If someone leaves the company on bad terms, then yoou will need to delete the key and create a new one and every developer would then need to update their keys. Instead create one key pair per developer.
+* You can use the CLI on your PC - You can install the CLI on your Mac, Linix or Windows PC. 
+
+#### EC2 with S3 role
+
+* Create role for EC2 service with S3 full access
+* Go to EC2 -> Instance, select EC2 instance
+* Action -> Instance setting-> Attach/Replace IAM Role
+* Select the role and apply
+
+Exam Tips
+* Roles allow you to not use access key ID's and secret access keys
+* Roles are preferred from a security perspective
+* Roles are controlled by policies
+* You can change a policy on a role and it will take immediate affect
+* You can attach and detach roels to running EC2 instance without having to stop or terminate these instances.
+
