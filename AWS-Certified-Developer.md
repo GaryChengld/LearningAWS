@@ -50,6 +50,7 @@ Amazon EC2 provides a wide selection of instance types optimized to fit differen
 
 FIGHT-DR-MC-PX
 
+#### A security group acts as a virtual firewall for your EC2 instances to control incoming and outgoing traffic. Inbound rules control the incoming traffic to your instance, and outbound rules control the outgoing traffic from your instance. ... If you don't specify a security group, Amazon EC2 uses the default security group.
 
 #### EC2 Cheat Sheet
   ![EC2-CheatSheet](https://user-images.githubusercontent.com/3359299/91666421-9c03a780-eaca-11ea-8166-ff7512482bb4.PNG)
@@ -166,6 +167,7 @@ CLI Tips
 * Go to EC2 -> Instance, select EC2 instance
 * Action -> Instance setting-> Attach/Replace IAM Role
 * Select the role and apply
+* Got SSH, cd ~/.aws, delete credential and config
 
 Exam Tips
 * Roles allow you to not use access key ID's and secret access keys
@@ -173,4 +175,98 @@ Exam Tips
 * Roles are controlled by policies
 * You can change a policy on a role and it will take immediate affect
 * You can attach and detach roels to running EC2 instance without having to stop or terminate these instances.
+
+#### Encrypt An EB Volume Attached to EC2
+
+* Create new Volume - EC2 -> Elastic Block Store -> Volumes -> Create Volume
+* Select Encryption
+* Create Volume
+* Attach this volume to EC2 instance
+* go to SSH
+* run command to list volumes
+```
+lsblk
+```
+* Check volume
+```
+file -s /dev/xvdf
+```
+* Create file system on volume
+```
+ mkfs -t ext4 /dev/xvdf
+ ```
+ * Mount file system
+ ```
+ cd /
+ mkdir filesystem
+ mount /dev/xvdf /filesystem
+```
+* Unmount
+```
+umount -d /dev/xvdf
+```
+* Detach volume from EC2 instance
+* Craete snapshot
+* Delete Volume
+* Go to snapshots
+* Select snapshot
+* create volume from shapshot
+* Attach it to EC2 instance
+* Go to SSH, mount filesystem
+
+Encrypt root volume
+* create a snapshot
+* Go to snapshot, select it and execute copy action
+* Select Encryption and create
+* Select encrypted root volume
+* Select create image in Images/AMIs
+* Launch the image
+
+Exam Tips
+* You can encrypt the root device volume(the volume the OS is installed on) using operating system level encryption
+* You can encrypt the root device volume by fist taking a shapshot of that volume, and then creating a copy of thet snap with encryption. You can then make an AMI of this snap and deploy the encrypted root device volume.
+* You can encrypt additional attached volumes using the console, CLI or API
+
+#### RDS - Relational database service
+
+Relational database type
+* SQL Server
+* Oracle
+* MySQL
+* PostgreSQL
+* Aurora
+* 
+
+Non Relaional Database
+* Database
+  * Collection
+  * Document
+  * Key Value pairs
+
+Data Warehouse
+* Used for business intelligence. Tools like Cognos, Jaspersoft, SQL server Reporting services, Oracle Hyperion, SAP NetWeaver
+* Used to pull in vary large and complex data sets, Uaually used by management to do queries on data(Such as current performance vstargets, etc.)
+
+OLTP vs OLAP
+
+* Online Transaction Processing (OLTP) differs from online Analytics Processing (OLAP) in terms of the types of queries you will run.
+
+
+Elasticache - is a web service that makes it esay to deploy, operate, and scale an in-memoty cache in the cloud. The service inproves the performance of web applications by allowing you to retrieve information from fast, managed, in-menory caches, instead of relying entirelyu on slower disk-based database.
+* Memcached
+* Redis
+
+AWS database types
+* RDS - OLTP
+  * SQL Server
+  * OraMariaDBcle
+  * MySQL
+  * PostgreSQL
+  * Aurora
+  * MariaDB
+* DynamoDB - NoSQL
+* RedShift - OLAP
+* Elasticache - In memory Caching
+  * Memcached
+  * Redis
 
