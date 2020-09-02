@@ -295,4 +295,28 @@ Multi-AZ - Amazon RDS provides high availability and failover support for DB ins
 Amazon RDS Read Replicas provide enhanced performance and durability for RDS database (DB) instances. They make it easy to elastically scale out beyond the capacity constraints of a single DB instance for read-heavy database workloads. You can create one or more replicas of a given source DB Instance and serve high-volume application read traffic from multiple copies of your data, thereby increasing aggregate read throughput. Read replicas can also be promoted when needed to become standalone DB instances. Read replicas are available in Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and SQL Server as well as Amazon Aurora.\
 \
 You can reduce the load on your source DB instance by routing read queries from your applications to the read replica. Read replicas allow you to elastically scale out beyond the capacity constraints of a single DB instance for read-heavy database workloads. Because read replicas can be promoted to master status, they are useful as part of a sharding implementation.\
+
+#### Elasticache - Fully managed in-memory data store, compatible with Redis or Memcached.
+
+Amazon ElastiCache allows you to seamlessly set up, run, and scale popular open-Source compatible in-memory data stores in the cloud. Build data-intensive apps or boost the performance of your existing databases by retrieving data from high throughput and low latency in-memory data stores.\
 \
+Amazon ElastiCache works as an in-memory data store and cache to support the most demanding applications requiring sub-millisecond response times. By utilizing an end-to-end optimized stack running on customer dedicated nodes, Amazon ElastiCache provides secure, blazing fast performance.\
+\
+
+Elasticache Exam Tips
+
+* Typically, you will be given a scenario where a particular database is under a lot of stress/load. You maybe asked which service you should user to alleviate this.
+* Elasticace is a good choice if your database is particularly read-heavy and not prone to frequent changing.
+* Redshift is a good answer if the reason your database is feeling stress in because management keep running OLAP transactions on it etc.
+* Use Mencached if
+  * Object caching is your primary goal
+  * You want to keep things as simple as possible
+  * You want to scale uyour cache horizontally(scale out)
+
+* Use Redis if
+  * You have advanced data types such as lists, hashes and sets.
+  * You are doing data sorting and ranking (sucn as leader boards)
+  * Data Persistence
+  * Multi AZ
+  * Put/Sub capabilities are needed
+  
