@@ -319,4 +319,44 @@ Elasticache Exam Tips
   * Data Persistence
   * Multi AZ
   * Put/Sub capabilities are needed
-  
+
+### S3
+
+Amazon Simple Storage Service is storage for the Internet. It is designed to make web-scale computing easier for developers.\
+\
+Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web. It gives any developer access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers.\
+\
+* S3 is a safe place to store your files
+* It is Object-based storage
+* The data is spread across multiple devices and facilities
+
+S3 - The Basics
+* S3 is Object-based - i.e. allows you to upload files
+* Files can be from 0 byte to 5 TB
+* There is unlimited storage
+* Files are stored in Buckers (similar to a folder)
+* S3 is a universal namespace. That is , names must be unique globally.
+* When you upload a file to S3, you will receive a HTTP 200 code if the upload was successful
+* Built for 99.99% availablity for the S3 platform
+* Amazon Guarantee 99.9% availability
+* Amazon guarantees 99.99999999& durablity for S3 information. (remember 11*9s)
+* Tiered stored available
+* Lifecycle management
+* Versioning
+* Encryption
+* Secure your data - access control lists and Bucker policies
+
+Data Consistency Model for S3
+* Read after write consistence for PUTS of new object
+* Eventual Consistency for overwrite PUTS and DELETES (can take some time to propagate)
+
+S3 is a Simple key-value store
+* S3 is Object based. Objects consist of the following:
+  * Key - this is simply the name of the objecdt
+  * Value - this is simply the data, which is made up of a sequence of bytes.
+  * Version ID
+  * Metadata (data about data you are storing)
+  * Subresources - bucket-specific configuration
+    * Bucket Policies, access control lists.
+    * Cross Origin Resource Sharing (CORS)
+    * Transfer Acceleration
