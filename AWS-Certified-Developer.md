@@ -409,3 +409,15 @@ Exam Tips for S3 Basic
     * Transfer Acceleration
     * Successful uploads will generate a HTTP 200 status code - when you use the CLI API
     * [FAQ](https://aws.amazon.com/s3/faqs/)
+
+#### S3 Security
+
+Securing your buckets
+* By Default, all newly created buckets are PRIVTE
+* You can set up access control to youyr buckets using: 
+  * Bucket Policies - Applied at a bucket level
+  * Access Control Lists - Applied at an onject level
+* S3 buckets can be configured to create access logs, which log all requests made to the S3 bucket. These logs can be written to another bucket.
+
+
+#### S3 ACLs and Policies
