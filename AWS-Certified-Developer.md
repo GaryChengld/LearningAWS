@@ -273,35 +273,34 @@ AWS database types
 #### RDS - Backups, Nulti-AZ & Read Relicas
 
 Amazon RDS provides two different methods for backing up and restoring your DB Instance(s): automated backups and database snapshots (DB Snapshots).\
-\
+
 Turned on by default, the automated backup feature of Amazon RDS enables point-in-time recovery for your DB Instance. Amazon RDS will back up your database and transaction logs and store both for a user-specified retention period. This allows you to restore your DB Instance to any second during your retention period, up to the last 5 minutes. Your automatic backup retention period can be configured to up to 35 days.\
-\
+
 During the backup window, storage I/O may be suspended while your data is being backed up. This I/O suspension typically lasts a few minutes. This I/O suspension is avoided with Multi-AZ DB deployments, since the backup is taken from the standby.\
-\
+
 DB Snapshots are user-initiated backups of your DB Instance. These full database backups are stored by Amazon RDS until you explicitly delete them. You can copy DB snapshots of any size and move them between any of AWS’s public regions, or copy the same snapshot to multiple regions simultaneously. You can then create a new DB Instance from a DB Snapshot whenever you desire.\
-\
+
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases. You can create a DB instance by restoring from this DB snapshot. When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore.\
-\
+
 You can encrypt your Amazon RDS DB instances and snapshots at rest by enabling the encryption option for your Amazon RDS DB instances. Data that is encrypted at rest includes the underlying storage for DB instances, its automated backups, read replicas, and snapshots.\
-\
+
 Amazon RDS encrypted DB instances use the industry standard AES-256 encryption algorithm to encrypt your data on the server that hosts your Amazon RDS DB instances. After your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance. You don't need to modify your database client applications to use encryption.\
-\
+
 Once you have created an encrypted DB instance, you can't change the type of encryption key used by that DB instance. Therefore, be sure to determine your encryption key requirements before you create your encrypted DB instance.\
-\
+
 Copy a snapshot can enable encription on\
-\
+
 Multi-AZ - Amazon RDS provides high availability and failover support for DB instances using Multi-AZ deployments. Amazon RDS uses several different technologies to provide failover support. Multi-AZ deployments for MariaDB, MySQL, Oracle, and PostgreSQL DB instances use Amazon's failover technology. SQL Server DB instances use SQL Server Database Mirroring (DBM) or Always On Availability Groups (AGs).\
-\
+
 Amazon RDS Read Replicas provide enhanced performance and durability for RDS database (DB) instances. They make it easy to elastically scale out beyond the capacity constraints of a single DB instance for read-heavy database workloads. You can create one or more replicas of a given source DB Instance and serve high-volume application read traffic from multiple copies of your data, thereby increasing aggregate read throughput. Read replicas can also be promoted when needed to become standalone DB instances. Read replicas are available in Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and SQL Server as well as Amazon Aurora.\
-\
+
 You can reduce the load on your source DB instance by routing read queries from your applications to the read replica. Read replicas allow you to elastically scale out beyond the capacity constraints of a single DB instance for read-heavy database workloads. Because read replicas can be promoted to master status, they are useful as part of a sharding implementation.\
 
 #### Elasticache - Fully managed in-memory data store, compatible with Redis or Memcached.
 
 Amazon ElastiCache allows you to seamlessly set up, run, and scale popular open-Source compatible in-memory data stores in the cloud. Build data-intensive apps or boost the performance of your existing databases by retrieving data from high throughput and low latency in-memory data stores.\
-\
+
 Amazon ElastiCache works as an in-memory data store and cache to support the most demanding applications requiring sub-millisecond response times. By utilizing an end-to-end optimized stack running on customer dedicated nodes, Amazon ElastiCache provides secure, blazing fast performance.\
-\
 
 Elasticache Exam Tips
 
@@ -323,9 +322,8 @@ Elasticache Exam Tips
 ### S3
 
 Amazon Simple Storage Service is storage for the Internet. It is designed to make web-scale computing easier for developers.\
-\
+
 Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web. It gives any developer access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers.\
-\
 * S3 is a safe place to store your files
 * It is Object-based storage
 * The data is spread across multiple devices and facilities
@@ -360,3 +358,54 @@ S3 is a Simple key-value store
     * Bucket Policies, access control lists.
     * Cross Origin Resource Sharing (CORS)
     * Transfer Acceleration
+
+S3 - Storage Tiers/classes
+* S3 standard - 99.99% availabilty
+* S3 Intelligent-Tiering - is designed to optimize costs by automatically moving data to the most cost-effective access tier, without performance impact or operational overhead. It works by storing objects in two access tiers: one tier that is optimized for frequent access and another lower-cost tier that is optimized for infrequent access. 
+* S3 - IA (Infrequently Accessed): For data that is accessed less frequently, bnut requires rapid access when needed. Lower fee than S3, but you are charged a retrieval fee.
+* S3 - One Zone IA: Same as IA however data is stored in a single AZ, same durability but only 99.5% avaiability. Cost is 20% less than regular S3 - IA.
+* Reduced redundancy over a given year(99.99% durability and 99.99% availability). Used for data that can be recreated if lost, e.g. thumbnials.
+* Glacier - Very cheap, but used for archival only. Optimised for data that is infrequently accessed and it takes 3 - 5 hours to restore from Glacier.
+
+[S3 tiers](https://miro.medium.com/max/875/1*PZryXkcXoVj99unK-XNqUA.png)
+
+S3 Intelligent Tier
+* Unknown or unpredictable access patterns
+* 2 tiers - frequent and infrequent access
+* Automatically moves your data to most cost-effective tier based on how frequently you access each object
+* same availability and durability as S3 stardand
+* Optimizes cost
+* No fees for accessing your data but a s small monthly fee for monitoring/automation %0.0025 per 1000 object
+
+S3 charges
+* charged for:
+  * Storage per GB
+  * Requestrs(Get, Put, Copy, etc.1
+  * Storage Management Pricing
+    * Inventory, Analytics and object tags
+  * Data management pricing
+    * Data transferred out of S3
+    * Transfer Acceleration
+      * Use of CloudFront to optimize transfers
+
+Exam Tips for S3 Basic
+* Remember that S3 is Object-based: i.e. allows you to upload files. object-based storage only(for files)
+* Not suitable to install an operating system or running a database on.
+* Files can be from 0 bytes to 5 TB
+* There is unlinited storage
+* Files are stored in buckets.
+* S3 is a universal namespace. That is names must by unique globally.
+* Read after write consistency for PUTS of new objects
+* Eventual onsistency for overwrite PUTS and DELETES(can take some time to propagate)
+* S3 Storage Class/Tiers
+* Remember the core fundamentals of an S3 object:
+  * Key (name)
+  * Value (data)
+  * Version ID
+  * Metadata
+  * Subresource - bucket-specific configuration
+    * Bucket Poliocies, Access control lists.
+    * CORS
+    * Transfer Acceleration
+    * Successful uploads will generate a HTTP 200 status code - when you use the CLI API
+    * [FAQ](https://aws.amazon.com/s3/faqs/)
