@@ -420,4 +420,41 @@ Securing your buckets
 * S3 buckets can be configured to create access logs, which log all requests made to the S3 bucket. These logs can be written to another bucket.
 
 
-#### S3 ACLs and Policies
+#### S3 Policies
+
+#### S3 Encryption
+
+Encryption
+* In Transit: SSL/TLS
+* At Rest:
+  * Server Side Encryption:
+    * S3 Managed keys - SSE-S3
+    * AWS Key Management service, managed keys, SSE-KMS
+    * Server side Encryption with customer provided keys - SSE-C
+  * Client side encryption
+
+Enforcing Encryption on S3 Buckets
+* Every time a file is uploaded to S3, a PUT request is initiated.
+* This is what a PUT request loos like
+```
+PUT /myfile HTTP/1.1
+Host: muyBucket.s3.amazonaws.com
+Date: Wed, 25 Apr 2020 09:50:00 GMT
+AuthorizationL authorization string
+Content-Type:text/plain
+Content-Length: 23456
+x-amz-meta-author: Gary
+Expect: 100-continue
+[23445 bytes of object data]
+```
+* If the file is to be encrypted at upload time, the x-amz-server-side-encryption parameter will be included in the request header
+* Two options are current available:
+  * x-amz-server-side-encryption:ASE256 (SSE-S3 - S3 managed key)
+  * x-amz-server-side-encryption:ams:kms (SSE-KMS 0 KMS managed keys)
+* When this parameter is inclkuded in the header of the PUT request, it tells S3 to encrypt the object at the time of upload, using the specified encryption method.
+* You can enforce the use of server side encryption by using a Bucket Policy which denies any S# PUT request which doesn't include the x-amz-server-side-encryption parameter in the request header.
+
+Exam Tips
+* Encryption in-transit - SSL/TLS (HTTPS)
+* Encryption at rest - server side / client side
+* If you want to enforce the use of encryption of your files stored in S#, use an S3 budkct policy to deny all PUT requests that doesn't inlcude the x-amz-server-side-encryption parameter in HTTP header
