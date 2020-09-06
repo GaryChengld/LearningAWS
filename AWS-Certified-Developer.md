@@ -482,3 +482,29 @@ Exam Tips
   * Encryption: select AWS KMS master-key
   * key: aws/s3
   * upload
+
+#### CORS Configuration
+* Create a bucket
+* Config it as public bucket
+* Go into the bucket
+* Goto properties / Static website hosting
+* Select Use this bucket to host a website
+* Upload index.html to the bucket (public read permission)
+
+* Create another static website hosting S3 bucket
+* Update load a html page to seconed bucket (public read permission)\
+* Update index.html in first bucket to load html of second bucket
+* Go into second bucket
+* Go to permission / CORS comfiguration
+* Copy below xml to editor and save it
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>[endpoint of first bucket]</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <MaxAgeSeconds>3000</MaxAgeSeconds>
+    <AllowedHeader>Authorization</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+```
