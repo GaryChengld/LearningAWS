@@ -458,3 +458,27 @@ Exam Tips
 * Encryption in-transit - SSL/TLS (HTTPS)
 * Encryption at rest - server side / client side
 * If you want to enforce the use of encryption of your files stored in S#, use an S3 budkct policy to deny all PUT requests that doesn't inlcude the x-amz-server-side-encryption parameter in HTTP header
+
+##### Setup encryption on S# bucket
+* Creatre a S3 bucket
+* Select bucket, select permission/Bucket Policy
+* Click Policy generator
+  * Type of policy: S3 Bucket Policy
+  * Effect: Deny
+  * Principal: * (any request)
+  * AWS Service: Amazon S3
+  * Action: PUTObject
+  * Amazon Resource Name (ARN): <the name of the bucket>
+  * Add Condition
+    * Condition: StringNotEquals
+    * Key: s3:x-amz-server-side-encryption
+    * Value: aws:kms
+  * Click Add conition -> Add Statement -> Generate Policy
+  * Copy to Bucket policy editor, add /* to Resource in Json
+  * Save it
+
+  Upload file
+  * select file
+  * Encryption: select AWS KMS master-key
+  * key: aws/s3
+  * upload
