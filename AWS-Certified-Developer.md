@@ -508,3 +508,37 @@ Exam Tips
 </CORSRule>
 </CORSConfiguration>
 ```
+
+#### [CloudFront](https://aws.amazon.com/cloudfront/)
+
+What is CDN? \
+
+A content delivery network (CDN) is a system of distriuted servers (network) that deliver webpages and other web content to a user based on the geographic locations of the user, the origin of the webpage, and a content delivery server.\
+
+CouldFront - Key Terminology
+
+* Edge Location - This is the location where content is cached and can also be written, Seperate to an AWS Region/AZ.
+* Origo - This is the origin of all the files that the CDN will distribute. Origins can be an S3 bucket, an EC2 Instance, an Elstic Load Balancer, or Route53.
+* Distribution - This is the name given the CDN, which consists of a collection of Edge Locations.
+* Web Distribution - Typically used for websites, http/https
+* RTMP - (Abpobe Real Time Messaging Protocal) Used for media streaming / Flash multi-media content
+
+
+What is CloudFront?\
+
+Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. CloudFront is integrated with AWS – both physical locations that are directly connected to the AWS global infrastructure, as well as other AWS services. CloudFront works seamlessly with services including AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code closer to customers’ users and to customize the user experience. Lastly, if you use AWS origins such as Amazon S3, Amazon EC2 or Elastic Load Balancing, you don’t pay for any data transferred between these services and CloudFront.\
+
+CouldFront and S3 transfer acceleration\
+
+Amazon S3 Transfer Acceleration enables fast, easy, and secure transfers of files over long distances between your client and an S3 bucket. Transfer Acceleration takes advantage of Amazon CloudFront’s globally distributed edge locations. As the data arrives at an edge location, data is routed to Amazon S3 over an optimized network path.
+
+CloudFront - Exam Tips
+* Edge Location
+* Origin
+* Distribution
+  * Web Distribution
+  * RTMP
+* Edge location are not just READ only - you can WRITE to them,too(i.e. PUT an object on to them.)
+* CloudFront Edge Lications are utilised by S3 transfer acceleration to reduct latency for s3 uploads.
+* Objects are cached for the life of the TTL (Time to Live).
+* You can clear cached objects, but you will be charged.
