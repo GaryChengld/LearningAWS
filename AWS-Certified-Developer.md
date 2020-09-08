@@ -544,3 +544,17 @@ CloudFront - Exam Tips
 * You can clear cached objects, but you will be charged.
 
 ##### S3 Performance Optimization
+
+S3 is designed to support very high request rates. However if your S3 buckets are routinely receiving PUT/LIST/DELETE or > 300 GET requests per second, then these are some best prictice guildlines that will help optimize S3 performance.
+
+The Guidance is based on the type of workload your are running:
+* GET-Intensice workloads - Use CloudFront content delivery service to get best performance. CloudFront will cache your most frequently accessed objects and will reduce latency for yout GET request.
+* Mixed Request Type Workloads a mix of GET,PUT,DELETE,, the key names you use for your objects can impact performance for intensive workloads.
+* S3 uses the key name to determine which partition an object will be stored in
+* The use of sequential key names e.g. names perfixed with a time stamp or alphabetical sequence increases the likelihood of having multiple objects stored on the same partition.
+* For heavy workloads this can cause I/O issue and contention
+* By using a rendom prefix to key names, you can force S3 to distribute your keys across multiple partitions, distributing the I/O workload.
+
+Exam Tips:
+* GET-Intensice workloads - Use CloudFront
+* Mixed Request Type Workloads - avoid sequential key names, instead add a random prefix like a hex hash to the key name (after July 2018 Amazon annonced a massive increase in S3 performace, logical and sequential naming patterns can now be used without any performance implication)
