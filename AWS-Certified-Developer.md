@@ -542,3 +542,5 @@ CloudFront - Exam Tips
 * CloudFront Edge Lications are utilised by S3 transfer acceleration to reduct latency for s3 uploads.
 * Objects are cached for the life of the TTL (Time to Live).
 * You can clear cached objects, but you will be charged.
+
+##### S3 Performance Optimization
