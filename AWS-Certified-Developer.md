@@ -427,7 +427,7 @@ Securing your buckets
 Encryption
 * In Transit: SSL/TLS
 * At Rest:
-  * Server Side Encryption:
+  * Server Side Encryption (AES-256)
     * S3 Managed keys - SSE-S3
     * AWS Key Management service, managed keys, SSE-KMS
     * Server side Encryption with customer provided keys - SSE-C
@@ -558,3 +558,46 @@ The Guidance is based on the type of workload your are running:
 Exam Tips:
 * GET-Intensice workloads - Use CloudFront
 * Mixed Request Type Workloads - avoid sequential key names, instead add a random prefix like a hex hash to the key name (after July 2018 Amazon annonced a massive increase in S3 performace, logical and sequential naming patterns can now be used without any performance implication)
+
+[Amazon S3 FAQs](https://aws.amazon.com/s3/faqs/)
+
+### Serverless computing
+
+#### Lambda
+
+What is Lambda
+
+AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running. With AWS Lambda, you can run code for virtually any type of application or backend service - all with zero administration. AWS Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging. All you need to do is supply your code in one of the languages that AWS Lambda supports.
+
+* Data Centers
+* Hardware
+* Assembly code/Protocols
+* High level language
+* Operating systems
+* Application Layer/AWS APIs
+* AWS Lambda
+
+* You can use AWS Lambda to run your code in response to events, such as changes to data in an Amazon S3 bucket or an Amazon DynamoDB table; 
+* To run your code in response to HTTP requests using Amazon API Gateway; 
+* Invoke your code using API calls made using AWS SDKs.
+
+ With these capabilities, you can use Lambda to easily build data processing triggers for AWS services like Amazon S3 and Amazon DynamoDB, process streaming data stored in Kinesis, or create your own back end that operates at AWS scale, performance, and security.
+
+ Languages
+ * Node.js
+ * Python
+ * Ruby
+ * Java
+ * GO
+ * .Net
+
+ Exam Tips
+ * Lambda scales out (not up) automaticlly
+ * Lambda functions are independent, 1 event = 1 function
+ * Serverless
+ * Know what services are serverless
+ * Lambda functions can trigger other lambda fnctions, 1 event can = x functions if functions trigger oehter functgions
+ * Atchitectures can get extremely complicated, AWS x-ray allows you to debug what is happening
+ * Lambda can do things globally, you can use it to backup S3 buckets to other S3 buckets etc
+ * Know your triggers
+ 
