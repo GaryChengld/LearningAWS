@@ -600,4 +600,50 @@ AWS Lambda is a compute service that lets you run code without provisioning or m
  * Atchitectures can get extremely complicated, AWS x-ray allows you to debug what is happening
  * Lambda can do things globally, you can use it to backup S3 buckets to other S3 buckets etc
  * Know your triggers
- 
+
+ #### API Gateway
+
+ API - An API is an application programming interface
+
+Type of APIs
+* Restful APIs - Uses Json
+* SOAP APIs - Use XML
+
+Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the "front door" for applications to access data, business logic, or functionality from your backend services. Using API Gateway, you can create RESTful APIs and WebSocket APIs that enable real-time two-way communication applications. API Gateway supports containerized and serverless workloads, as well as web applications.
+
+What can API gateway do?
+* Expost HTTPS endpoints to define a Restful API
+* Serverless-ly connect to services like Lambda & DynamoDB
+* Send each API endpoint to a different target
+* Run efficiently with low cost
+* Scale effortlessly
+* Track and control usage by API key
+* Throttle requests to prevent attacks
+* Connect to CloudWatch to log all requests for monitoring
+* Maintain multiple versions for your APIs
+
+How do I configure API Gateway
+* Define an API (Container)
+* Define resources and nested resource (URL paths)
+* For each resource
+  * Select supported HTTP methods
+  * Set Security
+  * Choose target (EC2, Lambda, DynamoDB etc.)
+  * Set request and response transformations
+* Deploy API to a stage
+  * Uses API gateway domain, by default
+  * Can use custom domain
+  * Supports AWS certificate manmager: free SSL/TSL certs.
+
+API Caching - You can enable API caching in Amazon API Gateway to chache your endpoint's response.
+
+Exam Tips
+* Remember what API gateway is at a high level
+* API Gateway has caching caoabilities to increase performance
+* API gateway is low cost and scales automatically
+* You can throttle API gateway to prevent attacks
+* You can log results to CloudWatch
+* If you are using javascript that uses multiple domains with API gateway, ensure that you have enabled CORS on API gateway
+* CORS is enforced by the client
+
+
