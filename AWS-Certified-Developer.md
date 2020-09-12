@@ -646,4 +646,35 @@ Exam Tips
 * If you are using javascript that uses multiple domains with API gateway, ensure that you have enabled CORS on API gateway
 * CORS is enforced by the client
 
+#### Version control with Lambda
+
+* Each Lambda function version has a unique Amazon Resource Nane (ARN). After you publish a version, it is immutable(that is, it can't be changed).
+* AWS Lambda maintains your latest function code in the $LATEST version.
+
+A function version includes the following information:
+* The function code and all associated dependencies.
+* The Lambda runtime that invokes the function.
+* All of the function settings, including the environment variables.
+* A unique Amazon Resource Name (ARN) to identify the specific version of the function.
+
+You can create one or more aliases for your Lambda function. A Lambda alias is like a pointer to a specific function version. Users can access the function version using the alias Amazon Resource Name (ARN).
+
+Exam Tips
+* Can have multiple versions of lambda functions
+* Latest version will user $LATEST
+* Qualified version will use $latest, unqualified will not have it
+* Versions are immutable(Can not be changed)
+* Can split traffic using aliases to different versions
+  * can not split traffic with $latest, instead create an alias to latest
+
+#### Step Functions
+
+AWS Step Functions is a serverless function orchestrator that makes it easy to sequence AWS Lambda functions and multiple AWS services into business-critical applications. Through its visual interface, you can create and run a series of checkpointed and event-driven workflows that maintain the application state. The output of one step acts as an input to the next. Each step in your application executes in order, as defined by your business logic.
+
+Orchestrating a series of individual serverless applications, managing retries, and debugging failures can be challenging. As your distributed applications become more complex, the complexity of managing them also grows. Step Functions automatically manages error handling, retry logic, and state. With its built-in operational controls, Step Functions manages sequencing, error handling, retry logic, and state, removing a significant operational burden from your team.
+
+* Great way to visualize your serverless application.
+* Step functions automatically triggers and tracks each step.
+* Step Functions logs the state of each step so if something goes wrong you can track what went wrong and where.
+
 
