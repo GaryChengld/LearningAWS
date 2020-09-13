@@ -702,3 +702,9 @@ X-Ray supported languages
 * Python
 * Ruby
 * .Net
+
+#### Advanced API Gateway
+
+* You can use API Gateway Import API feature to import an API from am external definition file into API Gateway, the Import API feature supports Swagger V2.0 definition files.
+* API Throttling, by defayult API Gateway limits the steady-state request rate to 10000requests per second, the maximum concurrent requests is 5000 requests across all APIs within an AWS account, if go over the maximum you will receive a 429 Too Many Request error
+* SOAP Webservice Passthrough
