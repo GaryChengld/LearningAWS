@@ -708,3 +708,58 @@ X-Ray supported languages
 * You can use API Gateway Import API feature to import an API from am external definition file into API Gateway, the Import API feature supports Swagger V2.0 definition files.
 * API Throttling, by defayult API Gateway limits the steady-state request rate to 10000requests per second, the maximum concurrent requests is 5000 requests across all APIs within an AWS account, if go over the maximum you will receive a 429 Too Many Request error
 * SOAP Webservice Passthrough
+
+
+### DynamoDB
+
+[Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database so that you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling. DynamoDB also offers encryption at rest, which eliminates the operational burden and complexity involved in protecting sensitive data. 
+
+* Stored on SSD storage
+* Spread Acress 3 geographiocally distinct data centers.
+* Choice of 2 cionsisteny models
+  * Eventual Consistent Reads (Default) - Consistency across all copies of data is usually reached within a second. Repeating a read after a short time should return the updated data. (Best read performance)
+  * Strongly Consistent Reads - A strongly consistent read returns a result that reflects all writes thet received a successful respons prior to the read.
+
+  Core Components of Amazon DynamoDB
+  * Tables - Similar to other database systems, DynamoDB stores data in tables. A table is a collection of data. For example, see the example table called People that you could use to store personal contact information about friends, family, or anyone else of interest. You could also have a Cars table to store information about vehicles that people drive.
+  * Items- Each table contains zero or more items. An item is a group of attributes that is uniquely identifiable among all of the other items. In a People table, each item represents a person. For a Cars table, each item represents one vehicle. Items in DynamoDB are similar in many ways to rows, records, or tuples in other database systems. In DynamoDB, there is no limit to the number of items you can store in a table.
+  * Attributes - Each item is composed of one or more attributes. An attribute is a fundamental data element, something that does not need to be broken down any further. For example, an item in a People table contains attributes called PersonID, LastName, FirstName, and so on. For a Department table, an item might have attributes such as DepartmentID, Name, Manager, and so on. Attributes in DynamoDB are similar in many ways to fields or columns in other database systems.
+
+  Primary Key
+  * DynamoDB stores and retrieves data based on a primary key
+  * 2 types of Primary key
+  * Partition key - unique attribute (e.g. user ID)
+    * Value of the partition key is input to an intermal hash function which determines the partition or physical lcoation on which the data is stored
+    * If you are using the partition key as your primary key, then no two items can have the same Partition key.
+  * Composite primary key (Partition key and sort key) - Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key.
+    * In a table that has a partition key and a sort key, it's possible for two items to have the same partition key value. However, those two items must have different sort key values.
+    * All items with the same Partition key are stored together, then sorted according to the Sort Key value.
+
+DynamoDB access control
+* Authentiation and access contriol is managed using AWS IAM.
+* You can creae an IAM user within your AWS acount which has specific permissions to access and create DynamoDB tables
+* You can create an IAM role which enables you to obtain temporary access keys which can be ised to access DynamoDB
+* Ypu can also use a special IAM condition to restrict user access to only their onw records. (this can done by adding a condition to an IAM policy to allow access only items where the partition key calue matches the user ID)
+
+DyanmoDB Exam tips
+* Amazon DynamoDB is a low latency NoSQL database
+* Consists of Tables, Items and Attributes
+* Support bith document and key-value data models
+* Support document formats are JSon, HTML, XML
+* 2 Types of Primary key - Partition key and comnonation of Partition key + sort Key (composite key)
+* 2 consistency model: strongly consistent / eventually consistent
+* Access is controlled using IAM policies
+* Fine grained access control usnig IAM condition parameter. dynamodb:LeadingKeys to allow to access the items where the partition key value mates there user ID
+
+DynamoDB indexes - 2 types of index
+* Local Secondary Index - An index that has the same partition key as the table, but a different sort key.
+  * Can only be created when you are creating your table
+  * You cannot add,remove or modify it later
+  * But a different Sort Key
+  * Gives you a different view of your data, organised according to an alternative Sort key
+  * Any queries based on this Sort Key are much faster using the index than the main tale
+* Global secondary Index - An index with a partition key and sort key that can be different from those on the table.
+  * You can create when you create your table or add it later
+  * Different Partition key as well as a Different Soft Key
+  * So gives a completely different view of the data
+  * Speeds up any queries relating to this alternative Partition and Softkey
