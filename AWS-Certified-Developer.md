@@ -763,3 +763,39 @@ DynamoDB indexes - 2 types of index
   * Different Partition key as well as a Different Soft Key
   * So gives a completely different view of the data
   * Speeds up any queries relating to this alternative Partition and Softkey
+
+#### Scan Vs Query API Call
+Query
+* A Query operation finds items in a table using only the the Primary Key attribute and a distinct value to search for.
+* By default a Query returns a the atrributes for the items but you can the ProjectExpression parameter if you want the query to only return the specific attributes you want.
+* Resutls are always sorted by Sort key
+* Numeric order - by default in ascending order
+* ASCII character code vaules
+* You can reverse the order by setting the ScanIndexForward parameter to false
+* By defult, Queries are Eventually Consistent
+* You need to explicitly set the query to be Strongly Consistent
+
+Scan
+* A Scan operation examinmes every item in the table
+* By default returns all data attributes
+* Use the ProjectExpression parameter to refine the scan to only return the attributes you want
+
+Query or Scan
+* Query is more efficient than a Scan
+* Scan dumps the entire table,then filters out the values to provide the desired result
+* This adds an extra step of removing the data you don't want
+* As the table grows, the can operation takes longer
+* Scan operation on a large table can use up the provisioned throughput for a large table in just a single operation.
+* Avoid using scan operations if you can: design tables in a way thet you can use the Query, Get or BatchGetItem APIs.
+
+How to Improve performance
+* You can reduct the impact of query or scan by setting a smaller page size which uses fewer read operations.
+* Large number of smaller operations will allow other requests to succeed without throttling
+* Avoide using scan operations if you can.
+
+How to improve scan performance
+* By Default, a scan operation processes data sequentially in return 1 MB increments before moving on to retrieve the next 1 MB of data. It can onluy scan one partition at a time.
+* You can config DynamoDB to use Parallel scans instead by logically dividing a table or index into segments and scanning each segment in parallel.
+* Best to avoid parallel scans if your table or index is already incurring heavy read / write activity from other applications.
+
+
