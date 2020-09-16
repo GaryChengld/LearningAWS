@@ -836,3 +836,28 @@ Not Suitable for
 * Write intensive applications
 * Application that do not perform many read operations
 * Applications that do not require microsecond response times
+
+#### Elasticache - Inmemory Cache
+* Memcached
+* Redis
+
+Caching Strategies
+* Lasy Loading - Loads the data into cache only when necessary
+  * If data in cache, returns the data to application
+  * If data not in cache or expired, returns null, application then fetches the data from database and writes it into cache so that is available next time.
+  * TTL
+* Write-Through - adds or updates data to the cache whenever data is written to the database
+
+Exam tips
+* In-memory cache sits between application and database
+* 2 different caching strategies: Lazy loading and write through
+* Laze laoding only chaches the data when it is requested
+* Elasticache Node failuers not fatal just lots of cache misses
+* Cache miss penaly: Initial request, query database, query database, writing to cache
+* Avoid stale datta by implementing a TTL
+* Write through strategy writes data into the cache whenever there is a change to the database
+* Data is never stale
+* Write penalty: Each write involes a write to the cache
+* Elasticache node failure means that data is missing until added or updated in the database
+* Wasted resources if most of the data is never used
+
