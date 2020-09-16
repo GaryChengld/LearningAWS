@@ -715,7 +715,7 @@ X-Ray supported languages
 [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database so that you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling. DynamoDB also offers encryption at rest, which eliminates the operational burden and complexity involved in protecting sensitive data. 
 
 * Stored on SSD storage
-* Spread Acress 3 geographiocally distinct data centers.
+* Spread across 3 Availability Zones in an AWS Region.
 * Choice of 2 cionsisteny models
   * Eventual Consistent Reads (Default) - Consistency across all copies of data is usually reached within a second. Repeating a read after a short time should return the updated data. (Best read performance)
   * Strongly Consistent Reads - A strongly consistent read returns a result that reflects all writes thet received a successful respons prior to the read.
@@ -734,6 +734,12 @@ X-Ray supported languages
   * Composite primary key (Partition key and sort key) - Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key.
     * In a table that has a partition key and a sort key, it's possible for two items to have the same partition key value. However, those two items must have different sort key values.
     * All items with the same Partition key are stored together, then sorted according to the Sort Key value.
+
+Partition
+* When you create a table, the initial status of the table is CREATING. During this phase, DynamoDB allocates sufficient partitions to the table so that it can handle your provisioned throughput requirements. You can begin writing and reading table data after the table status changes to ACTIVE.
+* DynamoDB allocates additional partitions to a table in the following situations:
+  * If you increase the table's provisioned throughput settings beyond what the existing partitions can support.
+  * If an existing partition fills to capacity and more storage space is required.
 
 DynamoDB access control
 * Authentiation and access contriol is managed using AWS IAM.
@@ -798,4 +804,35 @@ How to improve scan performance
 * You can config DynamoDB to use Parallel scans instead by logically dividing a table or index into segments and scanning each segment in parallel.
 * Best to avoid parallel scans if your table or index is already incurring heavy read / write activity from other applications.
 
+#### DynamoDB provisioned throughput
+* Provisioned throughput is measured in Capacity Units
+* When you create a new provisioned table in Amazon DynamoDB, you must specify its provisioned throughput capacity. 
+* Read Capacity Units - A read capacity unit represents one strongly consistent read per second, or two eventually consistent reads per second, for an item up to 4 KB in size.
+* Write Capacity Units - A write capacity unit represents one write per second, for an item up to 1 KB in size.
 
+#### DynamoDB on-demand capacity option
+* Charges apply for Reading, Writing and Storing Data
+* With on-demand, you don't need to specify your requirements
+* DynamoDB instantly scales up and down based on the activity of your application.
+* Great for unpredictab;e workloads
+* Ypu want to pay for only what you use (pay per requesst).
+
+#### DynamoDB Accellorator (DAX)
+
+* Amazon DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for Amazon DynamoDB that delivers up to a 10 times performance improvement—from milliseconds to microseconds—even at millions of requests per second.
+* Improves response times for Eventually Consistent reads only
+* Idealfor Read-heavy and bursty workloads
+
+How does it work?
+* DAX is a write-through caching service - this means data is written to the cache as well as the back and store at the same time.
+* Allows you point your DynamoDB API calls at the DAX cluster
+* If the item you are querying is in the cache(cache hit), DAX returns the result to the application
+* If the item is not available(Cache miss) then DAX performs an Ecentually Consistemt GetItem operation against DynamoDB
+* Retrieval of data from DAX reduces the read load on DynamoDB
+* May be able to reduce provisioned Read capacity.
+
+Not Suitable for
+* Caters for Eventually Consistent reads only - so not suitable for applications that require strongly consistent reads
+* Write intensive applications
+* Application that do not perform many read operations
+* Applications that do not require microsecond response times
