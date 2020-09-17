@@ -861,3 +861,35 @@ Exam tips
 * Elasticache node failure means that data is missing until added or updated in the database
 * Wasted resources if most of the data is never used
 
+#### DynamoDB Transactions
+
+* ACID Transactions (Atomic, Consistent, Isolated, Durable)
+* Read or write multiple items across multiple tables as an all or nothing operation
+* Check for a pre-requisite condition before writing to a table
+
+#### DynanmoDB TTL
+* Time To Live attribute defines an expriy time for your data
+* Expired items marked for deletion
+* Great for removing irrelevant or old data
+  * Session data
+  * Event logs
+  * Temporary data
+* Reduces cost by automatically removing datga which is no longer relevant
+* TTL expressed as epoch time
+* Expiration is set for 2 hours after the session begin
+* When the current time is greater than the TTL, the item will be expired and marked for deletion
+* You can filter out expired items for your queries and scans
+
+#### DynamoDB Streamss
+* Time-ordered sequence of item level modificaions (insert, update, delete)
+* Logs are encrypted at rest and store for 24 hours
+* Accessed using a dedicated endpoint
+* By default the primary key is recorded
+* Before and after images can be captured.
+
+Processing DynamoDBN streams
+* Event are recorded in near real-time
+* Applications can take actions based on contents
+* Event source for Lambda
+* Lamnbda polls the DynamoDB stream
+* Executes Lambda code based on a DuynamoDB Streams event
