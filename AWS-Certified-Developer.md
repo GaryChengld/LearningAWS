@@ -893,3 +893,67 @@ Processing DynamoDBN streams
 * Event source for Lambda
 * Lamnbda polls the DynamoDB stream
 * Executes Lambda code based on a DuynamoDB Streams event
+
+#### Provisioned throughput Exceeded Exception
+* Your request rate is too high for read / write capacity provisioned on your DynamoDB table
+* SDK will automatically retries the requests until successful
+* If you are not using the SDK you can:
+  * Reduce request frequency
+  * User Exponential Backoff
+
+What is exponential backoff
+* Many components in a network can generate errors due to being overladed
+* In addition to simple retries all AWS SDKs use ExponentialBackoff
+* Progressively longer waits between consecutive retries e.g. 05 ms, 100 ms, 200 ms....for improve flow control
+* If after 1 minutes this doesn't work, your request size may be exceeding the throughput for you read/write capacity.
+
+Exam tips
+* If you see ProvisionedThroughputExceeded Error, this means the number of requests is too high
+* Ezponential backoff inproves flow by retrying requests using progressively longer waits
+* This is not just true for DynmoDB, Exponential Back0ff is a feature of every ASW SDK and applies to many services witn AWS, e.g. S3 buckets, cloudFromation, SES
+
+[DynamoDB Cheatsheet](https://www.freecodecamp.org/news/ultimate-dynamodb-2020-cheatsheet/)
+
+
+### KMS & Encryption on AWS
+
+AWS Key Management Service (KMS) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses hardware security modules that have been validated under FIPS 140-2, or are in the process of being validated, to protect your keys. AWS KMS is integrated with AWS CloudTrail to provide you with logs of all key usage to help meet your regulatory and compliance needs.
+
+The customer Master Key:
+* CMK
+  * alias
+  * creation date
+  * description
+  * key state
+  * key material (either customer provided or AWS provided)
+* Can Never be exported
+
+#### Setup a customer master key
+* Create alias and descryption
+* Choose material option
+  * Use KMS generated key material
+  * Your own key material
+* Define Key Administrative Permissions
+  * IAM users/roles that can administer(but not use) the key through the KMS API
+* Define Key usage permission
+  * IAM users/roles that can use the key to encrypt and decrypt data
+
+#### KMS API Calls
+```
+aws kms encrypt --key-id YOURKEYIDHERE --plaintext fileb://secret.txt --output text --query CiphertextBlob | base64 --decode > encryptedsecret.txt
+aws kms decrypt --ciphertext-blob fileb://encryptedsecret.txt --output text --query Plaintext | base64 --decode > decryptedsecret.txt
+aws kms re-encrypt --destination-key-id YOURKEYIDHERE --ciphertext-blob fileb://encryptedsecret.txt | base64 > newencryption.txt 
+aws kms enable-key-rotation --key-id YOURKEYIDHERE
+```
+
+Exam Tips
+* aws kms encrypt
+* aws kms decrypt
+* aws kms re-encrypt
+* aws kms enable-key-rotation
+
+#### KMS Envelope Encryption
+The Customer Master Key:
+* Customer master key userd to decrypt the data key(envelope key)
+* envelope key is used to decrypt the data
+
