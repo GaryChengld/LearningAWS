@@ -957,3 +957,121 @@ The Customer Master Key:
 * Customer master key userd to decrypt the data key(envelope key)
 * envelope key is used to decrypt the data
 
+
+### Other AWS services
+
+#### SQS (Simple Queue Service)
+
+Amazon Simple Queue Service (SQS) is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications. SQS eliminates the complexity and overhead associated with managing and operating message oriented middleware, and empowers developers to focus on differentiating work. Using SQS, you can send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available. Get started with SQS in minutes using the AWS console, Command Line Interface or SDK of your choice, and three simple commands.
+
+SQS offers two types of message queues. Standard queues offer maximum throughput, best-effort ordering, and at-least-once delivery. SQS FIFO queues are designed to guarantee that messages are processed exactly once, in the exact order that they are sent.
+
+Benefits
+* Eliminate administrative overhead
+* Keep sensitive data secure
+* Reliably deliver messages
+* Scale elastically and cost-effectively
+
+Queue types
+* Standard Queues
+  * Unlimited Throughput
+  * At-Least-Once Delivery
+  * Best-Effort Ordering
+* FIFO Queues
+  * High Throughput: By default, FIFO queues support up to 300 messages per second
+  * Exactly-Once Processing
+  * First-In-First-Out Delivery
+
+Functionality
+* Unlimited queues and messages
+* Payload Size: Message payloads can contain up to 256KB of text in any format. 
+* Batches: Send, receive, or delete messages in batches of up to 10 messages or 256KB. 
+* Retain messages in queues for up to 14 days.
+* Message locking: When a message is received, it becomes “locked” while being processed. This keeps other computers from processing the message simultaneously. If the message processing fails, the lock will expire and the message will be available again.
+
+SQS Exam Tips
+* SQS is a distributed message queueing system
+* Allow you to decouple the components for an application so that they are independent
+* Pull-based, not push-based
+* Standard queue(defualt) - best-effort ordering, message delivered at least once
+* FIFO Queues - order strictly preserved, message delivered once, no duplicated.
+* Visibility timeout
+  * Default is 30 seconds - increase if your task takes > 30 seconds to complete
+  * Max 12 hours
+* Short Polling - returned immediately even if no message are in the queue
+* Long Polling - polls the queue periodically and only returns a response when a message is the queue or the timeout is reached
+
+#### SNS (Simple Notification Service)
+
+Amazon Simple Notification Service (SNS) is a fully managed messaging service for both system-to-system and app-to-person (A2P) communication. It enables you to communicate between systems through publish/subscribe (pub/sub) patterns that enable messaging between decoupled microservice applications or to communicate directly to users via SMS, mobile push and email.
+
+The system-to-system pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging. Using Amazon SNS topics, your publisher systems can fanout messages to a large number of subscriber systems or customer endpoints including Amazon SQS queues, AWS Lambda functions and HTTP/S, for parallel processing. The A2P messaging functionality enables you to send messages to users at scale using either a pub/sub pattern or direct-publish messages using a single API.
+
+SNS Topics
+* SNS allows you group multiple recipients using topics. A topic ia an "access point" for allowing recipients to dynamically subscribe for identical copies of the same notification.
+* One topic can support deliveries to multiple endpoint types - for examle, you can group together iOS, Andriod ans SMS recipients. When you publis once to a topic, SBS delivers appropriatey formatted copies of your message to each subscriber.
+* Tp prevent messages from being lost, all messages published to Amazon SNS are stored redundantly across nultiple availability zones.
+
+SNS Exam Tips
+* SNS is a scalable and highly available notification service which allow you to send push notifications from the cloud.
+* Variety of message formats supported: SMS, email, SQS and HTTP endpoint
+* Pub-sub model whereby users subscribe to topics
+* It is a push mechanism rather than a pull mechanism.
+
+#### SES
+
+* SES(Simpole Email Service) is a scalable and highly available email service designed to help marketing teams and application developers send marketing, notifiation, and transactional emails to their customers using a pay as you go model
+* Incoming mails can be delivered automaticlly to an S# bucket
+* Incoming mails can be used to trigger Lambda function ans SNS notifications.\
+
+#### Elastic Beanstalk
+With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications. Elastic Beanstalk reduces management complexity without restricting choice or control. You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+Elastic Beanstalk supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby. When you deploy your application, Elastic Beanstalk builds the selected supported platform version and provisions one or more AWS resources, such as Amazon EC2 instances, to run your application.
+
+You can interact with Elastic Beanstalk by using the Elastic Beanstalk console, the AWS Command Line Interface (AWS CLI), or eb, a high-level CLI designed specifically for Elastic Beanstalk.
+
+* Fastest and simplest way to deploy your application in AWS
+* Automatically scales your application up and down
+* You can select the EC2 instance type that is optimal for your application
+* Ypou can retain full administrative control over the resources powering your application, or have Elastic Beanstalk do it for you
+* Managed platform updateds feature automatically applies updates your Operating System, Java, PHP, Node.js, etc.
+* Monitor and manage application health via a dashboard
+* Integrated with CloudWatch and X-Ray for performance data and metrics
+
+EBS Deployment Policies
+
+Elastic Beanstalk supports sereral options for processing deployments
+* All at once
+* Rolling
+* Rolling with additional batch
+* Immutable
+
+All at once Deployment Updates
+* Deploys the new version to all instances simultaneously
+* All of your insances are out of service while the deployment takes place
+* You will experience an outage while the deployment is talking place - not idea for mission-critical production systems.
+* If the update failes, you need to roll back the chagnes byu re-deploying the original version to all your instances.
+
+Rolling Deployment policy, rolling deployment updates:
+* Deploys the new version in batches
+* Each batch of instances is taken out of service while the deployment takes place
+* Your environment capacity will be redeuced by the number of instances in a batch while the deployment takes place
+* Not ideal for performance sensitive systems
+* If the update failes, you need to perform an additional rolling update to roll back the changes.
+
+Rolling with additional Batch Deployment
+* Launches an additional batch of instances
+* Deploysthe new version in batches
+* Maintains full capacity during the deployment process
+* If the update fails, you need to perform an additional rooling update tpo roll back the changes
+
+Immutable deployment policy
+* Deploys the new version to a fresh group of instances in their own new autoscaling group
+* When the new instances pass their health checks, they are moved to your existing auto scaling group, and finally the old insatnces are terminated.
+* Maintains full capacity during the deployment process
+* The impace of a failed update is far less ad the rollback process requires only terminating the new auto scaling group
+* Preferred option for mission critical production systems.
+
+##### Configure Elastic Beanstalk
+You can customize your Elastic Beanstalk environment using Elastic Beanstalk configuration files. There are files written in YAML or JSON format. They can have a filename of your choice but must have a .config extension and be saved inside a folder called .ebextensions
