@@ -524,7 +524,7 @@ CouldFront - Key Terminology
 * RTMP - (Abpobe Real Time Messaging Protocal) Used for media streaming / Flash multi-media content
 
 
-What is CloudFront?\
+What is CloudFront\
 
 Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. CloudFront is integrated with AWS – both physical locations that are directly connected to the AWS global infrastructure, as well as other AWS services. CloudFront works seamlessly with services including AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code closer to customers’ users and to customize the user experience. Lastly, if you use AWS origins such as Amazon S3, Amazon EC2 or Elastic Load Balancing, you don’t pay for any data transferred between these services and CloudFront.\
 
@@ -990,16 +990,21 @@ Functionality
 * Message locking: When a message is received, it becomes “locked” while being processed. This keeps other computers from processing the message simultaneously. If the message processing fails, the lock will expire and the message will be available again.
 
 SQS Exam Tips
+* SQS was the first service on the AWS platform.
 * SQS is a distributed message queueing system
 * Allow you to decouple the components for an application so that they are independent
 * Pull-based, not push-based
+* Message payloads can contain up to 256KB of text in any format. 
 * Standard queue(defualt) - best-effort ordering, message delivered at least once
 * FIFO Queues - order strictly preserved, message delivered once, no duplicated.
 * Visibility timeout
+  * Changes the visibility timeout of a specified message in a queue to a new value. The maximum allowed timeout value is 12 hours.
   * Default is 30 seconds - increase if your task takes > 30 seconds to complete
   * Max 12 hours
 * Short Polling - returned immediately even if no message are in the queue
 * Long Polling - polls the queue periodically and only returns a response when a message is the queue or the timeout is reached
+* The maximum long polling wait time is 20 seconds.
+* Maximum retention period for an SQS message is 14 days
 
 #### SNS (Simple Notification Service)
 
@@ -1075,3 +1080,54 @@ Immutable deployment policy
 
 ##### Configure Elastic Beanstalk
 You can customize your Elastic Beanstalk environment using Elastic Beanstalk configuration files. There are files written in YAML or JSON format. They can have a filename of your choice but must have a .config extension and be saved inside a folder called .ebextensions
+
+#### RDS & Elastic Beabstalk
+Elastic Beabstalk supports two ways of integrationg an RDS database with your Beanstalk environment.
+
+You can lanch the RDS instance from within the Elastic Beanstalk console, which means the RDS instance is created within your Elastic beanstalk environment - a good option for Dev and Test deployments.
+
+However this may net be ideal for production envoronments because it means the lifecycle of your database is tied to the lifecycle of your application environment. If you terminate the environment, the database instance will be terminated too.
+
+For production environments, the preferred option is to decouple the RDS instance from ypur EBS environment: i.e. launch it outside of Elastic Beanstalk, directly from the RSS section of the console. This option gives you a log more flexibility, allows you to connect multiple environment to the same dababase, provides a wider choice of database type, and allows you to tear down your application environment without affecting the datbase instance.
+
+##### Access to RDS from Elastic Beanstalk
+To allow the EC2 instance in your Elastic Beanstalk environment to connect to an outside database, there are two additional configuration steps required:
+* An additional security group must be added to ypur enironment's Auto Scaling Group
+* You'll need tp proide connect string configuration information to ypur application servers (endpoing, password use Elastic Beanstalk environment properties)
+
+#### Systems Manager Parameter Store
+* Confidential information such as passwords, database connection strings and license code can be stored in SSM parameter store
+* You can store values as plain text or you can encrypt the data.
+* Ypou can use this service with EC2, loudFormation, Lambda, EC2 Run Command etc.
+
+#### Kinesis
+
+Amazon Kinesis is a managed, scalable, cloud-based service that allows real-time processing of streaming large amount of data per second. It is designed for real-time applications and allows developers to take in any amount of data from several sources, scaling up and down that can be run on EC2 instances.
+
+It is used to capture, store, and process data from large, distributed streams such as event logs and social media feeds. After processing the data, Kinesis distributes it to multiple consumers simultaneously.
+
+Streaming data - is data that is generated continuouslyu by thousands of data source, which typically send in the data records simultaneously and in small sizes(order fo kilobytes).
+  * Purchases from online stores
+  * Stock prices
+  * Game data
+  * Social network data
+  * Geospatial data (uber.com)
+  * IOT sensor data
+
+Core Kinesis Services
+  * Kinesis Streams
+  * Kinesis Firehose
+  * Kinesis Analytics
+
+Amazon Kinesis Data Streams (KDS) is a massively scalable and durable real-time data streaming service. KDS can continuously capture gigabytes of data per second from hundreds of thousands of sources such as website clickstreams, database event streams, financial transactions, social media feeds, IT logs, and location-tracking events. The data collected is available in milliseconds to enable real-time analytics use cases such as real-time dashboards, real-time anomaly detection, dynamic pricing, and more.
+  * Kinesis Streams consissts of shards
+    * 5 transactions per second for reads, up to a maximum total data read of 2 MB per second and up to 1000 records per second for writes, up to a maximun total data write rate of 1 MB per second(include partition keys)
+    * The data capacity of ypur stream is a function of the numner of shards that you specify for the stream. The total capacity of the stream is the sum of the capacities of its shards.
+
+Amazon Kinesis Data Firehose is the easiest way to reliably load streaming data into data lakes, data stores, and analytics services. It can capture, transform, and deliver streaming data to Amazon S3, Amazon Redshift, Amazon Elasticsearch Service, generic HTTP endpoints, and service providers like Datadog, New Relic, MongoDB, and Splunk. It is a fully managed service that automatically scales to match the throughput of your data and requires no ongoing administration. It can also batch, compress, transform, and encrypt your data streams before loading, minimizing the amount of storage used and increasing security.
+
+Amazon Kinesis Data Analytics is the easiest way to transform and analyze streaming data in real time with Apache Flink. Apache Flink is an open source framework and engine for processing data streams. Amazon Kinesis Data Analytics reduces the complexity of building, managing, and integrating Apache Flink applications with other AWS services.
+
+Amazon Kinesis Data Analytics takes care of everything required to run streaming applications continuously, and scales automatically to match the volume and throughput of your incoming data. With Amazon Kinesis Data Analytics, there are no servers to manage, no minimum fee or setup cost, and you only pay for the resources your streaming applications consume.
+
+##### The Storage Gateway service is primarily used for attaching infrastructure located in a Data center to the AWS Storage infrastructure. The AWS documentation states that; "You can think of a file gateway as a file system mount on S3." Amazon Elastic File System (EFS) is a mountable file storage service for EC2, but has no connection to S3 which is an object storage service. Amazon Elastic Block Store (EBS) is a block level storage service for use with Amazon EC2 and again has no connection to S3.
