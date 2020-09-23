@@ -1131,3 +1131,97 @@ Amazon Kinesis Data Analytics is the easiest way to transform and analyze stream
 Amazon Kinesis Data Analytics takes care of everything required to run streaming applications continuously, and scales automatically to match the volume and throughput of your incoming data. With Amazon Kinesis Data Analytics, there are no servers to manage, no minimum fee or setup cost, and you only pay for the resources your streaming applications consume.
 
 ##### The Storage Gateway service is primarily used for attaching infrastructure located in a Data center to the AWS Storage infrastructure. The AWS documentation states that; "You can think of a file gateway as a file system mount on S3." Amazon Elastic File System (EFS) is a mountable file storage service for EC2, but has no connection to S3 which is an object storage service. Amazon Elastic Block Store (EBS) is a block level storage service for use with Amazon EC2 and again has no connection to S3.
+
+### Developer Theory
+
+#### CI/CD
+
+#### What is CI/CD
+* Software development best practice - Continuous Integration, Continuous Delivery / Development
+* Make small change & automate everything (code integration, build, test and deployment)
+
+Benifits of CI/CD
+* Automation
+* Small changes
+
+AWS Continuous Delivery / Development workflow
+* CodeCommit - source control service enabling teams to collaborate on code.
+* CodeBuild - Compiles source, runs tests and products packages that are ready to deploy
+* CodeDeployment - automates code deployment to any instance, including EC2, Lambda and on-premises
+* CodePipeline - Manages the workflow, end-to-end solution, build, test and deploy your application every time there is a code change
+[AWS white paper](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+
+
+#### CodeCommit
+
+* Contralized Code Repository, based on GIT
+* Enabled Collaboration
+* Version control
+
+#### CodeDeploy
+
+Automated Deployment - EC2 instance, on-premises & Lambda
+
+Approaches
+* In-place - Application is stopped on each instance and the new release is installed. Also known as a rolling update, With an in-place deployment you will need to re-deploy the previous version to roll back, which can be time consumimg.
+  * Lambda is not supported.
+* Blue / Green - New instances are provisioned and the new releaase is installed on the new instances. Blue represents the active deployment, green is the new release.
+  * Blue represents the current version of application
+  * CodeDeploy provisions new instances.
+  * The new Revision is deployed to the Green environment
+  * The Greeen instances are registered with the Elastic Load Balancer.
+  * Traffic is routed away from the old environment.
+  * Blue environment is eventually terminated.
+  * Just set the load balancer to redirect tjhe traffic back to the original environment to roll back.
+  * Easy to switch between the old and new releases
+  * Only works if you didn't already terminate your old environment
+
+  #### CodeDeploy AppSpec File
+  * Configuration File, defines the parameters to be used during a CodeDeploy depolyment
+  * For EC2 and on-premises system, YAML only.
+  * Lambda - YAML and JSON supported. File structure depends on whether your are deploying to Lambda or EC2.
+  
+  EC2 AppSpec file structure
+  * Version - reserved for furure use, currentlyu the allowed value is 0.0
+  * OS - Linux or windows
+  * Files - Configuration files, packages, the location of any application files that need to be copied and wjhere they should be copied to.
+  * Hooks - LifeCycle event hooks,scripts which need to run at set points in the deployment lifecycle. Hooks have a very specific run order.
+
+  ##### Typical folder setup
+  * appspec.yml
+  * /scripts
+  * /config
+  * /source
+
+##### CodeDeploy lifeCycle Event Hooks
+
+* Phase 1 - De-register instances from a Load Balancer
+* Phase 2 - The real nets & bolts of the application deployment
+* Phase 3 - Re-register instances with the Load Balancer
+
+Run order for an in-place deployment
+
+* BeforeBlockTraffic - Run on instances before they are de-registered from a load balancer
+* BlockTraffic - De-register instances from a Load Balancer
+* AfterBlockTraffic - Run on instances after they are de-registered from a load balancer
+* ApplicationStop - Gracefully stop the application
+* DownloadBundle - CodeDeploy agent copies the application revision files to a temporary location
+* BeforeInstall - Pre-installation scripts, e.g. backinng up the current version, decrypting files.
+* Install - Copy application revision files to final location
+* AfterInstall - Post-install scripts e.g. configuration, file permissions.
+* ApplicationStart - start any services that were stopped during ApplicationStop.
+* ValidateService - Run tests to validate the service
+* BeforeAllowTraffic - Task you want to run on instances before they are registered with the load balancer
+* AllowTraffic - Register instances with a load balancer
+* AfterAllowTraffic - Tasks you want to run on instances after they are registered with a load balancer
+
+#### CodePipeline
+
+A Fully managed CI/CD service
+* Orchestrates build, test & deployment
+  * The pipeline is triggered every time there is a change to your code, like a conductor in an orchestra.
+* Automated release process
+  * Fast, consistent, fewer mistakes. Enables quick release of new features and bug fixes.
+* CodePipeline integrates with
+  * CodeCommit, CodeBuild, CodeDeploy, Github, Jenkins, Elastic Beanstalk, CloudFormation, Lanbda, Elastic container service.
+  
