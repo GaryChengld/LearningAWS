@@ -1224,4 +1224,42 @@ A Fully managed CI/CD service
   * Fast, consistent, fewer mistakes. Enables quick release of new features and bug fixes.
 * CodePipeline integrates with
   * CodeCommit, CodeBuild, CodeDeploy, Github, Jenkins, Elastic Beanstalk, CloudFormation, Lanbda, Elastic container service.
-  
+
+
+#### Elastic Container Service
+
+Advantges of Containers
+* Highly scalable - if the application becomes over loaded, scale only the services you need to
+* Fault Tolerant - A single error in one of your containers shouldn't bring down your entire app
+* Easy to Maintain - Easier to maintain, update and change then large monolithic applications
+
+ECS is a container orchestration service which supports Docker and windows containers
+* Clusters of virtual machines - ECS wil run your containers on clusters of virtual machines
+* Fargate for Serverless - Use Fargate for serverless containers and you don't need to worry about the underlying EC2 instances.
+* EC2 for more control - If you want to control the installation, configuration and management of your compute environment
+
+Elastic Container Registry - Registry of container images
+
+Exam Tips
+* Containers - Virtual operating environment with everything the software needs to run
+  * include libiaries, system tool, code and runtime
+  * Allows applications to be built using independent stateless components or microservices running in multiple containers.
+* ESC - Container Orchestration
+  * ESC will run your containers on clusters of virtual machines
+* Fargate - serverless
+  * You don't need to worry about the underlying EC2 instances.
+* EC2 - More control
+  * If you want to control the installation, configuration and management of your compute environment
+* ECR - Container Registry
+  * This is where you can store your container images. docker or windows container.
+
+#### Docker and codeBuild
+
+* Docker commands to build, tag and push your Docker image to the ECR repository
+  * docker build -t myimagerepo
+  * docker tag myimagerepo:latest <ecrurl>/myimagerepo:latest
+  * docker push <ecrurl>/myimagerepo:latest
+* Use buildspec.yuml to define the build commands and settings used by CodeBuild to run your build
+* You can override the setting in buildspec.yml by adding your own commands in the console when you launch the build
+* If your build fails, check the build logs in the CodeBuild console and you can also view the full CodeBuild log in CloudWatch
+
