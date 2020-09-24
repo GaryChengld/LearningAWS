@@ -1263,3 +1263,63 @@ Exam Tips
 * You can override the setting in buildspec.yml by adding your own commands in the console when you launch the build
 * If your build fails, check the build logs in the CodeBuild console and you can also view the full CodeBuild log in CloudWatch
 
+#### CloudFormation
+
+* CloudFormation is a service that allows you to manage, config and provision your AWS infrastructure as code
+* Resource are defined using CloudFormation template
+* CloudFormation interprets the template and make the appropriate API calls to create the resource you have defined
+* Support YAML and JSON
+
+CloudFormation Benefits
+
+* Infrastructure is provisioned consistently, with fewer mistakes.
+* Less time and effort than configuring things manually.
+* You can version control and peer review your templates
+* Free to use
+* Can be used to manage updates & dependencies
+* Can be used to rollback and delete the entire stack as well.
+
+CloudFormation Template
+* YAML or JSON template used to describe the endstate of the infrastructure you are eigher provisioning or changing
+* After creating the template, you upload it to CloudFormation using S3
+* CloudFormation reads the template and makes the API calls on your behalf
+* The resulting resources are called a Stack
+
+Exam Tips
+* CloudFormation allows you to manage, configure and provision AWS infrastructure as code (YAML, JSON)
+* Remamber the main sections in the cloud Formation template:
+  * Parameters - input custom values
+  * Conditions - e.g.provision resource based on environment
+  * Resources - mandatory - the AWS resources to create
+  * Mapping - create custom mapping like Region:AMI
+  * Transforms - reference code located in S3 e.g. Lambda code or reusable snippets of CloudFormation code
+
+#### Serverless Application Model
+
+* Serverless Application Model(SAM) is an extension to CloudFormation used to define serverless applications
+* Simplified syntax for defining serverless resources: APIs, Lambda Functions, DynamoDB Tables etc
+* Use the SAM Cli to package your deployment code, upload it to S3 and deploy your serverless application.
+
+SAM CLI Commanmds
+
+```
+sam package \
+--template-file ./mytemplate.yml \
+--output-template-file sam-template.yml \
+--s3-bucket S3-bucket-name
+
+sam deploy \
+--template-file sam-template.yml \
+--stack-name mystack \
+--capabilities CAPABILITY_IAM
+```
+
+CloudFormation & SAM Exam Tips
+
+* SAM is the Serverless Application Model
+* Allows you to define and provision serverless applications using CloudFormation
+* Use the SAM CLI commands to package and deploy
+* sam package - packages your application and uploads to S3
+* sam deploy - deploys your serverless app using CloudFormation
+
+
