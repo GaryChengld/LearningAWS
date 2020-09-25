@@ -1322,4 +1322,37 @@ CloudFormation & SAM Exam Tips
 * sam package - packages your application and uploads to S3
 * sam deploy - deploys your serverless app using CloudFormation
 
+#### CloudFormation Nested Stacks
 
+* Nested stackas allow re-use of CloudFormation code for common use cases
+* e.g. standard configuration for a load balancer, web server, application server etc
+* Instead of copying out the code each time, create a standard template for each common use case and reference form within your CloudFormation template
+* Simply create a CloudFormation template, store it in S3 and you can reference it in the Resource section of any CloudFormation template using the Stack resource type
+
+#### Developer Theory Summary
+
+* CI/CD
+  * CodeCommit
+  * CodeBuild
+  * CodeDeploy
+  * CodePipeline
+* [AWS white paper](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+* Containers
+  * ECS
+  * Fargate
+  * EC2
+  * ECR
+* Docker
+  * build
+  * tag
+  * push
+* CloudFormation
+  * Parameter
+  * Condition
+  * Resources
+  * Mapping
+  * Transforms
+* SAM
+  * sam package
+  * sam deploy
+* Nested stacks
