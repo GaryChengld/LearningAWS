@@ -1356,3 +1356,49 @@ CloudFormation & SAM Exam Tips
   * sam package
   * sam deploy
 * Nested stacks
+
+### Advanced IAM
+
+#### Web Identity Federation
+
+Web Identity Federation lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider like Amazon,Facebook,or Google.
+
+Following successful authentication, the user receives an authentication code from the Web ID provider, which they can trade for temporary AWS security credentials.
+
+Amazon Cognito
+
+Amazon Cognito provides web identity federation with the following feathres:
+* Sign-up and sign-in to your apps
+* Access for guest users
+* Acts as an identity broker between yout application and web id providers, do y don't need to write any additional code.
+* Recommended fpor all mobile appicatiobs AWS services
+
+Amazon Cognito use cases
+
+* The recommend approach for web identity federation using social media account like Facebook
+* Cognito brokers between the app and facebook or Google to provide temporary credential which map to an IAM role allowing access the required resources.
+* No need for the application to embed or store AWS credentials locally access mibile device.
+
+Exam Tips:
+* Federation allows users to authenticate with a Web Identity Provider(Google, Facebook, Amazon)
+* The user authenticates first with the Web ID provider and receives an authentication token, which is exchanged for temporary AWS credentials allowing them to assume an IAM role.
+* Cognito is an Identity broker which handles interaction between yoyr applications and the Web ID provider(you don't need to write your own code to do this)
+  * Provides sign-up, sign-in and guest user access
+  * Syncs user data for a seamless experience accross your devices
+  * Conginito is a AWS recommended approach for web ID federation particulary for mobile apps
+
+#### Cognito user pools
+
+* User pools are user directories used to manage sign-up and sign-in functionality for mobile and web applications. Users can sign-in directly to the user pool or indirectly via an identity provide like Facebook,amazon or google. Cognito acts as an indentity broker bwtween the ID provider and AWS. Successful authentication generates a number of JSON Wen Tokens(JWTs)
+* Identity Pools enable you to create unique indentities for your users and authenticate them with identity providers. With an identity, you can obtain temporary,limited-privilege AWS credentials to access other AWS services.
+
+Push synchronization
+
+Cognitpo tracks the association between user identity and the various different devices they sign-in from. In order to provide a seamless user experience for your application, Cognito uses Push Synchronization to push updates and synchronize user data across multiple devices.
+
+Amazon SNS is used to send a slient push notification to all the devices associated with a given user identity whenever datga stored in the cloud changes.
+
+Cognito Exam Tips
+* Cognito uses user pools to manmage user sign-up and sign-in directly or via web identity provides.
+* Cognito acts as an indentity broker, handling all interaction with web identity provides.
+* Cognito users push synchronization to send a silent push notification of use data updates to multiple device types associated with a user ID.
