@@ -1557,3 +1557,65 @@ AWS SDK for java allows you to
 * Get a message object from S3
 * Delete a message object from S3
 * Can't use: AWS CLI, AWS Management Console / SQS Console, SQS API
+
+#### AWS CLI Pagination
+
+* You can control the numbner of items included in the output when yuou run a CLI command
+* By defaylt, the AWS CLI uses a page size of 1000
+* i.e. if you run AWS s3api list-objects my_bucket - on a bucket which contains 2500 objects, the CLI actually makes 3 API calls to S3... but displays the entire output in one go.
+* If you see errors when running lists commands on a large numner of resource, the default page size of 1000 might by too high.
+* You are most likely to see a "time out error", because the API call has exceeded the maximun allows time to fetch the required results.
+* To Fix this, use the --page-size option to have the CLI request a smaller number of items form each API call
+* The CLI still retrieves the full list, but performs a large number of API calls in the background and retrieves a smaller number of items with each call.
+* Use the --max-items option to return fewer items in the CLI output.
+
+#### IAM Policy Simulator
+
+* Test the effects of IAM policies before commiting them to production
+* Valiate that the policy works as expected
+* Test policies already attached to existing users - great for troubleshooting an issue which you suspect is IAM related.
+* https://polocysim.aws.amazon.com
+
+#### Kinesis shards vs consumers
+
+What's Kinesis consumers
+* Kinesis client libiary runs on the consumer instances
+* Tracks the number of shards in your system
+* Discovers new shards when you reshard
+
+Kinesis Client Libiary
+* THE KCL ensures thar fior every shard there is a record processor
+* Manages the number of record processors relative to the number of shards & consumers
+* If you have only one consumer, the KCL will create all the record processors on a single consumer
+* If you hae two consumers it will load balance and create half the processors on one instance and half on another
+* Ensure that number of instance does not exceed the number of shards
+* Never need multiple instances to handle the processing load of one shard
+* CPU utilisations is what should drive the quantity of consumer instances you have, NOT the number of shards in your Kinesis stream.
+* Use and Auto scaling group, and based scaling desisions on CPU load on your consumers.
+
+#### Lambda concurrent executions limit
+
+* Not necessary to memorize lots of limits for exam
+* Be aware that there is a concurrent execution limit for Lambda
+* Safety feature to limit the numbner of concurrent executions across all function in a given region per account
+
+Concurrent Executions
+* Default is 1000 per second
+* TooManyRequestsException
+* HTTP Status code: 429
+* Request throughput limit execeeded
+
+Exam Tips
+* Know that a limit exist - 1000 per second
+* If you are running a serverless website like ACG, it's likely you will hit the limit at same point
+* If you hit the limit you will start to see invocation being rejected - 429 http status code
+* THe remedy is to get the limit raised by AWS support
+* Reserved concurrency garantees a set numbner of concurrent executions are always available to a cirtical function
+
+#### Lambda versions
+
+* When you create a Lambda function, there is only one version:$LATEST
+* When you upload a new version of the code to Lambda, this version will become the $LATEST
+* You can create multiple versions of your function code and use aliases to reference the version you want to use as part of the ARN
+* e.g. IN a development enviroment you might want to maintain a few version of the same function as you developer and test your code
+* An alias is like a pointer to a specific version of function code
