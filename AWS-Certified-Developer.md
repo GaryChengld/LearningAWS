@@ -1402,3 +1402,158 @@ Cognito Exam Tips
 * Cognito uses user pools to manmage user sign-up and sign-in directly or via web identity provides.
 * Cognito acts as an indentity broker, handling all interaction with web identity provides.
 * Cognito users push synchronization to send a silent push notification of use data updates to multiple device types associated with a user ID.
+
+#### Inline Policies vs managed Policies vs Custom Policies
+
+##### Advanced IAM Policies
+Identity Access Management (IAM) is ised to define user access permissions with AWS, there are 3 difference types of IAM Polocies available:
+*  Managed Policies
+* Custom Managed Policies
+* Inline Policies
+
+AWS managed policy\\
+An AWS managed policy is a standalone policy that is created and administered by AWS. Standalone policy means that the policy has its own Amazon Resource Name (ARN) that includes the policy name. For example, arn:aws:iam::aws:policy/IAMReadOnlyAccess is an AWS managed policy. For more information about ARNs, see IAM ARNs.
+
+A single Managed Policy can be attached to multiple users, groups, roles within the sam AWS account and across different accounts. You cann't change the permissions defined in an AWS Managed Policy
+
+Customer managed policies\\
+You can create standalone policies that you administer in your own AWS account, which we refer to as customer managed policies. You can then attach the policies to multiple principal entities in your AWS account. When you attach a policy to a principal entity, you give the entity the permissions that are defined in the policy.\
+A great way to create a customer managed policy is to start by copying an existing AWS managed policy. That way you know that the policy is correct at the beginning and all you need to do is customize it to your environment.
+
+Inline policies\\
+An inline policy is a policy that's embedded in an IAM identity (a user, group, or role). That is, the policy is an inherent part of the identity. You can create a policy and embed it in a identity, either when you create the identity or later.There is strick 1:1 relationship between the entity and the policy.\
+When you delete the user,group or role in which the inline policy is enbedded, the policy will also be deleted. In mose cases, AWS recommends using managed policies over inline Polices.
+
+#### STS AssumeRoleWithWebIdentity
+
+* Assume-Role-With-Web-Identity is an API provided by STS (Security Token Service)
+* Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider. Example providers include Amazon Cognito, Login with Amazon, Facebook, Google, or any OpenID Connect-compatible identity provider.
+* For mobile applications, Cognito is recommended
+* Regular web applications can use STS AssumeRoleWithWebIdentity API
+* Once tue user has authenticated, the application makes the AssumeRoleWithWebIdentity API call
+* If successful, STS will return temporary credentials enabling access to AWS resources
+* AssumedRoelUser ARN and AssumedRoleID - are used to programatcally reference the temporary credentials - not an IAM role or user
+
+#### Corss account access
+
+Many AWS customers use separate AWS accounts for thier development and production resources. This separation allows them to cleanly separate different types of resources and can also provide some security benefits.
+\
+Cross account access makes it easier for you to work productively within a multi-account (or multi-role) AWS environment by making it easy for you to switch roles within the AWS Management Console. You can now sign into the console using your IAM user name and then switch the console to manage another account without having to enter (or remember) another user name and password.
+
+Steps
+1. Identify Account Numbers
+2. Create a group in IAM - DEV
+3. Create a user in IAM - DEV
+4. Log in to Production
+5. Create the "read-write-app-bucket" policy
+6. Create the "UpdateApp" Cross Account Role
+7. Apply the newly created policy to the role
+8. Log in to the Developer Account
+9. Create a new inline policy
+10. Apply it to the Developer group
+11. Login as John
+12. Switch Accounts
+
+### Monitoring
+
+#### Cloud Watch
+
+Amazon CloudWatch is a monitoring service to monitor your AWS resources, as well as the applications that you run on AWS.
+
+##### CloudWatch monitors things like:
+
+* Compute
+  * Autoscaling Groups
+  * ELBs - Elastic Load Balancer
+  * Route53 Health Checks
+* Storage and Content Delivery
+  * EBS Volumes
+  * Storage Gateways
+  * CloudFront
+* Databases and Analytics
+  * DynamoDB
+  * Elasticache Nodes
+  * RDS Instances
+  * Elastic MapReduce Job Flows
+  * Redshift
+* Other
+  * SNS Topics
+  * SQS Queues
+  * Opsworks
+  * CloudWatch Logs
+  * Estimated Charges on your AWS Bill
+  * CloudWatch and EC2
+
+##### Host Level Metrics Consist of:
+* CPU
+* Network
+* Disk
+* Status Check
+
+Exam Tip: RAM Utilization is a custom metric! By default, EC2 monitoring is 5 minute intervals, unless you enable detailed monitoring, which will then make it 1 minute intervals.
+
+#####How Long are CloudWatch Metrics Stored
+You can retrieve data using the GetMetricStatistics API or by using third party tools offered by AWS partners.
+\\
+You can store your log data in CloudWatch Logs for as long as you want. By default, CloudWatch Logs will store your log data indefinitely. You can change the retention for each Log Group at any time.
+\\
+Note: You can retrieve data from any terminated EC2 or ELB instance after its termination
+
+##### Metric Granularity
+It depends on the AWS service. Many default metrics for many default services are 1 minute, but it can be 3 or 5 minutes depending on the service.
+\\
+Exam Tip: For custom metrics, the minimum granularity that you can have is 1 minute.
+
+##### CloudWatch Alarms
+You can create an alarm to monitor any Amazon CloudWatch metric in your account. This can include EC2 CPU Utilization, ELB Latency or even the charges on your AWS bill. You can set the appropriate thresholds in which to trigger the alarms and also set what actions should be take if an alarm state is reached. This will be covered in a subsequent lecture.
+
+##### CloudWatch Exam Tips
+* Amazon CloudWatch is a monitoring service to monitor your AWS resources, as well as the applications that you run on AWS.
+* Host Level Metrics Consist of:
+  * CPU
+  * Network
+  * Disk
+  * Status Check
+* RAM Utilization is a custom metric
+* Custom Metrics: Minimum granularity is 1 minute
+* Terminated Instances: You can retrieve data from any terminated EC2 or ELB instance after its termination. CloudWatch Logs by default are stored indefinitely.
+* Metric Granularity
+  * 1 minute for detailed monitoring
+  * 5 minutes for standard monitoring
+* CloudWatch can be used on presmise: Not restricted to just AWS resources. Can be on premise too. Just need to download and install the SSM agent and CloudWatch agent.
+
+#### CloudWatch vs. CloudTrail vs. Config
+* CloudWatch monitors performance.
+* CloudTrail monitors API calls in the AWS platform
+* AWS Config records the state of your AWS environment and can notify you of changes
+
+### MISC
+
+#### SQS Delay Queues & Managing Large Messages
+
+SQS Delay Queues - postpine delivery of new messages
+* Postpone delivery of new messages to a queue for a numner of seconds
+* Messages sent to the Delay Queue remain invisible to customers for the duration of the delay period
+* Default delay is 0 seconds, Maximun is 900
+* For satndard queues, changing the setting doesn't affect the delay of messages already in the queue, only new messages.
+* For FIFO queues, this affects the delay of messages already in the queue.
+
+When should you use a Delay Queue
+* Large distributed applications which may need to introduce a deley in processing
+* You need to apply a delay to an enire queue of messages
+* e.g. adding a delay of a few seconds, to allow for update to your sales and stock control databases before sending a notification to a customer confirming an online transaction.
+
+Managing Latge SQS Messages
+
+Best Practice for manageing large SQS messages using S3
+* For large SQS messages - 256KB up tp 2GB in size
+* Use S3 to store the message
+* Use Amazon SQS extended client libiary for java to manage them
+* (you will also need AWS SDK for java) - provides an API for S3 bucket and object operations
+
+AWS SDK for java allows you to
+* Specify that messages are always stored in Amazon S3 or only messages > 256KM
+* Send a message with references a message Obejct stored in S3
+* Get a message object from S3
+* Delete a message object from S3
+* Can't use: AWS CLI, AWS Management Console / SQS Console, SQS API
