@@ -1619,3 +1619,42 @@ Exam Tips
 * You can create multiple versions of your function code and use aliases to reference the version you want to use as part of the ARN
 * e.g. IN a development enviroment you might want to maintain a few version of the same function as you developer and test your code
 * An alias is like a pointer to a specific version of function code
+
+#### Lambda and VPCs
+
+Enabling Lambda to access your VPC Resources
+* Some use cases require Lambda to access resources which are inside a private VPC
+* e.g. read or write to an RDS database, ot shut down an EC2 in response to a security alerts
+* To enable this, you need to allow the function to connect to the priovate subnet
+* Lambda needs the following VPC comfiguration information so that it can connect to the VPC:
+  * Priovate subnet ID
+  * Secuirty griouypo ID ( with required access)
+  * Lambda uses this information to setup ENIs using an available IP address from your private subnet.
+* You can add VPC information to your lambda function config using the --vpc-config
+
+Exam Tips
+* It is possible to enable Lambda to access resource which are inside a private VPC
+* Provice VPC config to the function - private subnet ID, security group ID.
+* Lambda uses the VPC information to set up ENIs using an IP from the private subnet CIDR range
+* The security group then allows your function to access resources in VPC
+
+#### X-Ray configuration
+
+X-Ray overview
+* The QWS X-Ray sdk sends the data to the X-Ray darmon which buffers segments in a queue and uploads then to X-Ray in Batchs.
+* You need both the X-Ray SDK and the X-Ray daemen on your systems.
+
+Exam Tips
+* X-Ray integrates with many AWS services like DynamoDB, Lambda, AOI gateway. etc.
+* You can also instrument your own aolication to send data to X0RAY
+* Applicatiobns can be running on EC2, Elastic Beanstalk environment, on-promises system and ECS
+* For ECS, run X-Ray daemon is it's own docker image, running alongside your application.
+
+#### Deploying Docker using Elastic Beanstalk
+
+* When using Elasti Beanstalkm you can deploy your docker container to a single EC2 instance
+* You can also deploy multiple docker instances to an ECS cluster
+* To Deploy a docker application just up;pad your cde bundle to Elastic Beanstalk
+* To Upgrade your application to a new version, it's one easy step in the console to upload and deploy your new version.
+* Code can be uploaded directly from your local macnine or a public S3 bucket
+* You can also store your code in CodeCommit - but must use the Elastic Beanstalk CLI.
