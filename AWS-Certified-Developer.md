@@ -518,7 +518,7 @@ A content delivery network (CDN) is a system of distriuted servers (network) tha
 CouldFront - Key Terminology
 
 * Edge Location - This is the location where content is cached and can also be written, Seperate to an AWS Region/AZ.
-* Origo - This is the origin of all the files that the CDN will distribute. Origins can be an S3 bucket, an EC2 Instance, an Elstic Load Balancer, or Route53.
+* Origin - This is the origin of all the files that the CDN will distribute. Origins can be an S3 bucket, an EC2 Instance, an Elstic Load Balancer, or Route53.
 * Distribution - This is the name given the CDN, which consists of a collection of Edge Locations.
 * Web Distribution - Typically used for websites, http/https
 * RTMP - (Abpobe Real Time Messaging Protocal) Used for media streaming / Flash multi-media content
