@@ -1543,7 +1543,7 @@ When should you use a Delay Queue
 * You need to apply a delay to an enire queue of messages
 * e.g. adding a delay of a few seconds, to allow for update to your sales and stock control databases before sending a notification to a customer confirming an online transaction.
 
-Managing Latge SQS Messages
+Managing Large SQS Messages
 
 Best Practice for manageing large SQS messages using S3
 * For large SQS messages - 256KB up tp 2GB in size
