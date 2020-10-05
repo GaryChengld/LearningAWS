@@ -10,3 +10,5 @@ Exam Tips
 * You only get to view these once. If you lose them, you have to regenerate them. So, save them in a secure location.
 * Always setup Multicactor Authentication on your root account.
 * You can create and customise your own password rotation policies.
+
+### S3

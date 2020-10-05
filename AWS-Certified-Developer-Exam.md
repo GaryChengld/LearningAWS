@@ -23,6 +23,9 @@ LEARN MORE: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html
 * When creating an RDS instance, the user needs to specify whether it is Multi AZ or not. If the user does not provide the value for the zone, the maintenance window or automated backup window, RDS will automatically select the value.\
 LEARN MORE: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html
 
+* The AWS RDS DB instance is an isolated DB environment provided by AWS in which the user can create more than 1 database. The maximum size of the instance should be between 5 GB and 3 TB. The size of each DB can be anything in this range.\
+LEARN MORE: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html
+
 #### IAM
 
 * If a IAM user is trying to perform some action on an object belonging to another AWS user’s bucket, S3 will verify whether the owner of the IAM user has given sufficient permission to him. It also verifies the policy for the bucket as well as the policy defined by the object owner.\
@@ -57,6 +60,15 @@ LEARN MORE: http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
 * It is a recommended rule that the root user should grant the least privileges to the IAM user or the group. The higher the privileges, the more problems it can create.\
 LEARN MORE: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html
 
+* Newly created IAM users have no password and no access key (access key ID and secret access key). If the user needs to administer your AWS resources using the AWS Management Console, you can create a password for the user. If the user needs to interact with AWS programmatically (using the command line interface (CLI), the AWS SDK, or service-specific APIs), you can create an access key for that user. The credentials you create for users are what they use to uniquely identify themselves to AWS.\
+LEARN MORE: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html
+
+* A user can share an AMI with another user / peer using the command: ec2-modify-image-attribute <AMI-ID> -l -a <AWS Account ID>\
+LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-explicit.html
+
+* While launching an EC2 instance, the user can create a new key pair, select an existing key pair or proceed without a key pair. The user cannot upload a new key pair in the EC2 instance launch console.\
+LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html
+
 #### AutoScaling
 
 * The user can configure the AutoScaling group to automatically scale up and then scale down based on  the various specified CloudWatch monitoring conditions.  The user needs to provide the adjustment value and the adjustment type. A positive adjustment value increases the current capacity and a negative adjustment value decreases the current capacity. The user can express the change to the current size as an absolute number, an increment or as a percentage of the current group size.\
@@ -79,6 +91,9 @@ as-set-desired-capacity <Auto Scaling Group Name> --desired-capacity <New Capaci
 * The user can get notifications using SNS if he has configured the notifications while creating the Auto Scaling group.\
 LEARN MORE: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/GettingStartedTutorial.html
 
+* Before Auto Scaling selects an instance to terminate, it first identifies the Availability Zone that has more instances than the other Availability Zones used by the group. If all the Availability Zones have the same number of instances, it identifies a random Availability Zone.\
+LEARN MORE: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html
+
 #### DynamoDB
 
 * In DynamoDB, you can increase the throughput you have provisioned for your table using UpdateTable API or in the AWS Management Console. If you wish to exceed throughput rates of 10,000 writes/second or 10,000 reads/second, you must first contact AWS.\
@@ -97,6 +112,14 @@ LEARN MORE: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/APIS
 * The ListTables operation requires no parameters. However, you can specify optional parameters. For example, you can set the limit parameter if you want to use paging to limit the number of table names per page.\
 LEARN MORE: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LowLevelJavaCreateUpdateDeleteTable.html#LowLevelJavaCreate
 
+* In DynamoDB, DescribeTable returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.\
+LEARN MORE: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html
+
+* Amazon DynamoDB supports the following data types:
+  * Scalar data types (like Number, String, and Binary)
+  * Multi-valued types (like String Set, Number Set, and Binary Set).
+LEARN MORE: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModel.DataTypes
+
 #### SQS
 
 * In AWS Elastic Beanstalk, if the application returns any response other than 200, OK or there is no response within the configured InactivityTimeout period, SQS once again makes the message visible in the queue and available for another attempt at processing.\
@@ -107,6 +130,21 @@ LEARN MORE: http://aws.amazon.com/sqs/faqs/#How_long_can_I_keep_my_messages_in_A
 
 * Amazon SQS is a distributed queuing system that is optimized for horizontal scalability, not for single-threaded sending or receiving speeds. A single client can send or receive Amazon SQS messages at a rate of about 5 to 50 messages per second. Higher receive performance can be achieved by requesting multiple messages (up to 10) in a single call. It may take several seconds before a message that has been to a queue is available to be received.\
 LEARN MORE: http://media.amazonwebservices.com/AWS_Storage_Options.pdf
+
+* Queue names are limited to 80 characters. Alphanumeric characters plus hyphens (-) and underscores (_) are allowed. Queue names must be unique within an AWS account. After you delete a queue, you can reuse the queue name.\
+LEARN MORE: https://aws.amazon.com/sqs/faqs/
+
+* The SQS message retention period is configurable and can be set anywhere from 1 minute to 2 weeks. The default is 4 days and once the message retention limit is reached your messages will be automatically deleted. The option for longer message retention provides greater flexibility to allow for longer intervals between message production and consumption.\
+LEARN MORE: https://aws.amazon.com/sqs/faqs/
+
+* AWS reserve the right to delete a queue if none of the following requests have been issued against the queue for more than 30 consecutive days:
+  * SendMessage
+  * ReceiveMessage
+  * DeleteMessage
+  * GetQueueAttributes
+  * SetQueueAttributes
+You should design your application with this in mind.\
+LEARN MORE: https://aws.amazon.com/sqs/faqs/
 
 #### SNS
 
@@ -141,6 +179,9 @@ LEARN MORE: http://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersio
 * If the user is using the server-side encryption feature, Amazon S3 encrypts the object data before saving it on disks in its data centres and decrypts it when the user downloads the objects. Thus, the user is free from the tasks of managing encryption, encryption keys, and related tools.\
 LEARN MORE: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html
 
+* Amazon S3 offers access policy options broadly categorized as resource-based policies and user policies. Access policies, such as ACL and resource policy can be attached to the bucket.  With the object the user can only have ACL and not an object policy. The user can also attach access policies to the IAM users in the account. These are called user policies.\
+LEARN MORE: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+
 #### Beanstalk
 
 * AWS Elastic Beanstalk is designed to support a number of multiple running environments
@@ -159,6 +200,9 @@ LEARN MORE: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features
 LEARN MORE: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.components.html
 
 * *hile AWS Elastic Beanstalk creates your AWS resources and launches your application, the environment will be in a Launching (gray) state. Status messages about launch events are displayed in the environment’s dashboard. If the environment health is gray, the environment is still in the process of being launched.\
+LEARN MORE: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.Walkthrough.html
+
+* In AWS Elastic Beanstalk, you can update your deployed application, even while it is part of a running environment. For a Java application, you can also use the AWS Toolkit for Eclipse to update your deployed application.\
 LEARN MORE: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.Walkthrough.html
 
 #### EC2 & EBS
@@ -183,6 +227,13 @@ LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-vol
 
 * A user can always create a new EBS volume of a higher size than the original snapshot size. The user cannot create a volume of a lower size. When the new volume is created the size in the instance will be shown as the original size. The user needs to change the size of the device with resize2fs or other OS specific commands.\
 LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html
+
+* The EBS snapshots are a point in time backup of the EBS volume. It is an incremental snapshot, but is always specific to the region and never specific to a single AZ.\
+LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+
+* Spread Placement Groups are recommended for applications that have a small number of critical instances which need to be kept separate from each other. Launching instances in a Spread Placement Group reduces the risk of simultaneous failures that might occur when instances share the same underlying hardware. Spread Placement Groups provide access to distinct hardware, and are therefore suitable for mixing instance types or launching instances over time. In this case, deploying the EC2 instances in a Spread Placement Group is the only correct option.
+
+* To retrieve instance metadata or user data, you will need to use the following IP Address: http://169.254.169.254.
 
 #### SWF
 
@@ -219,5 +270,8 @@ LEARN MORE: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concep
 * The key to manage the sticky session is determining how long the load balancer should route the user’s request to the same application instance. If the application has its own session cookie, then the user can set the Elastic Load Balancing to create the session cookie to follow the duration specified by the application’s session cookie. If the user’s application does not have its own session cookie, then he can set the Elastic Load Balancing to create a session cookie by specifying his own stickiness duration.\
 LEARN MORE: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_StickySessions.html
 
-* Yes, it is possible to have one instance part of two separate ELBs, though both ELBs have different configurations. ELBs are never launched in specific zones.\
+* It is possible to have one instance part of two separate ELBs, though both ELBs have different configurations. ELBs are never launched in specific zones.\
 LEARN MORE: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-az.html
+
+* An ELB performs a health check on its instances to ensure that it diverts traffic only to healthy instances. The ELB can perform a health check on HTTP, HTTPS, TCP and SSL protocols.\
+LEARN MORE: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
