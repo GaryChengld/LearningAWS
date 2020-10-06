@@ -69,6 +69,8 @@ LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-expli
 * While launching an EC2 instance, the user can create a new key pair, select an existing key pair or proceed without a key pair. The user cannot upload a new key pair in the EC2 instance launch console.\
 LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html
 
+* Master keys are created and used only within AWS KMS to help ensure their security, enable your policies to be consistently enforced, and provide a centralized log of their use. Keys are only stored and used in the region in which they are created. They cannot be transferred to another region. For example; keys created in the EU-Central (Frankfurt) region are only stored and used within the EU-Central (Frankfurt) region.
+
 #### AutoScaling
 
 * The user can configure the AutoScaling group to automatically scale up and then scale down based on  the various specified CloudWatch monitoring conditions.  The user needs to provide the adjustment value and the adjustment type. A positive adjustment value increases the current capacity and a negative adjustment value decreases the current capacity. The user can express the change to the current size as an absolute number, an increment or as a percentage of the current group size.\
@@ -261,6 +263,8 @@ LEARN MORE: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tabl
 
 * The template is a JSON-format or YAML file that describes all the AWS resources you need to deploy to run your application.\
 LEARN MORE: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-template.html
+
+* Transforms is used to reference code located in S3 and also for specifying the use of the Serverless Application Model (SAM) for Lambda deployments.
 
 * In AWS CloudFormation, the default value is overridden if you specify a value for the parameter as part of theaws cloudformation create-stack –parameters option. Parameter values you override at runtime are returned as part of the aws cloudformation describe-stacks command, unless you suppress that in the parameter declaration by including the NoEcho property with a value of true.\
 LEARN MORE: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-parameters.html
