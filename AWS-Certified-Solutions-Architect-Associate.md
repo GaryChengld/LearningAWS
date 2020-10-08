@@ -43,3 +43,15 @@ Exam Tips
   * S3 - Intelligent Tiering
   * S3 Glacier
   * S3 Glacier Deep Archive
+
+#### S3 security & encryption
+
+#### S3 versioning
+
+Exam Tips
+
+* stored all version of an object(including all writes and even if you delete an object)
+* Great backup tool
+* Once enabled, can not be disabled, only suspended.
+* Integrates with lifecycle rules
+* Versioning's MFA delete capability can be used to provide an additional layer of security
