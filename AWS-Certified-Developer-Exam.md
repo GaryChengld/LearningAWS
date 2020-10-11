@@ -237,6 +237,11 @@ LEARN MORE: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
 
 * To retrieve instance metadata or user data, you will need to use the following IP Address: http://169.254.169.254.
 
+* Amazon EC2 RI Types - With RIs, you can choose the type that best fits your applications needs.
+  * Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.
+  * Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage.
+  * Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
+
 #### SWF
 
 * Amazon Simple Workflow (Amazon SWF) is a task coordination and state management service for cloud applications. With Amazon SWF, you can stop writing complex glue-code and state machinery and invest more in the business logic that makes your applications unique.\
@@ -279,3 +284,14 @@ LEARN MORE: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuid
 
 * An ELB performs a health check on its instances to ensure that it diverts traffic only to healthy instances. The ELB can perform a health check on HTTP, HTTPS, TCP and SSL protocols.\
 LEARN MORE: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
+
+#### SAM 
+
+* AWS SAM resource and property types
+  * AWS::Serverless::Api
+  * AWS::Serverless::Application
+  * AWS::Serverless::Function
+  * AWS::Serverless::HttpApi
+  * AWS::Serverless::LayerVersion
+  * AWS::Serverless::SimpleTable
+  * AWS::Serverless::StateMachine
