@@ -16,10 +16,20 @@ You can set the scope for the analyzer to an organization or an AWS account. Thi
 
 * CloudFront Key Pairs - IAM users can't create CloudFront key pairs. You must log in using root credentials to create key pairs.
 
+* You can authenticate to your DB instance using AWS Identity and Access Management (IAM) database authentication. IAM database authentication works with MySQL and PostgreSQL. 
+
 #### KMS
 
 * KMS stores the CMK, and receives data from the clients, which it encrypts and sends back
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q14-i1.jpg" />
+
+* While AWS KMS does support sending data up to 4 KB to be encrypted directly, envelope encryption can offer significant performance benefits. When you encrypt data directly with AWS KMS it must be transferred over the network. Envelope encryption reduces the network load since only the request and delivery of the much smaller data key go over the network. The data key is used locally in your application or encrypting AWS service, avoiding the need to send the entire block of data to AWS KMS and suffer network latency.
+
+* AWS Lambda environment variables can have a maximum size of 4 KB. Additionally, the direct 'Encrypt' API of KMS also has an upper limit of 4 KB for the data payload. To encrypt 1 MB, you need to use the Encryption SDK and pack the encrypted file with the lambda function.
+
+#### Kinesis
+
+* Server-side encryption is a feature in Amazon Kinesis Data Streams that automatically encrypts data before it's at rest by using an AWS KMS customer master key (CMK) you specify. Data is encrypted before it's written to the Kinesis stream storage layer and decrypted after it's retrieved from storage. As a result, your data is encrypted at rest within the Kinesis Data Streams service. Also, the HTTPS protocol ensures that data inflight is encrypted as well.
 
 #### Policy
 * Instead of creating individual policies for each user, you can use policy variables and create a single policy that applies to multiple users (a group policy). Policy variables act as placeholders. When you make a request to AWS, the placeholder is replaced by a value from the request when the policy is evaluated.
@@ -51,12 +61,18 @@ You can set the scope for the analyzer to an organization or an AWS account. Thi
 * An Amazon API Gateway Lambda authorizer (formerly known as a custom authorizer) is a Lambda function that you provide to control access to your API. A Lambda authorizer uses bearer token authentication strategies, such as OAuth or SAML. Before creating an API Gateway Lambda authorizer, you must first create the AWS Lambda function that implements the logic to a
 
 #### Cognito
+
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q40-i1.jpg">
+
 * After successful authentication, Amazon Cognito returns user pool tokens to your app. You can use the tokens to grant your users access to your own server-side resources, or to the Amazon API Gateway.\
 Amazon Cognito user pools implement ID, access, and refresh tokens as defined by the OpenID Connect (OIDC) open standard.\
 The ID token is a JSON Web Token (JWT) that contains claims about the identity of the authenticated user such as name, email, and phone_number. You can use this identity information inside your application. The ID token can also be used to authenticate users against your resource servers or server applications.
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q53-i1.jpg" />
 
 * You can use Identity pools to grant your users access to other AWS services. With an identity pool, your users can obtain temporary AWS credentials to access AWS services, such as Amazon S3 and DynamoDB. Identity pools support anonymous guest users, as well as the specific identity providers that you can use to authenticate users for identity pools.
+
+* Amazon Cognito Sync is an AWS service and client library that enables cross-device syncing of application-related user data. You can use it to synchronize user profile data across mobile devices and the web without requiring your own backend. The client libraries cache data locally so your app can read and write data regardless of device connectivity status. When the device is online, you can synchronize data, and if you set up push sync, notify other devices immediately that an update is available.
+
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q53-i2.jpg" />
 
 #### Secrets Manager
@@ -72,6 +88,20 @@ Benefits of Secrets Manager:
 
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q4-i1.jpg">
 
+* HTTP requests and HTTP responses use header fields to send information about the HTTP messages. Header fields are colon-separated name-value pairs that are separated by a carriage return (CR) and a line feed (LF).
+
+  * X-Forwarded-For - The X-Forwarded-For request header helps you identify the IP address of a client when you use an HTTP or HTTPS load balancer. Because load balancers intercept traffic between clients and servers, your server access logs contain only the IP address of the load balancer. To see the IP address of the client, use the X-Forwarded-For request header.
+  * X-Forwarded-Proto - The X-Forwarded-Proto request header helps you identify the protocol (HTTP or HTTPS) that a client used to connect to your load balancer. Your server access logs contain only the protocol used between the server and the load balancer; they contain no information about the protocol used between the client and the load balancer. To determine the protocol used between the client and the load balancer, use the X-Forwarded-Proto request header.
+  * X-Forwarded-Port - The X-Forwarded-Port request header helps you identify the destination port that the client used to connect to the load balancer.
+
+
+#### API Gateway
+
+* AWS Security Token Service (STS) - AWS Security Token Service (AWS STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). However, it is not supported by API Gateway.
+
+API Gateway supports the following mechanisms for authentication and authorization:
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q55-i1.jpg">
+
 #### Certificate
 * AWS Certificate Manager - AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy server certificates. With ACM you can request a certificate or deploy an existing ACM or external certificate to AWS resources. Certificates provided by ACM are free and automatically renew. In a supported Region, you can use ACM to manage server certificates from the console or programmatically.
 
@@ -79,6 +109,11 @@ Benefits of Secrets Manager:
 
 #### EC2
 * Key pairs consist of a public key and a private key. You use the private key to create a digital signature, and then AWS uses the corresponding public key to validate the signature. Key pairs are used only for Amazon EC2 and Amazon CloudFront. AWS does not provide key pairs for your account; you must create them. You can create Amazon EC2 key pairs from the Amazon EC2 console, CLI, or API. Key pairs make a robust combination for accessing an instance securely, a better option than using passwords.
+
+* Reuse SSH key pairs across AWS Regions - Generate a public SSH key from a private SSH key. Then, import the key into each of your AWS Regions
+  1. Generate a public SSH key (.pub) file from the private SSH key (.pem) file.
+  2. Set the AWS Region you wish to import to.
+  3. Import the public SSH key into the new Region.
 
 #### Billing
 * By default, IAM users do not have access to the AWS Billing and Cost Management console. You or your account administrator must grant users access. You can do this by activating IAM user access to the Billing and Cost Management console and attaching an IAM policy to your users. Then, you need to activate IAM user access for IAM policies to take effect. You only need to activate IAM user access once.
@@ -100,6 +135,9 @@ You can create a default record that handles both queries from IP addresses that
   * Dedicated Instances are Amazon EC2 instances that run in a virtual private cloud (VPC) on hardware that's dedicated to a single customer. Dedicated Instances that belong to different AWS accounts are physically isolated at a hardware level, even if those accounts are linked to a single-payer account. However, Dedicated Instances may share hardware with other instances from the same AWS account that are not Dedicated Instances.
   * A Dedicated Host is also a physical server that's dedicated for your use. With a Dedicated Host, you have visibility and control over how instances are placed on the server.
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q21-i1.jpg">
+
+Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster. You can host your cluster on a serverless infrastructure that is managed by Amazon ECS by launching your services or tasks using the Fargate launch type. For more control over your infrastructure, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage by using the EC2 launch type.
+<img src="https://d1.awsstatic.com/diagrams/product-page-diagrams/product-page-diagram_ECS_1.86ebd8c223ec8b55aa1903c423fbe4e672f3daf7.png">
 
 #### Lambda
 
@@ -141,6 +179,9 @@ SAM supports the following resource types:
   * AWS::Serverless::SimpleTable
   * AWS::Serverless::StateMachine
 
+* Serverless Application Model (SAM) Templates include several major sections. Transform and Resources are the only required sections.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q5-i1.jpg">
+
 #### Docker
 
 * Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR is integrated with Amazon Elastic Container Service (ECS), simplifying your development to production workflow.
@@ -179,7 +220,7 @@ ECS Overview
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q2-i1.jpg">
 
 #### CodeBuild
-
+\
 A build represents a set of actions performed by AWS CodeBuild to create output artifacts (for example, a JAR file) based on a set of input artifacts (for example, a collection of Java class files).\
 \
 The following rules apply when you run multiple builds:\
@@ -193,17 +234,27 @@ A build in a queue that does not start after the number of minutes specified in 
 By setting the timeout configuration, the build process will automatically terminate post the expiry of the configured timeout.
 
 #### CodeCommit
+\
+AWS CodeCommit is a fully-managed Source Control service that hosts secure Git-based repositories. It makes it easy for teams to collaborate on code in a secure and highly scalable ecosystem. AWS CodeCommit helps you collaborate on code with teammates via pull requests, branching and merging. AWS CodeCommit keeps your repositories close to your build, staging, and production environments in the AWS cloud. You can transfer incremental changes instead of the entire application. AWS CodeCommit supports all Git commands and works with your existing Git tools. You can keep using your preferred development environment plugins, continuous integration/continuous delivery systems, and graphical clients with CodeCommit.
 
 * IAM username and password credentials cannot be used to access CodeCommit.
 
 #### CodeDeploy
+\
+AWS CodeDeploy is a fully managed "deployment" service that automates software deployments to a variety of compute services such as Amazon EC2, AWS Fargate, AWS Lambda, and your on-premises servers. AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications. This is the right choice for the current use case.
 
+\
 AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, or serverless Lambda functions. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.\
 \
 The blue/green deployment type uses the blue/green deployment model controlled by CodeDeploy. This deployment type enables you to verify a new deployment of service before sending production traffic to it.\
 \
 CodeDeploy offers lot of control over deployment steps. Please see this note for more details:
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q58-i1.jpg">
+
+* An AppSpec file must be a YAML-formatted file named appspec.yml and it must be placed in the root of the directory structure of an application's source code.
+
+* To the failed instances: AWS CodeDeploy rolls back deployments by redeploying a previously deployed revision of an application as a new deployment on the failed instances.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q22-i1.jpg">
 
 ### Development
 
@@ -215,6 +266,13 @@ Amazon Kinesis Data Streams enables real-time processing of streaming big data. 
 
 Amazon Kinesis Data Streams is useful for rapidly moving data off data producers and then continuously processing the data, be it to transform the data before emitting to a data store, run real-time metrics and analytics, or derive more complex data streams for further processing. Kinesis data streams can continuously capture gigabytes of data per second from hundreds of thousands of sources such as website clickstreams, database event streams, financial transactions, social media feeds, IT logs, and location-tracking events.
 <img src="https://d1.awsstatic.com/Products/product-name/diagrams/product-page-diagram_Amazon-Kinesis-Data-Streams.074de94302fd60948e1ad070e425eeda73d350e7.png">
+
+* The capacity limits of an Amazon Kinesis data stream are defined by the number of shards within the data stream. The limits can be exceeded by either data throughput or the number of PUT records. While the capacity limits are exceeded, the put data call will be rejected with a ProvisionedThroughputExceeded exception.
+
+* You should use enhanced fan-out if you have, or expect to have, multiple consumers retrieving data from a stream in parallel. 
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q6-i1.jpg">
+
+* When a host needs to send many records per second (RPS) to Amazon Kinesis, simply calling the basic PutRecord API action in a loop is inadequate. To reduce overhead and increase throughput, the application must batch records and implement parallel HTTP requests. This will increase the efficiency overall and ensure you are optimally using the shards.
 
 Amazon Kinesis Data Firehose is the easiest way to load streaming data into data stores and analytics tools. Kinesis Firehose cannot be used to process and analyze the streaming data in custom applications. It can capture, transform, and load streaming data into Amazon S3, Amazon Redshift, Amazon Elasticsearch Service, and Splunk, enabling near real-time analytics.
 <img src="https://d1.awsstatic.com/Products/product-name/diagrams/product-page-diagram_Amazon-Kinesis-Data-Firehose.9340b812ab86518341c47b24316995b3792bf6e1.png">
@@ -247,7 +305,7 @@ Concurrency is the number of requests that a Lambda function is serving at any g
 To ensure that a function can always reach a certain level of concurrency, you can configure the function with reserved concurrency. When a function has reserved concurrency, no other function can use that concurrency. More importantly, reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases.
 \
 Please review this note to understand how reserved concurrency works:
-<img src='https://media.datacumulus.com/aws-dva-pt/assets/pt1-q6-i1.jpg">
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q6-i1.jpg">
 
 #### Load balancer
 A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.\
@@ -316,6 +374,8 @@ Application Load Balancer Configuration for Security Groups and Health Check Rou
   * By default, scripts entered as user data are executed with root user privileges - Scripts entered as user data are executed as the root user, hence do not need the sudo command in the script. Any files you create will be owned by root; if you need non-root users to have file access, you should modify the permissions accordingly in the script.
   * By default, user data runs only during the boot cycle when you first launch an instance - By default, user data scripts and cloud-init directives run only during the boot cycle when you first launch an instance. You can update your configuration to ensure that your user data scripts and cloud-init directives run every time you restart your instance.
 
+* You configure monitoring for EC2 instances using a launch configuration or template. Monitoring is enabled whenever an instance is launched, either basic monitoring (5-minute granularity) or detailed monitoring (1-minute granularity). By default, basic monitoring is enabled when you create a launch template or when you use the AWS Management Console to create a launch configuration. 
+
 #### AWS Systems Manager Parameter Store
 
 AWS Systems Manager Parameter Store provides secure, hierarchical storage for configuration data management and secrets management. You can store data such as passwords, database strings, Amazon Machine Image (AMI) IDs, and license codes as parameter values. You can store values as plain text or encrypted data.
@@ -333,6 +393,8 @@ How X-Ray Works:
 
 X-Ray Overview:
 <img src="https://docs.aws.amazon.com/xray/latest/devguide/images/architecture-dataflow.png">
+
+Create an IAM role with write permissions and assign it to the resources running your application. You can use AWS Identity and Access Management (IAM) to grant X-Ray permissions to users and compute resources in your account. This should be one of the first places you start by checking that your permissions are properly configured before exploring other troubleshooting options.
 
 #### CodeBuild
 
@@ -352,12 +414,74 @@ With CloudTrail, you can log, continuously monitor, and retain account activity 
 How CloudTrail Works:
 <img src="https://d1.awsstatic.com/product-marketing/CloudTrail/Product-Page-Diagram-AWSX-CloudTrail_How-it-Works.d2f51f6e3ec3ea3b33d0c48d472f0e0b59b46e59.png">
 
+#### CodeDeploy
+\
+An EC2/On-Premises deployment hook is executed once per deployment to an instance. You can specify one or more scripts to run in a hook.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q56-i1.jpg">
+
 ### Refactoring
 
 #### SQS
 
-Amazon SQS uses a visibility timeout to prevent other consumers from receiving and processing the same message. The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
+* Amazon SQS uses a visibility timeout to prevent other consumers from receiving and processing the same message. The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
+
+* Amazon SQS supports dead-letter queues, which other queues (source queues) can target for messages that can't be processed (consumed) successfully. Dead-letter queues are useful for debugging your application or messaging system because they let you isolate problematic messages to determine why their processing doesn't succeed. Amazon SQS does not create the dead-letter queue automatically. You must first create the queue before using it as a dead-letter queue.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q59-i1.jpg">
 
 #### ALB
 
  In API Gateway, an API's method request can take a payload in a different format from the corresponding integration request payload, as required in the backend. Similarly, vice versa is also possible. API Gateway lets you use mapping templates to map the payload from a method request to the corresponding integration request and from an integration response to the corresponding method response.
+
+ #### API Gateway
+
+ Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the "front door" for applications to access data, business logic, or functionality from your backend services.
+
+ #### S3
+
+ * Share pre-signed URLs with resources that need access - All objects by default are private, with the object owner having permission to access the objects. However, the object owner can optionally share objects with others by creating a pre-signed URL, using their own security credentials, to grant time-limited permission to download the objects. When you create a pre-signed URL for your object, you must provide your security credentials, specify a bucket name, an object key, specify the HTTP method (GET to download the object), and expiration date and time. The pre-signed URLs are valid only for the specified duration.
+
+ * When your source bucket and target bucket are the same bucket, additional logs are created for the logs that are written to the bucket. The extra logs about logs might make it harder to find the log that you are looking for. This configuration would drastically increase the size of the S3 bucket.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q57-i1.jpg">
+
+#### EC2
+\
+In a target tracking scaling policy, you can use predefined or customized metrics. The following predefined metrics are available:
+* ASGAverageCPUUtilization—Average CPU utilization of the Auto Scaling group.
+* ASGAverageNetworkIn—Average number of bytes received on all network interfaces by the Auto Scaling group.
+* ASGAverageNetworkOut—Average number of bytes sent out on all network interfaces by the Auto Scaling group.
+* ALBRequestCountPerTarget—Number of requests completed per target in an Application Load Balancer target group.
+
+A Spot Instance is an unused EC2 instance that is available for less than the On-Demand price. Your Spot Instance runs whenever capacity is available and the maximum price per hour for your request exceeds the Spot price. Any instance present with unused capacity will be allocated.
+\
+You can specify that Amazon EC2 should do one of the following when it interrupts a Spot Instance:
+* Stop the Spot Instance
+* Hibernate the Spot Instance
+* Terminate the Spot Instance
+
+The default is to terminate Spot Instances when they are interrupted.
+
+#### Kinesis
+
+* The application has halted data processing because of a ProvisionedThroughputExceeded exception.
+  * Configure the data producer to retry with an exponential backoff
+  * Increase the number of shards within your data streams to provide enough capacity
+
+#### Lambda
+
+* Configure Application Auto Scaling to manage Lambda provisioned concurrency on a schedule\
+\
+Concurrency is the number of requests that a Lambda function is serving at any given time. If a Lambda function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency.\
+\
+Due to a surge in traffic, when Lambda functions scale, this causes the portion of requests that are served by new instances to have higher latency than the rest. To enable your function to scale without fluctuations in latency, use provisioned concurrency. By allocating provisioned concurrency before an increase in invocations, you can ensure that all requests are served by initialized instances with very low latency.\
+\
+You can configure Application Auto Scaling to manage provisioned concurrency on a schedule or based on utilization. Use scheduled scaling to increase provisioned concurrency in anticipation of peak traffic. To increase provisioned concurrency automatically as needed, use the Application Auto Scaling API to register a target and create a scaling policy.
+
+#### CodeBuild
+\
+AWS CodeBuild is a fully managed build service. There are no servers to provision and scale, or software to install, configure, and operate.\
+\
+A typical application build process includes phases like preparing the environment, updating the configuration, downloading dependencies, running unit tests, and finally, packaging the built artifact.\
+\
+Downloading dependencies is a critical phase in the build process. These dependent files can range in size from a few KBs to multiple MBs. Because most of the dependent files do not change frequently between builds, you can noticeably reduce your build time by caching dependencies.\
+\
+This will allow the code bundle to be deployed to Elastic Beanstalk to have both the dependencies and the code, hence speeding up the deployment time to Elastic Beanstalk
