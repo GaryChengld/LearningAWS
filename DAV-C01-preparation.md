@@ -6,7 +6,7 @@
 
 ### Security
 
-[Security Best Practices for Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html)
+[Security Best Practices for Amazon](https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html)
 
 #### IAM
 * IAM Access Analyzer - AWS IAM Access Analyzer helps you identify the resources in your organization and accounts, such as Amazon S3 buckets or IAM roles, that are shared with an external entity. This lets you identify unintended access to your resources and data, which is a security risk.\
@@ -115,6 +115,24 @@ API Gateway supports the following mechanisms for authentication and authorizati
   2. Set the AWS Region you wish to import to.
   3. Import the public SSH key into the new Region.
 
+* You can give EC2 instances in one account ("account A") permissions to assume a role from another account ("account B") to access resources such as S3 buckets. You need to create an IAM role in Account B and set Account A as a trusted entity. Then attach a policy to this IAM role such that it delegates access to Amazon S3 like so -
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::awsexamplebucket1",
+                "arn:aws:s3:::awsexamplebucket1/*",
+                "arn:aws:s3:::awsexamplebucket2",
+                "arn:aws:s3:::awsexamplebucket2/*"
+            ]
+        }
+    ]
+}
+```
 #### Billing
 * By default, IAM users do not have access to the AWS Billing and Cost Management console. You or your account administrator must grant users access. You can do this by activating IAM user access to the Billing and Cost Management console and attaching an IAM policy to your users. Then, you need to activate IAM user access for IAM policies to take effect. You only need to activate IAM user access once.
 
@@ -166,6 +184,23 @@ Conditions cannot be used within the Parameters section. After you define all yo
 
 * Exported Output Values in CloudFormation must have unique names within a single Region
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q20-i1.jpg">
+
+* CloudFormation currently supports the following parameter types:
+```
+String – A literal string
+Number – An integer or float
+List<Number> – An array of integers or floats
+CommaDelimitedList – An array of literal strings that are separated by commas
+AWS::EC2::KeyPair::KeyName – An Amazon EC2 key pair name
+AWS::EC2::SecurityGroup::Id – A security group ID
+AWS::EC2::Subnet::Id – A subnet ID
+AWS::EC2::VPC::Id – A VPC ID
+List<AWS::EC2::VPC::Id> – An array of VPC IDs
+List<AWS::EC2::SecurityGroup::Id> – An array of security group IDs
+List<AWS::EC2::Subnet::Id> – An array of subnet IDs
+```
+
+* All of the imports must be removed before you can delete the exporting stack or modify the output value. 
 
 #### SAM 
 
@@ -223,15 +258,17 @@ ECS Overview
 \
 A build represents a set of actions performed by AWS CodeBuild to create output artifacts (for example, a JAR file) based on a set of input artifacts (for example, a collection of Java class files).\
 \
-The following rules apply when you run multiple builds:\
-\
-When possible, builds run concurrently. The maximum number of concurrently running builds can vary.\
-\
-Builds are queued if the number of concurrently running builds reaches its limit. The maximum number of builds in a queue is five times the concurrent build limit.\
-\
-A build in a queue that does not start after the number of minutes specified in its time out value is removed from the queue. The default timeout value is eight hours. You can override the build queue timeout with a value between five minutes and eight hours when you run your build.\
-\
-By setting the timeout configuration, the build process will automatically terminate post the expiry of the configured timeout.
+The following rules apply when you run multiple builds:
+
+* When possible, builds run concurrently. The maximum number of concurrently running builds can vary.
+
+* Builds are queued if the number of concurrently running builds reaches its limit. The maximum number of builds in a queue is five times the concurrent build limit.
+
+* A build in a queue that does not start after the number of minutes specified in its time out value is removed from the queue. The default timeout value is eight hours. You can override the build queue timeout with a value between five minutes and eight hours when you run your build.
+
+* By setting the timeout configuration, the build process will automatically terminate post the expiry of the configured timeout.
+
+* AWS CodeBuild monitors functions on your behalf and reports metrics through Amazon CloudWatch. These metrics include the number of total builds, failed builds, successful builds, and the duration of builds. You can monitor your builds at two levels: Project level, AWS account level. You can export log data from your log groups to an Amazon S3 bucket and use this data in custom processing and analysis, or to load onto other systems.
 
 #### CodeCommit
 \
@@ -284,7 +321,14 @@ Amazon Kinesis Data Firehose is the easiest way to load streaming data into data
 Short form of the above syntax is : !FindInMap [ MapName, TopLevelKey, SecondLevelKey ]
 ```
 
-Presence of 'Transform' section indicates it is a Serverless Application Model (SAM) template - The AWS::Serverless transform, which is a macro hosted by AWS CloudFormation, takes an entire template written in the AWS Serverless Application Model (AWS SAM) syntax and transforms and expands it into a compliant AWS CloudFormation template. So, presence of "Transform" section indicates, the document is a SAM template.
+* AWS CloudFormation provides several built-in functions that help you manage your stacks. Intrinsic functions are used in templates to assign values to properties that are not available until runtime.
+
+  * !GetAtt - The Fn::GetAtt intrinsic function returns the value of an attribute from a resource in the template. This example snippet returns a string containing the DNS name of the load balancer with the logical name myELB - YML : !GetAtt myELB.DNSName JSON : "Fn::GetAtt" : [ "myELB" , "DNSName" ]
+  * !Sub - The intrinsic function Fn::Sub substitutes variables in an input string with values that you specify. In your templates, you can use this function to construct commands or outputs that include values that aren't available until you create or update a stack.
+  * !Ref - The intrinsic function Ref returns the value of the specified parameter or resource.
+  * !FindInMap - The intrinsic function Fn::FindInMap returns the value corresponding to keys in a two-level map that is declared in the Mappings section. For example, you can use this in the Mappings section that contains a single map, RegionMap, that associates AMIs with AWS regions.
+  * !Join - This function appends a set of values into a single value, separated by the specified delimiter. The YAML syntax is like so: !Join [ delimiter, [ comma-delimited list of values ] ]
+* Presence of 'Transform' section indicates it is a Serverless Application Model (SAM) template - The AWS::Serverless transform, which is a macro hosted by AWS CloudFormation, takes an entire template written in the AWS Serverless Application Model (AWS SAM) syntax and transforms and expands it into a compliant AWS CloudFormation template. So, presence of "Transform" section indicates, the document is a SAM template.
 
 #### API Gateway
 
@@ -296,16 +340,25 @@ How API Gateway Works:
 Overview of API Gateway Usage Plans and API keys:
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q18-i1.jpg">
 
+* After creating your API, you must deploy it to make it callable by your users. To deploy an API, you create an API deployment and associate it with a stage. A stage is a logical reference to a lifecycle state of your API (for example, dev, prod, beta, v2). API stages are identified by the API ID and stage name. Every time you update an API, you must redeploy the API to an existing stage or to a new stage. Updating an API includes modifying routes, methods, integrations, authorizers, and anything else other than stage settings.
+
 #### Lambda
 
-You can give a Lambda function created in one account ("account A") permissions to assume a role from another account ("account B") to access resources such as DynamoDB or S3 bucket. You need to create an execution role in Account A that gives the Lambda function permission to do its work. Then you need to create a role in account B that the Lambda function in account A assumes to gain access to the cross-account DynamoDB table. Make sure that you modify the trust policy of the role in Account B to allow the execution role of Lambda to assume this role. Finally, update the Lambda function code to add the AssumeRole API call.
+* You can give a Lambda function created in one account ("account A") permissions to assume a role from another account ("account B") to access resources such as DynamoDB or S3 bucket. You need to create an execution role in Account A that gives the Lambda function permission to do its work. Then you need to create a role in account B that the Lambda function in account A assumes to gain access to the cross-account DynamoDB table. Make sure that you modify the trust policy of the role in Account B to allow the execution role of Lambda to assume this role. Finally, update the Lambda function code to add the AssumeRole API call.
 
-Concurrency is the number of requests that a Lambda function is serving at any given time. If a Lambda function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency.\
-\
-To ensure that a function can always reach a certain level of concurrency, you can configure the function with reserved concurrency. When a function has reserved concurrency, no other function can use that concurrency. More importantly, reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases.
-\
+* Concurrency is the number of requests that a Lambda function is serving at any given time. If a Lambda function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency.\
+To ensure that a function can always reach a certain level of concurrency, you can configure the function with reserved concurrency. When a function has reserved concurrency, no other function can use that concurrency. More importantly, reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases.\
 Please review this note to understand how reserved concurrency works:
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q6-i1.jpg">
+
+* Stage Variables - Stage variables are name-value pairs that you can define as configuration attributes associated with a deployment stage of an API. They act like environment variables and can be used in your API setup and mapping templates. With deployment stages in API Gateway, you can manage multiple release stages for each API, such as alpha, beta, and production. Using stage variables you can configure an API deployment stage to interact with different backend endpoints.\
+For example, your API can pass a GET request as an HTTP proxy to the backend web host (for example, http://example.com). In this case, the backend web host is configured in a stage variable so that when developers call your production endpoint, API Gateway calls example.com. When you call your beta endpoint, API Gateway uses the value configured in the stage variable for the beta stage and calls a different web host (for example, beta.example.com).
+
+* Lambda Aliases - A Lambda alias is like a pointer to a specific Lambda function version. Users can access the function version using the alias ARN.\
+Lambda Aliases allow you to create a "mutable" Lambda version that points to whatever version you want in the backend. This allows you to have a "dev", "test", prod" Lambda alias that can remain stable over time.
+
+* In the AWS Lambda resource model, you choose the amount of memory you want for your function which allocates proportional CPU power and other resources. This means you will have access to more compute power when you choose one of the new larger settings. You can set your memory in 64MB increments from 128MB to 3008MB. You access these settings when you create a function or update its configuration. The settings are available using the AWS Management Console, AWS CLI, or SDKs.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q15-i1.jpg">
 
 #### Load balancer
 A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.\
@@ -327,7 +380,7 @@ Elastic Load Balancing supports three types of load balancers:
 * Build a highly available system - Elastic Load Balancing provides fault tolerance for your applications by automatically balancing traffic across targets – Amazon EC2 instances, containers, IP addresses, and Lambda functions – in multiple Availability Zones while ensuring only healthy targets receive traffic.
 
 #### EC2
-
+\
 EC2 Reserved Instance types:
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q19-i1.jpg">
 
@@ -338,6 +391,14 @@ You can also review all general options for AWS CLI:
 
 Amazon EC2 Auto Scaling Overview:
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt1-q27-i1.jpg">
+
+* When a scaling policy is executed, if the capacity calculation produces a number outside of the minimum and maximum size range of the group, Amazon EC2 Auto Scaling ensures that the new capacity never goes outside of the minimum and maximum size limits.
+
+* General Purpose SSD (gp2) volumes offer cost-effective storage that is ideal for a broad range of workloads. These volumes deliver single-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time. Between a minimum of 100 IOPS (at 33.33 GiB and below) and a maximum of 16,000 IOPS (at 5,334 GiB and above), baseline performance scales linearly at 3 IOPS per GiB of volume size.
+
+* The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. 
+
+* A Reserved Instance billing benefit can apply to a maximum of 3600 seconds (one hour) of instance usage per clock-hour. You can run multiple instances concurrently, but can only receive the benefit of the Reserved Instance discount for a total of 3600 seconds per clock-hour; instance usage that exceeds 3600 seconds in a clock-hour is billed at the On-Demand rate.
 
 #### Route 53
 
@@ -353,6 +414,24 @@ AWS requires approximately 5 weeks of usage data to generate budget forecasts. I
 #### Beanstalk
 
 You can add AWS Elastic Beanstalk configuration files (.ebextensions) to your web application's source code to configure your environment and customize the AWS resources that it contains. Configuration files are YAML or JSON formatted documents with a .config file extension that you place in a folder named .ebextensions and deploy in your application source bundle.
+
+#### DynamoDB
+
+* DynamoDB uses eventually consistent reads by default. Read operations (such as GetItem, Query, and Scan) provide a ConsistentRead parameter. If you set this parameter to true, DynamoDB uses strongly consistent reads during the operation. As per the given use-case, to make sure that only the last updated value of any item is used in the application, you should use strongly consistent reads by setting ConsistentRead = true for GetItem operation.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q9-i1.jpg">
+
+* You can use DynamoDB transactions to make coordinated all-or-nothing changes to multiple items both within and across tables. Transactions provide atomicity, consistency, isolation, and durability (ACID) in DynamoDB, helping you to maintain data correctness in your applications.
+
+* DynamoDB uses the partition key’s value as an input to an internal hash function. The output from the hash function determines the partition in which the item is stored. Each item’s location is determined by the hash value of its partition key.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q11-i1.jpg">
+
+* DynamoDB optionally supports conditional writes for write operations (PutItem, UpdateItem, DeleteItem). A conditional write succeeds only if the item attributes meet one or more expected conditions. Otherwise, it returns an error.\
+For example, you might want a PutItem operation to succeed only if there is not already an item with the same primary key. Or you could prevent an UpdateItem operation from modifying an item if one of its attributes has a certain value. Conditional writes are helpful in cases where multiple users attempt to modify the same item. This is the right choice for the current scenario.
+
+* Backup DynamoDB to S3
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q58-i1.jpg">
+
+* A projection expression is a string that identifies the attributes you want. To retrieve a single attribute, specify its name. For multiple attributes, the names must be comma-separated.
 
 ### Monitoring and Troubleshooting
 
@@ -375,6 +454,23 @@ Application Load Balancer Configuration for Security Groups and Health Check Rou
   * By default, user data runs only during the boot cycle when you first launch an instance - By default, user data scripts and cloud-init directives run only during the boot cycle when you first launch an instance. You can update your configuration to ensure that your user data scripts and cloud-init directives run every time you restart your instance.
 
 * You configure monitoring for EC2 instances using a launch configuration or template. Monitoring is enabled whenever an instance is launched, either basic monitoring (5-minute granularity) or detailed monitoring (1-minute granularity). By default, basic monitoring is enabled when you create a launch template or when you use the AWS Management Console to create a launch configuration. 
+
+* To maintain the same number of instances, Amazon EC2 Auto Scaling performs a periodic health check on running instances within an Auto Scaling group. When it finds that an instance is unhealthy, it terminates that instance and launches a new one. Amazon EC2 Auto Scaling creates a new scaling activity for terminating the unhealthy instance and then terminates it. Later, another scaling activity launches a new instance to replace the terminated instance.
+
+* The network ACLs associated with the subnet must have rules to allow inbound and outbound traffic - The network access control lists (ACLs) that are associated with the subnet must have rules to allow inbound and outbound traffic on port 80 (for HTTP traffic) and port 443 (for HTTPs traffic). This is a necessary condition for Internet Gateway connectivity
+
+* The route table in the instance’s subnet should have a route to an Internet Gateway - A route table contains a set of rules, called routes, that are used to determine where network traffic from your subnet or gateway is directed. The route table in the instance’s subnet should have a route defined to the Internet Gateway.
+
+* Auto Scaling groups can be configured to launch an instance to replace an instance that is undergoing maintenance. This could have been the reason why an instance of the same type got launched automatically. The size of an Auto Scaling group depends on the number of instances that you set as the desired capacity. If you wish to terminate an instance that is part of Auto Scaling Group, the configuration of the group should be changed to a reduced number of instances, so the automatic launch of instances does not happen when an unwanted instance is terminated.
+
+* When you purchase a Reserved Instance for a specific Availability Zone, it's referred to as a Zonal Reserved Instance. Zonal Reserved Instances provide capacity reservations as well as discounts.
+<img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q31-i1.jpg">
+
+* When you create an EBS volume, it is automatically replicated within its Availability Zone to prevent data loss due to the failure of any single hardware component. You can attach an EBS volume to an EC2 instance in the same Availability Zone.
+
+* Amazon EC2 Auto Scaling cannot add a volume to an existing instance if the existing volume is approaching capacity - A volume is attached to a new instance when it is added. Amazon EC2 Auto Scaling doesn't automatically add a volume when the existing one is approaching capacity. You can use the EC2 API to add a volume to an existing instance.
+
+* Amazon EC2 Auto Scaling works with both Application Load Balancers and Network Load Balancers - Amazon EC2 Auto Scaling works with Application Load Balancers and Network Load Balancers including their health check feature.
 
 #### AWS Systems Manager Parameter Store
 
@@ -419,6 +515,10 @@ How CloudTrail Works:
 An EC2/On-Premises deployment hook is executed once per deployment to an instance. You can specify one or more scripts to run in a hook.
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q56-i1.jpg">
 
+#### CLI
+
+* The --dry-run option checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation, otherwise, it is UnauthorizedOperation.
+
 ### Refactoring
 
 #### SQS
@@ -427,6 +527,10 @@ An EC2/On-Premises deployment hook is executed once per deployment to an instanc
 
 * Amazon SQS supports dead-letter queues, which other queues (source queues) can target for messages that can't be processed (consumed) successfully. Dead-letter queues are useful for debugging your application or messaging system because they let you isolate problematic messages to determine why their processing doesn't succeed. Amazon SQS does not create the dead-letter queue automatically. You must first create the queue before using it as a dead-letter queue.
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q59-i1.jpg">
+
+* There are no message limits for storing in SQS, but 'in-flight messages' do have limits. Make sure to delete messages after you have processed them. There can be a maximum of approximately 120,000 inflight messages (received from a queue by a consumer, but not yet deleted from the queue).
+
+* Delay queues let you postpone the delivery of new messages to a queue for several seconds, for example, when your consumer application needs additional time to process messages. If you create a delay queue, any messages that you send to the queue remain invisible to consumers for the duration of the delay period. The default (minimum) delay for a queue is 0 seconds. The maximum is 15 minutes.
 
 #### ALB
 
@@ -442,6 +546,8 @@ An EC2/On-Premises deployment hook is executed once per deployment to an instanc
 
  * When your source bucket and target bucket are the same bucket, additional logs are created for the logs that are written to the bucket. The extra logs about logs might make it harder to find the log that you are looking for. This configuration would drastically increase the size of the S3 bucket.
 <img src="https://media.datacumulus.com/aws-dva-pt/assets/pt2-q57-i1.jpg">
+
+* You need to use multi-part upload for large files: In general, when your object size reaches 100 MB, you should consider using multipart uploads instead of uploading the object in a single operation.
 
 #### EC2
 \
