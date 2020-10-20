@@ -77,3 +77,22 @@ A retention period protects an object version for a fixed amount of time. When y
 Legal holds - Object Lock also enables you to place a legal hold on an object version. Like a retention period, a legal hold prevents an object version from being overwritten or deleted. However, a legal hold doesn't have an associated retention period and remains in effect until removed. Legal holds can be freely placed and removed by any user who has the s3:PutObjectLegalHold permission. 
 
 Vault Locking - S3 Glacier Vault Lock allows you to easily deploy and enforce compliance controls for individual S3 Glacier vaults with a vault lock policy. You can specify controls such as “write once read many” (WORM) in a vault lock policy and lock the policy from future edits. Once locked, the policy can no longer be changed.
+
+#### S3 performance
+
+S3 Prefix - You can get better performance by spreading your reads across different prefixes. For exa,ple if you are using 2 prefixes, you can achieve 11,000 requests per second
+
+S3 linitations when using KMS
+* if you are using SSE-KMS to encrypt your objects in S3, you must keep in mind the KMS limits
+* When you upload a file, you will call GenerateDataKey in the KMS API.
+* When you download a file, you will call Decrypt in the KMS API.
+
+Multipart Uploads
+* Recommended fo files over 100 MB
+* Required for files over 5 GB
+* Paralleize uploads (Increases efficiency)
+
+S3 byte-range fetches
+* Paralleize downloads by specifying byte ranges.
+* If there is a failure in the download, it's only for a specific bute range.
+
