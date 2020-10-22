@@ -261,7 +261,7 @@ LEARN MORE: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-de
 
 #### VPC
 
-* Every subnet in your VPC must be associated with exactly one Route Table. However, multiple subnets can be associated with the same Route Table.\
+* Every subnet in your VPC must be associated witfh exactly one Route Table. However, multiple subnets can be associated with the same Route Table.\
 LEARN MORE: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
 
 #### CloudFomation

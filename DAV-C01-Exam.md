@@ -202,3 +202,60 @@ How can the Developer MOST efficiently handle the temporary files?
 2. Copy the files to EFS and delete the files at the end of the Lambda function.
 3. (X) Store the files in the /tmp directory and delete the files at the end of the Lambda function.
 4. Copy the files to an S3 bucket with a lifecycle policy to delete the files.
+
+\
+AWS CodeBuild builds code for an application, creates the Docker image, pushes the image to Amazon Elastic Container Registry (Amazon ECR), and tags the image with a unique identifier.
+If the Developers already have AWS CLI configured on their workstations, how can the Docker images be pulled to the workstations?
+1. Run the following: docker pull REPOSITORY URI : TAG
+2. (X) Run the output of the following: aws ecr get-login and then run: docker pull REPOSITORY URI : TAG
+3. Run the following: aws ecr get-login and then run: docker pull REPOSITORY URI : TAG
+4. Run the output of the following: aws ecr get-download-url-for-layer and then run: docker pull REPOSITORY URI : TAG
+
+\
+A Developer wants to encrypt new objects that are being uploaded to an Amazon S3 bucket by an application. There must be an audit trail of who has used the key during this process. There should be no change to the performance of the application.
+Which type of encryption meets these requirements?
+1. Server-side encryption using S3-managed keys
+2. (X) Server-side encryption with AWS KMS-managed keys
+3. Client-side encryption with a client-side symmetric master key
+4. Client-side encryption with AWS KMS-managed keys
+
+\
+While developing an application that runs on Amazon EC2 in an Amazon VPC, a Developer identifies the need for centralized storage of application-level logs.
+Which AWS service can be used to securely store these logs?
+1. Amazon EC2 VPC Flow Logs
+2. (X) Amazon CloudWatch Logs
+3. Amazon CloudSearch
+4. AWS CloudTrail
+
+\
+An application uses Amazon Kinesis Data Streams to ingest and process large streams of data records in real time. Amazon EC2 instances consume and process the data from the shards of the Kinesis data stream by using Amazon Kinesis Client Library (KCL). The application handles the failure scenarios and does not require standby workers. The application reports that a specific shard is receiving more data than expected. To adapt to the changes in the rate of data flow, the "hot" shard is resharded.
+Assuming that the initial number of shards in the Kinesis data stream is 4, and after resharding the number of shards increased to 6, what is the maximum number of EC2 instances that can be deployed to process data from all the shards?
+1. 12
+2. (X) 6
+3. 4
+4. 1
+
+Typically, when you use the KCL, you should ensure that the number of instances does not exceed the number of shards (except for failure standby purposes). Each shard is processed by exactly one KCL worker and has exactly one corresponding record processor, so you never need multiple instances to process one shard. However, one worker can process any number of shards, so it's fine if the number of shards exceeds the number of instances.
+https://docs.aws.amazon.com/streams/latest/dev/kinesis-record-processor-scaling.html
+
+\
+A Development team is working on a case management solution that allows medical claims to be processed and reviewed. Users log in to provide information related to their medical and financial situations.
+As part of the application, sensitive documents such as medical records, medical imaging, bank statements, and receipts are uploaded to Amazon S3. All documents must be securely transmitted and stored. All access to the documents must be recorded for auditing.
+What is the MOST secure approach?
+1. Use S3 default encryption using Advanced Encryption Standard-256 (AES-256) on the destination bucket.
+2. Use Amazon Cognito for authorization and authentication to ensure the security of the application and documents.
+3. Use AWS Lambda to encrypt and decrypt objects as they are placed into the S3 bucket.
+4. (X) Use client-side encryption/decryption with Amazon S3 and AWS KMS.
+
+Not only will KMS provide the Auditing you need, but with client-side encryption although a little more work on client side, this method provides the needed encryption at rest since the data has to be encrypted before being transmitted to s3 for storage, and it REQUIRES (and only allows) HTTPS for the transmission across to the bucket
+
+\
+A company has an internet-facing application that uses Web Identity Federation to obtain a temporary credential from AWS Security Token Service (AWS STS).
+The app then uses the token to access AWS services.
+Review the following response:
+<img src="https://www.examtopics.com/assets/media/exam-media/02738/0005900001.jpg">
+1. (X) Permissions associated with the role AROACLKWSDQRAOEXAMPLE:app1
+2. Permissions associated with the default role used when the AWS service was built
+3. Permission associated with the IAM principal that owns the AccessKeyID ASgeIAIOSFODNN7EXAMPLE
+4. Permissions associated with the account that owns the AWS service
+
