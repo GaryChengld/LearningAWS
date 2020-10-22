@@ -167,6 +167,38 @@ A website's page load times are gradually increasing as more users access the sy
 Developer decides to cache the user profile data.\
 Which caching strategy will address this situation MOST efficiently?
 1. Create a new Amazon EC2 Instance and run a NoSQL database on it. Cache the profile data within this database using the write-through caching strategy.
-2. Create an Amazon ElastiCache cluster to cache the user profile data. Use a cache-aside caching strategy.
+2. (X) Create an Amazon ElastiCache cluster to cache the user profile data. Use a cache-aside caching strategy.
 3. Use a dedicated Amazon RDS instance for caching profile data. Use a write-through caching strategy.
 4. Create an ElastiCache cluster to cache the user profile data. Use a write-through caching strategy.
+
+\
+A development team is using AWS Elastic Beanstalk to deploy a two-tier application that consists of a load-balanced web tier and an Amazon RDS database tier in production. The team would like to separate the RDS instance from the Elastic Beanstalk.
+How can this be accomplished?
+1. Use the Elastic Beanstalk CLI to disassociate the database.
+2. Use the AWS CLI to disassociate the database.
+3. Change the deployment policy to disassociate the database.
+4. (X) Recreate a new Elastic Beanstalk environment without Amazon RDS.
+
+\
+The development team is working on an API that will be served from Amazon API gateway. The API will be served from three environments: development, test, and production. The API Gateway is configured to use 237 GB of cache in all three stages.
+Which is the MOST cost-efficient deployment strategy?
+1. Create a single API Gateway with all three stages.
+2. Create three API Gateways, one for each stage in a single AWS account.
+3. Create an API Gateway in three separate AWS accounts.
+4. (X) Enable the cache for development and test environments only when needed.
+
+\
+An application running on an Amazon Linux EC2 instance needs to manage the AWS infrastructure.
+How can the EC2 instance be configured to make AWS API calls securely?
+1. Sign the AWS CLI command using the signature version 4 process.
+2. Run the aws configure AWS CLI command and specify the access key id and secret access key.
+3. (X) Specify a role for the EC2 instance with the necessary privileges.
+4. Pass the access key id and secret access key as parameters for each AWS CLI command.
+
+\
+A Developer is creating a Lambda function that will generate and export a file. The function requires 100 MB of temporary storage for temporary files while executing. These files will not be needed after the function is complete.
+How can the Developer MOST efficiently handle the temporary files?
+1. Store the files in EBS and delete the files at the end of the Lambda function.
+2. Copy the files to EFS and delete the files at the end of the Lambda function.
+3. (X) Store the files in the /tmp directory and delete the files at the end of the Lambda function.
+4. Copy the files to an S3 bucket with a lifecycle policy to delete the files.
