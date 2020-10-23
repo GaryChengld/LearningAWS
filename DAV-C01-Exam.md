@@ -259,3 +259,92 @@ Review the following response:
 3. Permission associated with the IAM principal that owns the AccessKeyID ASgeIAIOSFODNN7EXAMPLE
 4. Permissions associated with the account that owns the AWS service
 
+\
+A company has multiple Developers located across the globe who are updating code incrementally for a development project. When Developers upload code concurrently, internet connectivity is slow and it is taking a long time to upload code for deployment in AWS Elastic Beanstalk.
+Which step will result in minimized upload and deployment time with the LEAST amount of administrative effort?
+1. Allow the Developers to upload the code to an Amazon S3 bucket, and deploy it directly to Elastic Beanstalk.
+2. Allow the Developers to upload the code to a central FTP server to deploy the application to Elastic Beanstalk.
+3. (X) Create an AWS CodeCommit repository, allow the Developers to commit code to it, and then directly deploy the code to Elastic Beanstalk.
+4. Create a code repository on an Amazon EC2 instance so that all Developers can update the code, and deploy the application from the instance to Elastic Beanstalk.
+
+An application running on Amazon EC2 instances must access objects within an Amaon S3 busket that are encrypted using server-side encryption using AWS
+KMS encryption keys (SSE-KMS). The application must have access to the customer master key (CMK) to decrypt the objects.\
+Which combination of steps will grant the application access? (Select TWO.)
+1. Write an S3 bucket policy that grants the bucket access to the key.
+2. (X) Grant access to the key in the IAM EC2 role attached to the application's EC2 instances.
+3. (X) Write a key policy that enables IAM policies to grant access to the key.
+4. Grant access to the key in the S3 bucket's ACL
+5. Create a Systems Manager parameter that exposes the KMS key to the EC2 instances.
+ 
+\ 
+A Developer is designing a fault-tolerant environment where client sessions will be saved.
+How can the Developer ensure that no sessions are lost if an Amazon EC2 instance fails?
+1. Use sticky sessions with an Elastic Load Balancer target group.
+2. Use Amazon SQS to save session data.
+3. (X) Use Amazon DynamoDB to perform scalable session hadling.
+4. Use Elastic Load Balancer connection draining to stop sending requests to failing instances.
+
+\
+How should custom libraries be utilized in AWS Lambda?
+1. Host the library on Amazon S3 and reference to it from the Lambda function.
+2. (X) Install the library locally and upload a ZIP file of the Lambda function.
+3. Import the necessary Lambda blueprint when creating the function.
+4. Modify the function runtime to include the necessary library.
+
+\
+An AWS Lambda function generates a 3MB JSON file and then uploads it to an Amazon S3 bucket daily. The file contains sensitive information, so the Developer must ensure that it is encrypted before uploading to the bucket.
+Which of the following modifications should the Developer make to ensure that the data is encrypted before uploading it to the bucket?
+1. Use the default AWS KMS customer master key for S3 in the Lambda function code.
+2. Use the S3 managed key and call the GenerateDataKey API to encrypt the file.
+3. (X) Use the GenerateDataKey API, then use that data key to encrypt the file in the Lambda function code.
+4. Use a custom KMS customer master key created for S3 in the Lambda function code.
+
+\
+A Developer has published an update to an application that is served to a global user base using Amazon CloudFront. After deploying the application, users are not able to see the updated changes.\
+How can the Developer resolve this issue?
+1. Remove the origin from the CloudFront configuration and add it again.
+2. Disable forwarding of query strings and request headers from the CloudFront distribution configuration.
+3. (X) Invalidate all the application objects from the edge caches.
+4. Disable the CloudFront distribution and enable it again to update all the edge locations.
+
+A Developer wants to enable AWS X-Ray for a secure application that runs in an Amazon ECS environment.\
+What combination of steps will enable X-Ray? (Select THREE.)
+1. (X) Create a Docker image that runs the X-Ray daemon.
+2. (X) Add instrumentation to the application code for X-Ray.
+3. Install the X-Ray daemon on the underlying EC2 instance.
+4. Configure and use an IAM EC2 instance role.
+5. Register the application with X-Ray.
+6. (X) Configure and use an IAM role for tasks.
+
+\
+An AWS Elastic Beanstalk application needs to be deployed in multiple regions and requires a different Amazon Machine Image (AMI) in each region.
+Which AWS CloudFormation template key can be used to specify the correct AMI for each region?
+1. Parameters
+2. Outputs
+3. (X) Mappings
+4. Resources
+
+\
+A Developer writes an AWS Lambda function and uploads the code in a .ZIP file to Amazon S3. The Developer makes changes to the code and uploads a new
+.ZIP file to Amazon S3. However, Lambda executes the earlier code.
+How can the Developer fix this in the LEAST disruptive way?
+1. Create another Lambda function and specify the new .ZIP file.
+2. (X) Call the update-function-code API.
+3. Remove the earlier .ZIP file first, then add the new .ZIP file.
+4. Call the create-alias API. 
+
+An AWS Lambda function must read data from an Amazon RDS MySQL database in a VPC and also reach a public endpoint over the internet to get additional data.
+Which steps must be taken to allow the function to access both the RDS resource and the public endpoint? (Select TWO.)
+1. (X) Modify the default configuration for the Lambda function to associate it with an Amazon VPC private subnet.
+2. Modify the default network access control list to allow outbound traffic.
+3. (X) Add a NAT Gateway to the VPC.
+4. Modify the default configuration of the Lambda function to associate it with a VPC public subnet.
+5. Add an environmental variable to the Lambda function to allow outbound internet access.
+
+\
+A Developer is creating an AWS Lambda function to process a stream of data from an Amazon Kinesis Data Stream. When the Lambda function parses the data and encounters a missing field, it exits the function with an error. The function is generating duplicate records from the Kinesis stream. When the Developer looks at the stream output without the Lambda function, there are no duplicate records.
+What is the reason for the duplicates?
+1. The Lambda function did not advance the Kinesis stream pointer to the next record after the error.
+2. The Lambda event source used asynchronous invocation, resulting in duplicate records.
+3. (X) The Lambda function did not handle the error, and the Lambda service attempted to reprocess the data.
+4. The Lambda function is not keeping up with the amount of data coming from the stream.
