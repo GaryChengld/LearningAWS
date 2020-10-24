@@ -348,3 +348,27 @@ What is the reason for the duplicates?
 2. The Lambda event source used asynchronous invocation, resulting in duplicate records.
 3. (X) The Lambda function did not handle the error, and the Lambda service attempted to reprocess the data.
 4. The Lambda function is not keeping up with the amount of data coming from the stream.
+
+\
+A company is providing services to many downstream consumers. Each consumer may connect to one or more services. This has resulted in a complex architecture that is difficult to manage and does not scale well. The company needs a single interface to manage these services to consumers.
+Which AWS service should be used to refactor this architecture?
+1. AWS Lambda
+2. AWS X-Ray
+3. Amazon SQS
+4. (X) Amazon API Gateway
+
+\
+A Development team has pushed out 10 applications running on several Amazon EC2 instances. The Operations team is asking for a graphical representation of one key performance metric for each application. These metrics should be available on one screen for easy monitoring.
+Which steps should the Developer take to accomplish this using Amazon CloudWatch?
+1. (X) Create a custom namespace with a unique metric name for each application.
+2. Create a custom dimension with a unique metric name for each application.
+3. Create a custom event with a unique metric name for each application.
+4. Create a custom alarm with a unique metric name for each application.
+
+\
+A Developer wants access to make the log data of an application running on an EC2 instance available to systems administrators.
+Which of the following enables monitoring of this metric in Amazon CloudWatch?
+1. Retrieve the log data from CloudWatch using the GetMetricData API call
+2. Retrieve the log data from AWS CloudTrail using the LookupEvents API call.
+3. Launch a new EC2 instance, configure Amazon CloudWatch Events, and then install the application.
+4. (X) Install the Amazon CloudWatch Logs agent on the EC2 instance that the application is running on.
