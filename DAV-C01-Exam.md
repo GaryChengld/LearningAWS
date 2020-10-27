@@ -516,7 +516,7 @@ What solution would give the BEST performance increase?
 
 1
 
-
+\
 An application writes items to an Amazon DynamoDB table. As the application scales to thousands of instances, calls to the DynamoDB API generate occasional
 ThrottlingException errors. The application is coded in a language incompatible with the AWS SDK.
 How should the error be handled?
@@ -526,3 +526,141 @@ How should the error be handled?
 4. Send the items to DynamoDB through Amazon Kinesis Data Firehose
 
 1
+
+\
+A Developer is building a web application that uses Amazon API Gateway to expose an AWS Lambda function to process requests from clients. During testing, the Developer notices that the API Gateway times out even though the Lambda function finishes under the set time limit.\
+Which of the following API Gateway metrics in Amazon CloudWatch can help the Developer troubleshoot the issue? (Choose two.)
+1. CacheHitCount
+2. IntegrationLatency
+3. CacheMissCount
+4. Latency
+5. Count
+
+2,4
+
+\
+An AWS Lambda function must access an external site by using a regularly rotated user name and password. These items must be kept securely and cannot be stored in the function code.
+What combination of AWS services can be used to accomplish this? (Choose two.)
+1. AWS Certificate Manager (ACM)
+2. AWS Systems Manager Parameter Store
+3. AWS Trusted Advisor
+4. AWS KMS
+5. Amazon GuardDuty
+
+2,4
+
+\
+A Developer wants to upload data to Amazon S3 and must encrypt the data in transit.
+Which of the following solutions will accomplish this task? (Choose two.)
+1. Set up hardware VPN tunnels to a VPC and access S3 through a VPC endpoint
+2. Set up Client-Side Encryption with an AWS KMS-Managed Customer Master Key
+3. Set up Server-Side Encryption with AWS KMS-Managed Keys
+4. Transfer the data over an SSL connection
+5. Set up Server-Side Encryption with S3-Managed Keys
+
+2,4
+
+\
+A Developer has been asked to create an AWS Lambda function that is triggered any time updates are made to items in an Amazon DynamoDB table. The function has been created, and appropriate permissions have been added to the Lambda execution role. Amazon DynamoDB streams have been enabled for the table, but the function is still not being triggered.
+Which option would enable DynamoDB table updates to trigger the Lambda function?
+1. Change the StreamViewType parameter value to NEW_AND_OLD_IMAGES for the DynamoDB table
+2. Configure event source mapping for the Lambda function
+3. Map an Amazon SNS topic to the DynamoDB streams
+4. increase the maximum execution time (timeout) setting of the Lambda function
+
+2
+
+\
+A Developer is building a three-tier web application that should be able to handle a minimum of 5000 requests per minute. Requirements state that the web tier should be completely stateless while the application maintains session state for the users.
+How can session data be externalized, keeping latency at the LOWEST possible value?
+1. Create an Amazon RDS instance, then implement session handling at the application level to leverage a database inside the RDS database instance for session data storage
+2. Implement a shared file system solution across the underlying Amazon EC2 instances, then implement session handling at the application level to leverage the shared file system for session data storage
+3. Create an Amazon ElastiCache Memcached cluster, then implement session handling at the application level to leverage the cluster for session data storage
+4. Create an Amazon DynamoDB table, then implement session handling at the application level to leverage the table for session data storage
+
+3
+
+\
+An Amazon DynamoDB table uses a Global Secondary Index (GSI) to support read queries. The primary table is write-heavy, whereas the GSI is used for read operations. Looking at Amazon CloudWatch metrics, the Developer notices that write operations to the primary table are throttled frequently under heavy write activity. However, write capacity units to the primary table are available and not fully consumed.
+Why is the table being throttled?
+1. The GSI write capacity units are underprovisioned
+2. There are not enough read capacity units on the primary table
+3. Amazon DynamoDB Streams is not enabled on the table
+4. A large write operation is being performed against another table 
+
+1
+
+\
+A Developer created a new AWS account and must create a scalable AWS Lambda function that meets the following requirements for concurrent execution:\
+✑ Average execution time of 100 seconds\
+✑ 50 requests per second\
+Which step must be taken prior to deployment to prevent errors?
+1. Implement dead-letter queues to capture invocation errors
+2. Add an event source from Amazon API Gateway to the Lambda function
+3. Implement error handling within the application code
+4. Contact AWS Support to increase the concurrent execution limits
+
+4
+
+\
+A Development team would like to migrate their existing application code from a GitHub repository to AWS CodeCommit.
+What needs to be created before they can migrate a cloned repository to CodeCommit over HTTPS?
+1. A GitHub secure authentication token
+2. A public and private SSH key file
+3. A set of Git credentials generated from IAM
+4. An Amazon EC2 IAM role with CodeCommit permissions
+
+3
+
+\
+When developing an AWS Lambda function that processes Amazon Kinesis Data Streams, Administrators within the company must receive a notice that includes the processed data.
+How should the Developer write the function to send processed data to the Administrators?
+1. Separate the Lambda handler from the core logic
+2. Use Amazon CloudWatch Events to send the processed data
+3. Publish the processed data to an Amazon SNS topic
+4. Push the processed data to Amazon SQS
+
+3
+
+\
+A Developer is storing documents in Amazon S3 that will require encryption at rest. The encryption keys must be rotated annually, at least.
+What is the easiest way to achieve this?
+1. Encrypt the data before sending it to Amazon S3
+2. Import a custom key into AWS KMS with annual rotation enabled
+3. Use AWS KMS with automatic key rotation
+4. Export a key from AWS KMS to encrypt the data
+
+3
+
+\
+What type of block cipher does Amazon S3 offer for server side encryption?
+1. Triple DES
+2. Advanced Encryption Standard
+3. Blowfish
+4. RC5
+
+2
+
+\
+A corporate web application is deployed within an Amazon VPC, and is connected to the corporate data center via IPSec VPN. The application must authenticate against the on-premise LDAP server. Once authenticated, logged-in users can only access an S3 keyspace specific to the user.
+Which two approaches can satisfy the objectives? (Choose two.)
+1. The application authenticates against LDAP. The application then calls the IAM Security Service to login to IAM using the LDAP credentials. The application can use the IAM temporary credentials to access the appropriate S3 bucket.
+2. The application authenticates against LDAP, and retrieves the name of an IAM role associated with the user. The application then calls the IAM Security Token Service to assume that IAM Role. The application can use the temporary credentials to access the appropriate S3 bucket.
+3. The application authenticates against IAM Security Token Service using the LDAP credentials. The application uses those temporary AWS security credentials to access the appropriate S3 bucket.
+4. Develop an identity broker which authenticates against LDAP, and then calls IAM Security Token Service to get IAM federated user credentials. The application calls the identity broker to get IAM federated user credentials with access to the appropriate S3 bucket.
+5. Develop an identity broker which authenticates against IAM Security Token Service to assume an IAM Role to get temporary AWS security credentials. The application calls the identity broker to get AWS
+ 
+2,4
+
+\
+You are providing AWS consulting services for a company developing a new mobile application that will be leveraging Amazon SNS Mobile Push for push notifications. In order to send direct notification messages to individual devices each device registration identifier or token needs to be registered with SNS; however the developers are not sure of the best way to do this.
+You advise them to:
+1. Bulk upload the device tokens contained in a CSV file via the AWS Management Console.
+2. Let the push notification service (e.g. Amazon Device Messaging) handle the registration.
+3. Implement a token vending service to handle the registration.
+4. Call the CreatePlatformEndPoint API function to register multiple device tokens.
+
+4
+\
+
+
