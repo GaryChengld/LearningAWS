@@ -661,6 +661,124 @@ You advise them to:
 4. Call the CreatePlatformEndPoint API function to register multiple device tokens.
 
 4
+
 \
+You are writing to a DynamoDB table and receive the following exception:"
+ProvisionedThroughputExceededException". though according to your Cloudwatch metrics for the table, you are not exceeding your provisioned throughput.
+What could be an explanation for this?
+1. You haven't provisioned enough DynamoDB storage instances
+2. You're exceeding your capacity on a particular Range Key
+3. You're exceeding your capacity on a particular Hash Key
+4. You're exceeding your capacity on a particular Sort Key
+5. You haven't configured DynamoDB Auto Scaling triggers
+
+3
+
+\
+What AWS products and features can be deployed by Elastic Beanstalk? (Choose three.)
+1. Auto scaling groups
+2. Route 53 hosted zones
+3. Elastic Load Balancers
+4. RDS Instances
+5. Elastic IP addresses
+6. SQS Queues
+
+1,3,4
+
+\
+In DynamoDB, what type of HTTP response codes indicate that a problem was found with the client request sent to the service?
+1. 5xx HTTP response code
+2. 200 HTTP response code
+3. 306 HTTP response code
+4. 4xx HTTP response code
+
+4
+\
+
+Which DynamoDB limits can be raised by contacting AWS support? (Choose two.)
+1. The number of hash keys per account
+2. The maximum storage used per account
+3. The number of tables per account
+4. The number of local secondary indexes per account
+5. The number of provisioned throughput units per account
+
+3,5
+
+\
+An application stores payroll information nightly in DynamoDB for a large number of employees across hundreds of offices. Item attributes consist of individual name, office identifier, and cumulative daily hours.
+Managers run reports for ranges of names working in their office. One query is. "Return all Items in this office for names starting with A through E".
+Which table configuration will result in the lowest impact on provisioned throughput for this query?
+1. Configure the table to have a hash index on the name attribute, and a range index on the office identifier
+2. Configure the table to have a range index on the name attribute, and a hash index on the office identifier
+3. Configure a hash index on the name attribute and no range index
+4. Configure a hash index on the office Identifier attribute and no range index
+
+2
+
+\
+How can you secure data at rest on an EBS volume?
+1. Attach the volume to an instance using EC2's SSL interface.
+2. Write the data randomly instead of sequentially.
+3. Use an encrypted file system on top of the BBS volume.
+4. Encrypt the volume using the S3 server-side encryption service.
+5. Create an IAM policy that restricts read and write access to the volume.
+
+3
+
+\
+Which of the following statements about SWF are true? (Choose three.)
+1. SWF tasks are assigned once and never duplicated
+2. SWF requires an S3 bucket for workflow storage
+3. SWF workflow executions can last up to a year
+4. SWF triggers SNS notifications on task assignment
+5. SWF uses deciders and workers to complete tasks
+6. SWF requires at least 1 EC2 instance per domain
+
+1,3,5
+
+\
+Which of the following are valid arguments for an SNS Publish request? (Choose three.)
+1. TopicAm
+2. Subject
+3. Destination
+4. Format
+5. Message
+6. Language
+
+1,2,5
+
+\
+EC2 instances are launched from Amazon Machine images (AMIs). A given public AMI can:
+1. be used to launch EC2 Instances in any AWS region.
+2. only be used to launch EC2 instances in the same country as the AMI is stored.
+3. only be used to launch EC2 instances in the same AWS region as the AMI is stored.
+4. only be used to launch EC2 instances in the same AWS availability zone as the AMI is stored
+
+3
+
+\
+
+Which EC2 API call would you use to retrieve a list of Amazon Machine Images (AMIs)?
+1. DescnbeInstances
+2. DescribeAMls
+3. DescribeImages
+4. GetAMls
+5. You cannot retrieve a list of AMIs as there are over 10,000 AMIs
+
+3
+
+\
+
+Which code snippet below returns the URL of a load balanced web site created in CloudFormation with an
+AWS::ElasticLoadBalancing::LoadBalancer resource name "ElasticLoad Balancer"?
+1. "Fn::Join" : ["". [ "http://", {"Fn::GetAtr" : [ "ElasticLoadBalancer","DNSName"]}]]
+2. "Fn::Join" : ["". [ "http://", {"Fn::GetAtr" : [ "ElasticLoadBalancer","Url"]}]]
+3. "Fn::Join" : ["". [ "http://", {"Ref" : "ElasticLoadBalancerUrl"}]]
+4. "Fn::Join" : [".", [ "http://", {"Ref" : "ElasticLoadBalancerDNSName"}]]
+
+1
+
+\
+
 
 
