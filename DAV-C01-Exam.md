@@ -779,6 +779,34 @@ AWS::ElasticLoadBalancing::LoadBalancer resource name "ElasticLoad Balancer"?
 1
 
 \
+Which of the following are correct statements with policy evaluation logic in AWS Identity and Access
+Management? (Choose two.)
+1. By default, all requests are denied
+2. An explicit allow overrides an explicit deny
+3. An explicit allow overrides default deny.
+4. An explicit deny does not override an explicit allow
+5. By default, all request are allowed
 
+1, 3
 
+\
+You have an environment that consists of a public subnet using Amazon VPC and 3 instances that are running in this subnet. These three instances can successfully communicate with other hosts on the Internet. You launch a fourth instance in the same subnet, using the same AMI and security group configuration you used for the others, but find that this instance cannot be accessed from the Internet.
+What should you do to enable internet access?
+1. Deploy a NAT instance into the public subnet.
+2. Modify the routing table for the public subnet
+3. Configure a publically routable IP Address In the host OS of the fourth instance.
+4. Assign an Elastic IP address to the fourth instance.
 
+4
+
+\
+After launching an instance that you intend to serve as a NAT (Network Address Translation) device in a public subnet you modify your route tables to have the NAT device be the target of internet bound traffic of your private subnet. When you try and make an outbound connection to the Internet from an instance in the private subnet, you are not successful.
+Which of the following steps could resolve the issue?
+1. Attaching a second Elastic Network interface (ENI) to the NAT instance, and placing it in the private subnet
+2. Attaching a second Elastic Network Interface (ENI) to the instance in the private subnet, and placing it in the public subnet
+3. Disabling the Source/Destination Check attribute on the NAT instance
+4. Attaching an Elastic IP address to the instance in the private subnet
+
+3
+
+\
