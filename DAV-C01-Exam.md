@@ -810,3 +810,13 @@ Which of the following steps could resolve the issue?
 3
 
 \
+The release process workflow of an application requires a manual approval before the code is deployed into the production environment.
+What is the BEST way to achieve this using AWS CodePipeline?
+1. Use multiple pipelines to allow approval
+2. Use an approval action in a stage
+3. Disable the stage transition to allow manual approval
+4. Disable a stage just prior the deployment stage
+
+4
+
+\
