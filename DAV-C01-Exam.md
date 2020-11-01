@@ -838,3 +838,66 @@ Which of the following entities can be used to facilitate this use-case?
 4. Multi-Factor Authentication (MFA)
 
 Key pairs - Key pairs consist of a public key and a private key. You use the private key to create a digital signature, and then AWS uses the corresponding public key to validate the signature. Key pairs are used only for Amazon EC2 and Amazon CloudFront. AWS does not provide key pairs for your account; you must create them. You can create Amazon EC2 key pairs from the Amazon EC2 console, CLI, or API. Key pairs make a robust combination for accessing an instance securely, a better option than using passwords.
+
+
+\
+A new recruit is trying to configure what an Amazon EC2 should do when it interrupts a Spot Instance.\
+Which of the below CANNOT be configured as an interruption behavior?
+1. Terminate the Spot Instance
+2. Reboot the Spot Instance
+3. Hibernate the Spot Instance
+4. Terminate the Spot Instance 
+
+2.
+
+\
+A developer in your company was just promoted to Team Lead and will be in charge of code deployment on EC2 instances via AWS CodeCommit and AWS CodeDeploy. Per the new requirements, the deployment process should be able to change permissions for deployed files as well as verify the deployment success.\
+Which of the following actions should the new Developer take?
+1. Define a buildspec.yml file in the root directory
+2. Define an appspec.yml file in the root directory
+3. Define a buildspec.yml file in the codebuild/ directory
+4. Define an appspec.yml file in the codebuild/ directory
+
+2
+
+\
+As a Team Lead, you are expected to generate a report of the code builds for every week to report internally and to the client. This report consists of the number of code builds performed for a week, the percentage success and failure, and overall time spent on these builds by the team members. You also need to retrieve the CodeBuild logs for failed builds and analyze them in Athena.\
+Which of the following options will help achieve this?
+1. Use AWS Lambda integration
+2. Use CloudWatch Events
+3. Enable S3 and CloudWatch Logs integration
+4. Use AWS CloudTrail and deliver logs to S3 
+
+3 - AWS CodeBuild monitors functions on your behalf and reports metrics through Amazon CloudWatch. These metrics include the number of total builds, failed builds, successful builds, and the duration of builds. You can monitor your builds at two levels: Project level, AWS account level. You can export log data from your log groups to an Amazon S3 bucket and use this data in custom processing and analysis, or to load onto other systems.
+
+\
+As a Developer Associate, you are responsible for the data management of the AWS Kinesis streams at your company. The security team has mandated stricter security requirements by leveraging mechanisms available with the Kinesis Data Streams service that won't require code changes on your end.\
+Which of the following features meet the given requirements? (Select two)
+1. KMS encryption for data at rest
+2. Envelope Encryption 
+3. Client-Side Encryption
+4. Encryption in flight with HTTPS endpoint
+5. SSE-C encryption
+
+1,4
+
+\
+The development team at a retail company is gearing up for the upcoming Thanksgiving sale and wants to make sure that the application's serverless backend running via Lambda functions do not hit concurrency limits as a result of the surge in traffic.\
+As a Developer Associate, which of the following solutions would you recommend to address this use-case?
+1. No need to make any special provisions as Lambda is automatically scalable because of its serverless nature 
+2. Add an Application Load Balancer in front of the Lambda functions 
+3. Configure Application Auto Scaling to manage Lambda provisioned concurrency on a schedule
+4. Configure Application Auto Scaling to manage Lambda reserved concurrency on a schedule
+
+3
+
+\
+A developer is looking at establishing access control for an API that connects to a Lambda function downstream.\
+Which of the following represents a mechanism that CANNOT be used for authenticating with the API Gateway?
+1. Standard AWS IAM roles and policies
+2. Lambda Authorizer
+3. Cognito User Pools
+4. AWS Security Token Service (STS)
+
+4 AWS Security Token Service (STS) - AWS Security Token Service (AWS STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). However, it is not supported by API Gateway.
+
