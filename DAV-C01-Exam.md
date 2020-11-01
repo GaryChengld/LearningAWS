@@ -828,3 +828,13 @@ How can these requirements be met?
 4. Store the source code in AWS CodeCommit. Create a CodePipeline to automate unit testing. Use Amazon CloudWatch to trigger notification of failure events.
 
 4
+
+\
+A developer at a company is trying to create a digital signature for SSH'ing into the Amazon EC2 instances.\
+Which of the following entities can be used to facilitate this use-case?
+1. Key pairs 
+2. Access keys
+3. Root user credentials 
+4. Multi-Factor Authentication (MFA)
+
+Key pairs - Key pairs consist of a public key and a private key. You use the private key to create a digital signature, and then AWS uses the corresponding public key to validate the signature. Key pairs are used only for Amazon EC2 and Amazon CloudFront. AWS does not provide key pairs for your account; you must create them. You can create Amazon EC2 key pairs from the Amazon EC2 console, CLI, or API. Key pairs make a robust combination for accessing an instance securely, a better option than using passwords.
