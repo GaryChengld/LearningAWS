@@ -901,3 +901,14 @@ Which of the following represents a mechanism that CANNOT be used for authentica
 
 4 AWS Security Token Service (STS) - AWS Security Token Service (AWS STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). However, it is not supported by API Gateway.
 
+
+\
+A Developer is investigating an issue whereby certain requests are passing through an Amazon API Gateway endpoint /MyAPI, but the requests do not reach the
+AWS Lambda function backing /MyAPI. The Developer found that a second Lambda function sometimes runs at maximum concurrency allowed for the given AWS account.
+How can the Developer address this issue?
+1. Manually reduce the concurrent execution limit at the account level
+2. Add another API Gateway stage for /MyAPI, and shard the requests
+3. Configure the second Lambda function's concurrency execution limit
+4. Reduce the throttling limits in the API Gateway /MyAPI endpoint
+
+3
