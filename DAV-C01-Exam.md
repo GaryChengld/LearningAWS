@@ -486,6 +486,7 @@ How should the Developer identify and troubleshoot the root cause of the perform
 
 3
 
+\
 A Developer wants to debug an application by searching and filtering log data. The application logs are stored in Amazon CloudWatch Logs. The Developer creates a new metric filter to count exceptions in the application logs. However, no results are returned from the logs.
 What is the reason that no filtered results are being returned?
 1. A setup of the Amazon CloudWatch interface VPC endpoint is required for filtering the CloudWatch Logs in the VPC
