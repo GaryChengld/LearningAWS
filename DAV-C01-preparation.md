@@ -4,6 +4,16 @@
 * [Monitoring and Troubleshooting](#Monitoring-and-Troubleshooting)
 * [Refactoring](#Refactoring)
 
+1. Be very familiar with Lambda! There were a lot of in-depth questions on it. Things like packaging up Lambda functions with dependencies; increasing Lambda function memory allocation; understanding why Lambda handlers should be separate from core logic; configuring a Lambda function to access private resources in a VPC, etc.
+2. Be comfortable with the order in which credentials are evaluated in the default credential provider chain when using AWS SDKs.
+3. Diagnosing issues with API Gateway (latency, performance issues, connection errors).
+4. Really watch through and understand the developer theory section of the course and do the labs on CodeBuild, CodeCommit, etc.
+5. Know Elastic Beanstalk on an in-depth level.
+6. Know how to deploy an X-Ray Daemon on your ECS.
+7. Understand SQS in quite a bit of detail, including long vs short polling and when to use them.
+8. Get in-depth with DynamoDB (calculating RCU and WCU, query vs scan operations, etc.)
+9. You have to really know CloudFormation, especially as it pertains to the Severless Application Model!
+
 ### Security
 
 [Security Best Practices for Amazon](https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html)

@@ -915,3 +915,22 @@ How can the Developer address this issue?
 3
 
 \
+A developer wants to ensure the Amazon EC2 instances in AWS Elastic Beanstalk execute a certain set of commands before the application is ready to use.
+Which Elastic Beanstalk feature will allow the developer to accomplish this?
+1. Rolling update
+2. Immutable update
+3. User data
+4. .ebextensions
+
+4
+
+\
+A developer tested an application locally and then deployed it to AWS Lambda. While testing the application remotely, the Lambda function fails with an access denied message.
+How can this issue be addressed?
+1. Update the Lambda function's execution role to include the missing permissions.
+2. Update the Lambda function's resource policy to include the missing permissions.
+3. Include an IAM policy document at the root of the deployment package and redeploy the Lambda function.
+4. Redeploy the Lambda function using an account with access to the AdministratorAccess policy.
+
+1
+\
