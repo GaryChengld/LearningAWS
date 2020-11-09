@@ -933,4 +933,86 @@ How can this issue be addressed?
 4. Redeploy the Lambda function using an account with access to the AdministratorAccess policy.
 
 1
+
 \
+How can a developer use a debugger for AWS Lambda code that is deployed with AWS Serverless Application Model (AWS SAM)?
+1. Download the Lambda code locally and use the AWS CLI to execute it
+2. Use the Lambda console to connect the debugger
+3. Use AWS SAM to invoke a function locally in debug mode
+4. Connect a third-party-compatible integrated development environment (IDE) to the Lambda debugger endpoint
+
+c
+
+\
+A developer is testing an application that invokes an AWS Lambda function asynchronously. During the testing phase, the Lambda function fails to process after two retries.
+How can the developer troubleshoot the failure?
+1. Configure AWS CloudTrail logging to investigate the invocation failures
+2. Configure Dead Letter Queues by sending events to Amazon SQS for investigation
+3. Configure Amazon Simple Workflow Service to process any direct unprocessed events
+4. Configure AWS Config to process any direct unprocessed events
+
+2
+\
+
+A developer is setting up Amazon API Gateway for their company's products. The API will be used by registered developers to query and update their environments. The company wants to limit the amount of requests end users can send for both cost and security reasons. Management wants to offer registered developers the option of buying larger packages that allow for more requests.
+How can the developer accomplish this with the LEAST amount of overhead management?
+1. Enable throttling for the API Gateway stage. Set a value for both the rate and burst capacity. If a registered user chooses a larger package, create a stage for them, adjust the values, and share the new URL with them.
+2. Set up Amazon CloudWatch API logging in API Gateway. Create a filter based on the user and requestTime fields and create an alarm on this filter. Write an AWS Lambda function to analyze the values and requester information, and respond accordingly. Set up the function as the target for the alarm. If a registered user chooses a larger package, update the Lambda code with the values.
+3. Enable Amazon CloudWatch metrics for the API Gateway stage. Set up CloudWatch alarms based off the Count metric and the ApiName, Method, Resource, and Stage dimensions to alerts when request rates pass the threshold. Set the alarm action to Deny. If a registered user chooses a larger package, create a user-specific alarm and adjust the values.
+4. Set up a default usage plan, specify values for the rate and burst capacity, and associate it with a stage. If a registered user chooses a larger package, create a custom plan with the appropriate values and associate the plan with the user.
+ 
+4
+\
+
+A developer works in an environment with multiple AWS accounts that have AWS Lambda functions processing the same 100 KB payloads. The developer wants to centralize the point of origin of the payloads to one account and have all the Lambda functions be invoked whenever the initiating event occurs in the parent account.
+How can the developer design the workflow in the MOST efficient way, so all the multi-account Lambda functions get invoked when the event occurs?
+1. Create a Lambda function in the parent account and use cross-account IAM roles with the AWS Security Token Service (AWS STS) AssumeRole API call to make AWS Lambda invoke the API call to invoke all the cross-account Lambda functions.
+2. Subscribe all the multi-account Lambda functions to an Amazon SNS topic and make a SNS Publish API call with the payload to the SNS topic.
+3. Set up an Amazon SQS queue with the queue policy permitting the ReceiveMessage action for multi-account Lambda functions. Then send the payload to the SQS queue using the sqs:SendMessage permission and poll the queue using multi-account Lambda functions.
+4. Use a worker on an Amazon EC2 instance to poll for the payload event. Invoke all Lambda functions using the Lambda Invoke API after using cross-account IAM roles with the AWS Security Token Service (AWS STS) AssumeRole API call.
+
+2
+\
+
+A large company has its application components distributed across multiple AWS accounts. The company needs to collect and visualize trace data across these accounts.
+What should be used to meet these requirements?
+1. AWS X-Ray
+2. Amazon CloudWatch
+3. Amazon VPC flow logs
+4. Amazon Elasticsearch Service
+
+1
+\
+
+A company has 25,000 employees and is growing. The company is creating an application that will be accessible to its employees only. A developer is using
+Amazon S3 to store images and Amazon RDS to store application data. The company requires that all employee information remain in the legacy Security
+Assertion Markup Language (SAML) employee directory only and is not interested in mirroring any employee information on AWS.
+How can the developer provide authorized access for the employees who will be using this application so each employee can access their own application data only?
+1. Use Amazon VPC and keep all resources inside the VPC, and use a VPC link for the S3 bucket with the bucket policy.
+2. Use Amazon Cognito user pools, federate with the SAML provider, and use user pool groups with an IAM policy.
+3. Use an Amazon Cognito identity pool, federate with the SAML provider, and use an IAM condition key with a value for the cognito-identity.amazonaws.com:sub variable to rant access to the employees.
+4. Create a unique IAM role for each employee and have each employee assume the role to access the application so they can access their personal data only.
+ 
+3
+\
+
+A developer is creating an AWS Lambda function that generates a new file each time it runs. Each new file must be checked into an AWS CodeCommit repository hosted in the same AWS account.
+How should the developer accomplish this?
+1. When the Lambda function starts, use the Git CLI to clone the repository. Check the new file into the cloned repository and push the change.
+2. After the new file is created in Lambda, use cURL to invoke the CodeCommit API. Send the file to the repository.
+3. Use an AWS SDK to instantiate a CodeCommit client. Invoke the put_file method to add the file to the repository.
+4. Upload the new to an Amazon S3 bucket. Create an AWS Step Function to accept S3 events. In the Step Function, add the new file to the repository.
+
+3
+\
+
+A developer must ensure that the IAM credentials used by an application in Amazon EC2 are not misused or compromised.
+What should the developer use to keep user credentials secure?
+1. Environment variables
+2. AWS credentials file
+3. Instance profile credentials
+4. Command line options
+
+3
+\
+
