@@ -1016,3 +1016,91 @@ What should the developer use to keep user credentials secure?
 3
 \
 
+A development team uses AWS Elastic Beanstalk for application deployment. The team has configured the application version lifecycle policy to limit the number of application versions to 25. However, even with the lifecycle policy, the source bundle is deleted from the Amazon S3 source bucket.
+What should a developer do in the Elastic Beanstalk application version lifecycle settings to retain the source code in the S3 bucket?
+1. Change the Set the application versions limit by total count setting to zero.
+2. Disable the Lifecycle policy setting.
+3. Change the Set the application version limit by age setting to zero.
+4. Set Retention to Retain source bundle in S3.
+
+4
+\
+
+A developer is writing an AWS Lambda function. The developer wants to log key events that occur during the Lambda function and include a unique identifier to associate the events with a specific function invocation.
+Which of the following will help the developer accomplish this objective?
+1. Obtain the request identifier from the Lambda context object. Architect the application to write logs to the console.
+2. Obtain the request identifier from the Lambda event object. Architect the application to write logs to a file.
+3. Obtain the request identifier from the Lambda event object. Architect the application to write logs to the console.
+4. Obtain the request identifier from the Lambda context object. Architect the application to write logs to a file.
+
+1
+\
+Your company leverages Amazon CloudFront to provide content via the internet to customers with low latency. Aside from latency, security is another concern and you are looking for help in enforcing end-to-end connections using HTTPS so that content is protected.\
+Which of the following options is available for HTTPS in AWS CloudFront? 
+
+* Between clients and CloudFront as well as between CloudFront and backend
+
+\
+A cybersecurity company is publishing critical log data to a log group in Amazon CloudWatch Logs, which was created 3 months ago. The company must encrypt the log data using an AWS KMS customer master key (CMK), so any future data can be encrypted to meet the company’s security guidelines.\
+How can the company address this use-case?
+
+* Use the AWS CLI associate-kms-key command and specify the KMS key ARN
+
+\
+Your company stores confidential data on an Amazon Simple Storage Service (S3) bucket. New security compliance guidelines require that files be stored with server-side encryption. The encryption used must be Advanced Encryption Standard (AES-256) and the company does not want to manage S3 encryption keys.\
+Which of the following options should you use?
+
+* SSE-S3
+
+\
+You have a popular web application that accesses data stored in an Amazon Simple Storage Service (S3) bucket. Developers use the SDK to maintain the application and add new features. Security compliance requests that all new objects uploaded to S3 be encrypted using SSE-S3 at the time of upload. Which of the following headers must the developers add to their request?
+
+* 'x-amz-server-side-encryption': 'AES256'
+
+\
+An organization recently began using AWS CodeCommit for its source control service. A compliance security team visiting the organization was auditing the software development process and noticed developers making many git push commands within their development machines. The compliance team requires that encryption be used for this activity.\
+How can the organization ensure source code is encrypted in transit and at rest?
+
+* Repositories are automatically encrypted at rest
+
+\
+Your development team uses the AWS SDK for Java on a web application that uploads files to several Amazon Simple Storage Service (S3) buckets using the SSE-KMS encryption mechanism. Developers are reporting that they are receiving permission errors when trying to push their objects over HTTP. Which of the following headers should they include in their request?
+
+* 'x-amz-server-side-encryption': 'aws:kms'
+
+\
+You are planning to build a fleet of EBS-optimized EC2 instances to handle the load of your new application. Due to security compliance, your organization wants any secret strings used in the application to be encrypted to prevent exposing values as clear text.\
+The solution requires that decryption events be audited and API calls to be simple. How can this be achieved? (select two)
+
+* Store the secret as SecureString in SSM Parameter Store
+* Audit using CloudTrail
+
+\
+As part of internal regulations, you must ensure that all communications to Amazon S3 are encrypted.\
+For which of the following encryption mechanisms will a request get rejected if the connection is not using HTTPS?
+
+* SSE-C
+
+
+\
+You are working for a technology startup building web and mobile applications. You would like to pull Docker images from the ECR repository called demo so you can start running local tests against the latest application version.\
+Which of the following commands must you run to pull existing Docker images from ECR? (Select two)
+
+* $(aws ecr get-login --no-include-email)
+* docker pull 1234567890.dkr.ecr.eu-west-1.amazonaws.com/demo:latest
+
+\
+As a site reliability engineer, you are responsible for improving the company’s deployment by scaling and automating applications. As new application versions are ready for production you ensure that the application gets deployed to different sets of EC2 instances at different times allowing for a smooth transition.\
+Using AWS CodeDeploy, which of the following options will allow you to do this?
+
+* CodeDeploy Deployment Groups
+
+\
+An IT company is using AWS CloudFormation to manage its IT infrastructure. It has created a template to provision a stack with a VPC and a subnet. The output value of this subnet has to be used in another stack.\
+As a Developer Associate, which of the following options would you suggest to provide this information to another stack?
+
+* Use 'Export' field in the Output section of the stack's template
+
+
+
+
