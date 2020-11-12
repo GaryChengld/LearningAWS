@@ -1101,6 +1101,51 @@ As a Developer Associate, which of the following options would you suggest to pr
 
 * Use 'Export' field in the Output section of the stack's template
 
+\
+An organization uses Alexa as its intelligent assistant to improve productivity throughout the organization. A group of developers manages custom Alexa Skills written in Node.Js to control conference-room equipment settings and start meetings using voice activation. The manager has requested developers that all functions code should be monitored for error rates with the possibility of creating alarms on top of them.\
+Which of the following options should be chosen? (select two)
 
+* CloudWatch Metrics
+* CloudWatch Alarms
+
+\
+Your company manages hundreds of EC2 instances running on Linux OS. The instances are configured in several Availability Zones in the eu-west-3 region. Your manager has requested to collect system memory metrics on all EC2 instances using a script.\
+Which of the following solutions will help you collect this data?
+
+* Use a cron job on the instances that pushes the EC2 RAM statistics as a Custom metric into CloudWatch
+
+
+\
+A company has configured an Auto Scaling group with health checks. The configuration is set to the desired capacity value of 3 and maximum capacity value of 3. The EC2 instances of your Auto Scaling group are configured to scale when CPU utilization is at 60 percent and is now running at 80 percent utilization.\
+Which of the following will take place?
+
+* System will keep running as is
+
+\
+A firm maintains a highly available application that receives HTTPS traffic from mobile devices and web browsers. The main Developer would like to set up the Load Balancer routing to route traffic from web servers to smart.com/api and from mobile devices to smart.com/mobile. A developer advises that the previous recommendation is not needed and that requests should be sent to api.smart.com and mobile.smart.com instead.\
+Which of the following routing options were discussed in the given use-case? (select two)
+
+* Path based
+* Host based
+
+\
+You have an Amazon Kinesis Data Stream with 10 shards, and from the metrics, you are well below the throughput utilization of 10 MB per second to send data. You send 3 MB per second of data and yet you are receiving ProvisionedThroughputExceededException errors frequently.\
+What is the likely cause of this?
+
+* The partition key that you have selected isn't distributed enough
+
+
+\
+Your company has a load balancer in a VPC configured to be internet facing. The public DNS name assigned to the load balancer is myDns-1234567890.us-east-1.elb.amazonaws.com. When your client applications first load they capture the load balancer DNS name and then resolve the IP address for the load balancer so that they can directly reference the underlying IP.\
+It is observed that the client applications work well but unexpectedly stop working after a while. What is the reason for this?
+
+* The load balancer is highly available and its public IP may change. The DNS name is constant
+
+
+\
+You are designing a high-performance application that requires millions of connections. You have several EC2 instances running Apache2 web servers and the application will require capturing the user’s source IP address and source port without the use of X-Forwarded-For.\
+Which of the following options will meet your needs?
+
+* Network Load Balancer
 
 
