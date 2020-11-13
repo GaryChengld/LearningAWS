@@ -1148,4 +1148,155 @@ Which of the following options will meet your needs?
 
 * Network Load Balancer
 
+\
+Your team lead has finished creating a CodeBuild project in the management console and a build spec has been defined for the project. After the build is run, CodeBuild fails to pull a Docker image into the build environment.\
+What is the most likely cause?
 
+* Missing IAM permissions for the CodeBuild Service
+
+\
+Your company likes to operate multiple AWS accounts so that teams have their environments. Services deployed across these accounts interact with one another, and now there's a requirement to implement X-Ray traces across all your applications deployed on EC2 instances and AWS accounts.\
+As such, you would like to have a unified account to view all the traces. What should you in your X-Ray daemon set up to make this work? (Select two)
+
+* Create a role in the target unified account and allow roles in each sub-account to assume the role
+* Configure the X-Ray daemon to use an IAM instance role
+
+\
+Your company has developers worldwide with access to the company's Amazon Simple Storage Service (S3) buckets. The objects in the buckets are encrypted at the server-side but need more flexibility with access control, auditing, rotation, and deletion of keys. You would also like to limit who can use the key.\
+Which encryption mechanism best fits your needs?
+
+* SSE-KMS
+
+
+\
+An IT company leverages CodePipeline to automate its release pipelines. The development team wants to write a Lambda function that will send notifications for state changes within the pipeline.\
+As a Developer Associate, which steps would you suggest to associate the Lambda function with the event source?
+
+* Set up an Amazon CloudWatch Events rule that uses CodePipeline as an event source with the target as the Lambda function
+
+
+\
+You are running a public DNS service on an EC2 instance where the DNS name is pointing to the IP address of the instance. You wish to upgrade your DNS service but would like to do it without any downtime.\
+Which of the following options will help you accomplish this?
+
+* Elastic IP
+
+\
+Your team has just signed up an year-long contract with a client maintaining a three-tier web application, that needs to be moved to AWS Cloud. The application has steady traffic throughout the day and needs to be on a reliable system with no down-time or access issues. The solution needs to be cost-optimal for this startup.\
+Which of the following options should you choose?
+
+* Amazon EC2 Reserved Instances 
+
+
+\
+You would like to have a one-stop dashboard for all the CI/CD needs of one of your projects. You don't need heavy control of the individual configuration of each component in your CI/CD, but need to be able to get a holistic view of your projects.\
+Which service do you recommend?
+
+* CodeStar
+
+
+\
+Your client has tasked you with finding a service that would enable you to get cross-account tracing and visualization.\
+Which service do you recommend?
+
+* AWS X-Ray
+
+
+\
+Your company is new to cloud computing and would like to host a static HTML5 website on the cloud and be able to access it via domain www.mycompany.com. You have created a bucket in Amazon Simple Storage Service (S3), enabled website hosting, and set the index.html as the default page. Finally, you create an Alias record in Amazon Route 53 that points to the S3 website endpoint of your S3 bucket.\
+When you test the domain www.mycompany.com you get the following error: 'HTTP response code 403 (Access Denied)'. What can you do to resolve this error?
+
+* Create a bucket policy
+
+
+\
+You have created a test environment in Elastic Beanstalk and as part of that environment, you have created an RDS database.\
+How can you make sure the database can be explored after the environment is destroyed?
+
+* Make a snapshot of the database before it gets deleted
+
+
+\
+You are using AWS SQS FIFO queues to get the ordering of messages on a per user_id basis.\
+As a developer, which message parameter should you set the value of user_id to guarantee the ordering?
+
+* MessageGroupId
+
+
+\
+As part of your video processing application, you are looking to perform a set of repetitive and scheduled tasks asynchronously. Your application is deployed on Elastic Beanstalk.\
+Which Elastic Beanstalk environment should you set up for performing the repetitive tasks?
+
+* Setup a Worker environment and a cron.yaml file
+
+
+\
+You would like to run the X-Ray daemon for your Docker containers deployed using AWS Fargate.\
+What do you need to do to ensure the setup will work? (Select two)
+
+* Deploy the X-Ray daemon agent as a sidecar container
+* Provide the correct IAM task role to the X-Ray container
+
+
+\
+A data analytics company ingests a large number of messages and stores them in an RDS database using Lambda. Because of the increased payload size, it is taking more than 15 minutes to process each message.\
+As a Developer Associate, which of the following options would you recommend to process each message in the MOST scalable way?
+
+* Provision EC2 instances in an Auto Scaling group to poll the messages from an SQS queue
+
+
+\
+You would like to deploy a Lambda function globally so that requests are filtered at the AWS edge locations.\
+Which Lambda deployment mode do you need?
+
+* Use a Lambda@Edge
+
+
+\
+You would like your Elastic Beanstalk environment to expose an HTTPS endpoint instead of an HTTP endpoint to get in-flight encryption between your clients and your web servers.\
+What must be done to set up HTTPS on Beanstalk?
+
+* Create a .ebextension file to configure the Load Balancer
+
+
+\
+Which environment variable can be used by AWS X-Ray SDK to ensure that the daemon is correctly discovered on ECS?
+
+* AWS_XRAY_DAEMON_ADDRESS
+
+
+\
+Your organization has set up a full CI/CD pipeline leveraging CodePipeline and the deployment is done on Elastic Beanstalk. This pipeline has worked for over a year now but you are approaching the limits of Elastic Beanstalk in terms of how many versions can be stored in the service.\
+How can you remove older versions that are not used by Elastic Beanstalk so that new versions can be created for your applications?
+
+* Use a Lifecycle Policy
+
+
+\
+You are a developer working on AWS Lambda functions that are triggered by Amazon API Gateway and would like to perform testing on a low volume of traffic for new API versions.\
+Which of the following features will accomplish this task?
+
+* Canary Deployment
+
+
+\
+A development team has a mix of applications hosted on-premises as well as on EC2 instances. The on-premises application controls all applications deployed on the EC2 instances. In case of any errors, the team wants to leverage Amazon CloudWatch to monitor and troubleshoot the on-premises application.\
+As a Developer Associate, which of the following solutions would you suggest to address this use-case?
+
+* Configure the CloudWatch agent on the on-premises server by using IAM user credentials with permissions for CloudWatch
+
+
+
+\
+ou were assigned to a project that requires the use of the AWS CLI to build a project with AWS CodeBuild. Your project's root directory includes the buildspec.yml file to run build commands and would like your build artifacts to be automatically encrypted at the end.\
+How should you configure CodeBuild to accomplish this?
+
+* Specify a KMS key to use
+
+
+
+\
+Your e-commerce company needs to improve its software delivery process and is moving away from the waterfall methodology. You decided that every application should be built using the best CI/CD practices and every application should be packaged and deployed as a Docker container. The Docker images should be stored in ECR and pushed with AWS CodePipeline and AWS CodeBuild.\
+When you attempt to do this, the last step fails with an authorization issue. What is the most likely issue?
+
+* The IAM permissions are wrong for the CodeBuild service
